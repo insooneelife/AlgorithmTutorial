@@ -37,8 +37,37 @@
 // https://www.acmicpc.net/problem/3085
 
 
+// 모의고사 (Brute Force)
+// https://programmers.co.kr/learn/courses/30/lessons/42840
+
+
+// 카펫 (Brute Force)
+// https://programmers.co.kr/learn/courses/30/lessons/42842
+
+
+// 소수 찾기 (순열 and 조합)
+// https://programmers.co.kr/learn/courses/30/lessons/42839
+
+
+
 // 부분수열의 합 (조합 or bitmask)
 // https://www.acmicpc.net/problem/1182
+
+
+// 암호 만들기 (백트래킹)
+// https://www.acmicpc.net/problem/1759
+
+
+// 알파벳 (백트래킹)
+// https://www.acmicpc.net/problem/1987
+
+
+// 스도쿠 (백트래킹)
+// https://www.acmicpc.net/problem/2580
+
+
+// 색종이 붙이기 (백트래킹)
+// https://www.acmicpc.net/problem/17136
 
 
 // 달이 차오른다, 가자. (BFS and bitmask)
