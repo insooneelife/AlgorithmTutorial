@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Sources\Tutorial1\Concepts.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Sources\Tutorial2\BruteForce1.cpp" />
   </ItemGroup>
