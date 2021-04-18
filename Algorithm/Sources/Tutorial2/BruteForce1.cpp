@@ -1,42 +1,85 @@
+// 완전탐색
+
+// 완전탐색 예제1
+// 일곱 난쟁이
+// https://www.acmicpc.net/problem/2309
+
+// 가능한 모든 경우의 수는?
+// 시간복잡도?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
-const int N = 4;
-
-void Print(const vector<int>& vec)
-{
-    for (auto e : vec)
-    {
-        cout << e << " ";
-    }
-    cout << endl;
-}
-
-void Combinations(vector<int>& combs, int selections)
-{
-    if (selections == 0)
-    {
-        Print(combs);
-        return;
-    }
-
-    int start = combs.size() == 0 ? 0 : combs.back() + 1;
-
-    for (int i = start; i < N; ++i)
-    {
-        combs.push_back(i);
-        Combinations(combs, selections - 1);
-        combs.pop_back();
-    }
-}
-
+// 7명의 합 = 100
+// 9명의 합 = 100 + x + y
+// N <= 9 이므로 순서쌍 (x, y)의 가능한 모든 경우의 수는 C(9, 2) = 36가지이다.
+const int kNum = 9;
 
 int main()
 {
-    vector<int> combs;
+    vector<int> v(kNum);
+    int sum = 0;
 
-    Combinations(combs, 2);
+    for (int i = 0; i < kNum; ++i)
+    {
+        cin >> v[i];
+        sum += v[i];
+    }
+
+    int not1 = v[0];
+    int not2 = v[1];
+
+    for (int x = 0; x < kNum; ++x)
+    {
+        for (int y = x + 1; y < kNum; ++y)
+        {
+            if (sum - (v[x] + v[y]) == 100)
+            {
+                not1 = v[x];
+                not2 = v[y];
+
+                break;
+            }
+        }
+    }
+
+    vector<int> real;
+    for (auto e : v)
+    {
+        if (e != not1 && e != not2)
+        {
+            real.push_back(e);
+        }
+    }
+
+    sort(begin(real), end(real));
+
+    for (auto e : real)
+    {
+        cout << e << endl;
+    }
 
     return 0;
 }

@@ -27,5 +27,23 @@
     <ClCompile Include="Sources\Tutorial2\BruteForce1.cpp">
       <Filter>소스 파일\Tutorial2</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\Concepts.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\BruteForce2.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\Combination.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\Permutation.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\Recursive.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Tutorial2\Backtracking.cpp">
+      <Filter>소스 파일\Tutorial2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
