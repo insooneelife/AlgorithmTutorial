@@ -1,4 +1,4 @@
-// Àç±ÍÇÔ¼ö°¡ ¹º°¡¿ä?
+// Àç±ÍÇÔ¼ö°¡ ¹º°¡¿ä? (Àç±Í)
 // https://www.acmicpc.net/problem/17478
 
 #include <iostream>

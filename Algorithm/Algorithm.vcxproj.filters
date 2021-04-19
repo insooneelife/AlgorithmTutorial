@@ -18,5 +18,8 @@
     <ClCompile Include="Sources\BruteForce\3-Combination.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\BruteForce\Solutions\Programmers\소수 찾기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
