@@ -13,37 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\Tutorial1">
-      <UniqueIdentifier>{50990f4e-87cb-46ca-9468-4c14aa3ded2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Tutorial2">
-      <UniqueIdentifier>{bdb1a7f2-78d9-44b1-a1ce-05f020287c49}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Tutorial1\Concepts.cpp">
-      <Filter>소스 파일\Tutorial1</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\BruteForce1.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\Concepts.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\BruteForce2.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\Combination.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\Permutation.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\Recursive.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Tutorial2\Backtracking.cpp">
-      <Filter>소스 파일\Tutorial2</Filter>
+    <ClCompile Include="Sources\BruteForce\3-Combination.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

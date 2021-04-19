@@ -1,30 +1,5 @@
-// 완전탐색 예제2
-// 유레카 이론
+// 유레카 이론 (Brute Force)
 // https://www.acmicpc.net/problem/10448
-
-// 가능한 모든 경우의 수는?
-// 시간복잡도?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #include <iostream>
 #include <vector>
@@ -79,5 +54,3 @@ int main()
 
     return 0;
 }
-
-// 주의해야하는 예외는 무엇이 있을까?

@@ -1,31 +1,5 @@
-// 완전탐색
-
-// 완전탐색 예제1
-// 일곱 난쟁이
+// 일곱난쟁이 (Brute Force)
 // https://www.acmicpc.net/problem/2309
-
-// 가능한 모든 경우의 수는?
-// 시간복잡도?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #include <iostream>
 #include <vector>

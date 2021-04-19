@@ -98,14 +98,4 @@ int main()
 
 
 
-// 암호 만들기
-// https://www.acmicpc.net/problem/1759
 
-// 알파벳
-// https://www.acmicpc.net/problem/1987
-
-// 스도쿠
-// https://www.acmicpc.net/problem/2580
-
-// 색종이 붙이기
-// https://www.acmicpc.net/problem/17136
