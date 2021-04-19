@@ -56,7 +56,7 @@ void SetBoard(int n, int si, int sj, int flag)
 }
 
 int cnt = 0;
-void SetQueen(int n, int line, int si)
+void SetQueen(int n, int line)
 {
     if (line == n)
     {
@@ -69,7 +69,7 @@ void SetQueen(int n, int line, int si)
         if (arr[line][i] <= 0)
         {
             SetBoard(n, line, i, 1);
-            SetQueen(n, line + 1, i);
+            SetQueen(n, line + 1);
             SetBoard(n, line, i, -1);
         }   
     }
@@ -80,7 +80,7 @@ int main()
     int n;
     cin >> n;
 
-    SetQueen(n, 0, 0);
+    SetQueen(n, 0);
 
     cout << cnt;
 
