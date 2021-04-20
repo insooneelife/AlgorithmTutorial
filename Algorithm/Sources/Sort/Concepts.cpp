@@ -16,8 +16,8 @@
         // 분할정복
         // 동적계획법
     // C++을 통한 CS(Computer Science) 개념
-        // 개발자한테 모든 책임을 다 넘김 -> 모든 개념을 다 숙지하고 있어야 함 -> 공부하기에는 좋은 언어 (개발하기에 좋은 언어?)
-        //
+        // 개발자한테 모든 책임을 다 넘김 -> 모든 개념을 다 숙지하고 있어야 함 -> 공부하기에는 좋은 언어 
+        // 개발하기에 좋은 언어? -> 그것은 상황에 따라 다름
     // 개인 (블로그) 알고리즘 라이브러리 만들기 (온라인 코딩테스트)
         // 검색 가능
         // BFS, DFS, 다익스트라 미리 짜둠
@@ -28,23 +28,29 @@
     // 문제 소개 및 풀이
     // 라이브러리 추가
     // 문제 풀이 (수업 이후~)
-// 진정한 개발자가 되기 위해서는?
-// 다양한 환경에 적응을 해야함
-// c, c++  || java, c# (oop) || python, javascript
+
+
+// --- CS 개념 ---
 // 동적타입언어 vs 정적타입언어
 // https://algorfati.tistory.com/112
-// Managed vs UnManaged 언어
+
+// Managed vs Unmanaged 언어
 // https://algorfati.tistory.com/113
-// C++
-// 타입
-// https://algorfati.tistory.com/115
+
+    // 진정한 개발자가 되기 위해서는?  다양한 환경에 적응을 해야함
+    // c, c++ (Unmanaged, 정적타입언어) || 
+    // java, c# (oop, Managed, 정적타입언어) || 
+    // python, javascript (Managed, 동적타입언어)
+
 // 메모리 구조
 // https://algorfati.tistory.com/114
+
+// --- C++ ---
+// 타입
+// https://algorfati.tistory.com/115
+
 // 정렬
 // https://algorfati.tistory.com/106
-// 예제풀이, 문제풀이
-//
-// STL (standard template library)
 
 
 #include <iostream>

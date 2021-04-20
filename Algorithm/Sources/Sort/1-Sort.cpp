@@ -1,3 +1,5 @@
+// 기본 정렬
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -15,6 +17,12 @@ void Print(const vector<int>& v, string tag = "----------------------------")
     cout << endl;
 }
 
+// sort에서 요구하는 operator< 를 함수로 구현
+bool Compare(int a, int b)
+{
+    return a > b;
+}
+
 int main()
 {
     vector<int> plays{ 3, 500, 2, 600, 5, 150, 800, 1, 2500, 800 };
@@ -23,6 +31,9 @@ int main()
 
     // 기본, 오름차순
     sort(begin(plays), end(plays));
+
+    // Compare 함수, 내림차순
+    // sort(begin(plays), end(plays), Compare);
 
     // 람다, 내림차순
     //sort(begin(plays), end(plays), [](int a, int b) { return a > b; });
@@ -51,3 +62,8 @@ int main()
 
     return 0;
 }
+
+
+// 정렬 예제1
+// K번째 수
+// https://programmers.co.kr/learn/courses/30/lessons/42748
