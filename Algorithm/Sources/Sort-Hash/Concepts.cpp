@@ -62,3 +62,14 @@ int main()
 {
     return 0;
 }
+
+
+// 추가 연습문제
+
+
+// 전화번호 목록 (해시 or 정렬)
+// https://programmers.co.kr/learn/courses/30/lessons/42577
+
+
+// 순위 검색 (조합 and 해시)
+// https://programmers.co.kr/learn/courses/30/lessons/72412
