@@ -71,5 +71,3 @@ int main()
 // https://programmers.co.kr/learn/courses/30/lessons/42577
 
 
-// 순위 검색 (조합 and 해시)
-// https://programmers.co.kr/learn/courses/30/lessons/72412

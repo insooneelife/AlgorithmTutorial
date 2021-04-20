@@ -150,11 +150,7 @@ public:
 
         do
         {
-            for (int i = 0; i < vec.size(); i++)
-            {
-                cout << vec[i] << " ";
-            }
-            cout << '\n';
+            Print::Container(vec);
 
         } while (next_permutation(vec.begin(), vec.end()));
     }
@@ -173,15 +169,36 @@ public:
 
         do
         {
-            for (int i = 0; i < vec.size(); i++)
-            {
-                cout << vec[i] << " ";
-            }
-            cout << '\n';
+            Print::Container(vec);
 
         } while (next_permutation(vec.begin(), vec.end()));
     }
 
+    // 부분 컨테이너 생성하기
+    // 범위기반 생성자로 부분 컨테이너를 생성할 수 있다.
+    static void SubContainer()
+    {
+        using namespace std;
+
+        // 부분 vector
+        vector<int> vec = { 1, 5, 2, 6, 3, 7, 4 };
+        int from = 2;
+        int to = 5;
+
+        vector<int> subvec(begin(vec) + from, begin(vec) + to + 1);
+        Print::Container(subvec);
+
+        // 부분 string
+        string str = "abazuzdk";
+        string substr(begin(str) + from, begin(str) + to + 1);
+        Print::Container(substr);
+
+
+        // 부분 map
+        map<int, string> m = { {1, "aaa"}, {7, "bbb"}, {3, "ccc"}, {2, "dddd"}, {4, "eeeee"}, {5, "fffff"}, {6, "gg"} };
+        map<int, string> subm(m.find(3), m.find(5));
+        Print::Map(subm);
+    }
 };
 
 

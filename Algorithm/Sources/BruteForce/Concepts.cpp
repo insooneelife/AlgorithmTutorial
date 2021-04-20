@@ -35,10 +35,7 @@
 
 
 
-
-
 // 추가 연습문제
-
 
 // 모의고사 (Brute Force)
 // https://programmers.co.kr/learn/courses/30/lessons/42840
@@ -52,7 +49,7 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 
 
-
+// #다시 풀어보기
 // 부분수열의 합 (조합 or bitmask)
 // https://www.acmicpc.net/problem/1182
 
@@ -69,13 +66,24 @@
 // https://www.acmicpc.net/problem/2580
 
 
+// #풀어보기
 // 색종이 붙이기 (백트래킹)
 // https://www.acmicpc.net/problem/17136
 
-
+// #풀어보기
 // 달이 차오른다, 가자. (BFS and bitmask)
 // https://www.acmicpc.net/problem/1194
 
 
+// #다시 풀어보기
+// 순위 검색 (조합 and 해시)
+// https://programmers.co.kr/learn/courses/30/lessons/72412
 
+// #다시 풀어보기
+// 메뉴 리뉴얼 (조합 and 해시)
+// https://programmers.co.kr/learn/courses/30/lessons/72411
+
+// #다시 풀어보기
+// 카드 짝 맞추기 (순열 and 조합 and BFS)
+// https://programmers.co.kr/learn/courses/30/lessons/72415
 
