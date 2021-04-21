@@ -51,6 +51,7 @@ public:
     
     // str을 whitespace 단위로 자른다.
     // (whitespace에는 '\t', ' ', '\n' 과 같은 것들이 있다.)
+    // ex)
     // "split\ton   \t white\nspace   ." => { "split", "on", "white", "space", "." }
     static std::vector<std::string> Split(const std::string& str)
     {

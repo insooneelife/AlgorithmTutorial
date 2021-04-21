@@ -13,19 +13,20 @@ using namespace std;
 
 int main() 
 {
-
     string s = "split\ton   \t white\nspace   .";
-    vector<string> results;
     istringstream iss(s);
-    for (string s; iss >> s;)
-    {
-        results.push_back(s);
-    }
 
-    cout << s << endl;
-    for (auto e : results)
+    string a, b, c, d, e;
+    iss >> a >> b >> c >> d >> e;
+
+    vector<string> results = { a, b, c, d, e };
+    Print::Container(results);
+    
+    istringstream iss2(s);
+    string temp;
+    while (iss2 >> temp)
     {
-        cout << e << "\n";
+        cout << temp << endl;
     }
 
     return 0;

@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <string>
+#include <sstream>
 #include <set>
 #include "Utility.h"
 
@@ -198,6 +200,38 @@ public:
         map<int, string> m = { {1, "aaa"}, {7, "bbb"}, {3, "ccc"}, {2, "dddd"}, {4, "eeeee"}, {5, "fffff"}, {6, "gg"} };
         map<int, string> subm(m.find(3), m.find(5));
         Print::Map(subm);
+    }
+
+    // istringstream
+    // 특정 string을 대상으로 인풋과 같은 연산을 사용할 수 있다.
+    // 다음과 같이 string의 whitespace를 제거하여 저장할 수 있다.
+     
+    static void Istringstream()
+    {
+        using namespace std;
+
+        string s = "split\ton   \t white\nspace   .";
+        istringstream iss(s);
+
+        string a, b, c, d, e;
+        string temp;
+        iss >> a >> b >> c >> d >> e;
+
+        vector<string> results = { a, b, c, d, e };
+        Print::Container(results);
+    }
+
+    // 다음과 같이 loop로 이용할 수도 있다.
+    static void Istringstream_Loop()
+    {
+        string s = "split\ton   \t white\nspace   .";
+        istringstream iss(s);
+        string temp;
+
+        while (iss >> temp)
+        {
+            cout << temp << endl;
+        }
     }
 };
 
