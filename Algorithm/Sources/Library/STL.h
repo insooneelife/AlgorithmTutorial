@@ -224,6 +224,8 @@ public:
     // 다음과 같이 loop로 이용할 수도 있다.
     static void Istringstream_Loop()
     {
+        using namespace std;
+
         string s = "split\ton   \t white\nspace   .";
         istringstream iss(s);
         string temp;

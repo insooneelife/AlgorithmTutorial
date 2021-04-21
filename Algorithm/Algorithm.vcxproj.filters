@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\BruteForce\3-Combination.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\BruteForce\Solutions\Programmers\소수 찾기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -33,7 +30,7 @@
     <ClCompile Include="Sources\Sort\4-SortCompareValid1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Playground.cpp">
+    <ClCompile Include="Sources\BruteForce\4-Permutation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

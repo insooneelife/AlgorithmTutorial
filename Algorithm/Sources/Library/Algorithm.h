@@ -208,6 +208,46 @@ public:
         return ret;
     }
 
-    // N진수 만들기
+    // 10진수 -> N진수 변환
+    class DecimalNumberSystem
+    {
+    public:
+        // input : 10 진수 n, 변환 대상 진수 num_system [2 - 16]
+        // output : num_system 진수
+        static std::string Convert(long long n, int num_system)
+        {
+            using namespace std;
+
+            char arr[100];
+            int k = 0;
+
+            if (n == 0)
+                return "0";
+
+            while (n)
+            {
+                arr[k++] = ToASCII(n % num_system);
+                n /= num_system;
+            }
+
+            string out = "";
+            for (int i = k - 1; i >= 0; i--)
+            {
+                out += arr[i];
+            }
+            return out;
+        }
+
+    private:
+        static char ToASCII(char n)
+        {
+            if (n < 10) return '0' + n;
+            else return 'A' + n - 10;
+        }
+    };
+
+    // BigInteger
+    // C++로 BigInteger 문제를 푸는것은 어리석은 짓이다.
+    // python으로 풀도록 하자.
 
 };
