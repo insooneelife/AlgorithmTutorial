@@ -208,6 +208,6 @@ public:
         return ret;
     }
 
-
+    // N진수 만들기
 
 };
