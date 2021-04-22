@@ -1,63 +1,102 @@
-// 해시 테이블(Hash Table)
-
-// 해시 테이블이란?
-// key와 value 형태로 자료를 저장하는 자료구조
-// key는 유일성을 갖는 숫자로, 해시맵 인덱싱을 위해 사용된다.
-// value는 실제 데이터가 저장되는 변수이다.
-// key를 통해 빠르게 원하는 value를 참조해올 수 있다.
+// 백트래킹
 
 
-// 해시 예제 1.
-// vector<int> inputs = { 50, 51, 51, 52, 51, 52, 51, 55, 54, 53, 52, 58, 59, 57 };
-// 각 원소 K의 범위 (50 <= K < 60)
-// 다음과 같은 인풋이 들어온다고 가정했을 때 각 원소의 개수를 카운팅하는 알고리즘을 작성.
+// N-Queen
+// https://www.acmicpc.net/problem/9663
 
 
-#include <string>
-#include <vector>
 #include <iostream>
-#include <algorithm>
-#include <map>
-#include <unordered_map>
-
+#include <vector>
 using namespace std;
 
+const vector<int> papers = { 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1 };
+const int N = 10;
+int board[N][N] = {};
 
-void HashExample()
+void PrintBoard(int n, string tag)
 {
-    vector<int> inputs = { 50, 51, 51, 52, 51, 52, 51, 55, 54, 53, 52, 58, 59, 57 };
-
-    int bucket[10] = { 0 };
-    int cnt_bucket[10] = { 0 };
-
-    for (int i = 0; i < inputs.size(); ++i)
+    cout << tag << endl;
+    for (int i = 0; i < n; ++i)
     {
-        // 이 부분이 hash function이다.
-        int index = inputs[i] % 50;
-        bucket[index] = inputs[i];
-        cnt_bucket[index]++;
+        for (int j = 0; j < n; ++j)
+        {
+            cout << board[i][j] << " ";
+        }
+        cout << endl;
     }
+    cout << endl;
+}
 
-    for (int i = 0; i < 10; ++i)
+bool InBoard(int n, int si, int sj)
+{
+    return
+        0 <= si && si < n &&
+        0 <= sj && sj < n;
+}
+
+void SetBoard(int n, int si, int sj, int flag)
+{
+    vector<pair<int, int>> directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1}, {-1, -1}, {1, 1}, {-1, 1}, {1, -1} };
+
+    board[si][sj] += flag;
+    for (auto dir : directions)
     {
-        cout << bucket[i] << " " << cnt_bucket[i] << endl;
+        int mi = dir.first;
+        int mj = dir.second;
+
+        int next_i = si + mi;
+        int next_j = sj + mj;
+
+        while (InBoard(n, next_i, next_j))
+        {
+            board[next_i][next_j] += flag;
+
+            next_i = next_i + mi;
+            next_j = next_j + mj;
+        }
     }
 }
 
+void Paper(int k)
+{
+    using namespace std;
+
+    if (k == 0)
+    {
+        return;
+    }
+
+    //int start = combs.size() > 0 ? combs.back() + 1 : 0;
+    for (int i = 0; i < papers.size(); ++i)
+    {
+        // set board
+
+        Paper(k - 1);
+
+        // recover board
+    }
+}
 
 int main()
 {
-    HashExample();
+    int n;
+    cin >> n;
+
+
 
 
     return 0;
 }
 
 
-// 해시 예제1
-// 완주하지 못한 선수
-// https://programmers.co.kr/learn/courses/30/lessons/42576
 
-// 해시 예제2
-// 위장
-// https://programmers.co.kr/learn/courses/30/lessons/42578
+
+
+
+
+
+
+
+
+
+

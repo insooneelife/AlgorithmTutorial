@@ -52,6 +52,8 @@
 // 정렬
 // https://algorfati.tistory.com/106
 
+// 깊은 복사 vs 얕은 복사
+// 
 
 #include <iostream>
 #include <vector>

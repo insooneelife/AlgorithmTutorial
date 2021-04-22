@@ -1,6 +1,6 @@
 // 조합
 
-// 조합 예제1
+// 조합 예제 1.
 // 재귀함수로 조합 알고리즘 구현
 
 
@@ -117,7 +117,7 @@ int main()
     vector<int> combs;
     //Comb1(1, combs);
     //Comb2(N, K, combs);
-    //Comb3(N, K);
+    Comb3(N, K);
 
     /*
     vector<vector<int>> all_combs;

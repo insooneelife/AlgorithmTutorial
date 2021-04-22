@@ -22,20 +22,34 @@
 
 using namespace std;
 
+
 void HashExample()
 {
     vector<int> inputs = { 50, 51, 51, 52, 51, 52, 51, 55, 54, 53, 52, 58, 59, 57 };
 
-    int bucket[10] = {};
+    // 해시 테이블의 근원이 되는 메모리를 bucket이라 부른다.
+    int bucket[10] = { 0 };
+    int cnt_bucket[10] = { 0 };
 
-    for(int i = 0; i<inputs.size(); ++i)
+    for (int i = 0; i < inputs.size(); ++i)
+    {
+        // 이 부분이 hash function이다.
+        int index = inputs[i] % 50;
+        bucket[index] = inputs[i];
+        cnt_bucket[index]++;
+    }
+
+    for (int i = 0; i < 10; ++i)
+    {
+        cout << bucket[i] << " " << cnt_bucket[i] << endl;
+    }
 }
 
 
 int main()
 {
-    
-    
+    HashExample();
+
 
     return 0;
 }
