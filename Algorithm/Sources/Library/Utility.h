@@ -133,6 +133,18 @@ public:
         cout << endl;
     }
 
+    template <typename T>
+    static void ContainerInContainer(const T& container_in_vector, std::string tag = kTag)
+    {
+        using namespace std;
+        cout << tag << endl;
+        for (auto container : container_in_vector)
+        {
+            Container(container);
+        }
+        cout << tag << endl;
+    }
+
     template <typename CustomType>
     static void Custom(const std::vector<CustomType>& container, std::string tag = kTag)
     {

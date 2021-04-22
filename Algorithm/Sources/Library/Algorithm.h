@@ -250,4 +250,82 @@ public:
     // C++로 BigInteger 문제를 푸는것은 어리석은 짓이다.
     // python으로 풀도록 하자.
 
+
+    // [0, N - 1] 범위의 수 중, K개를 선택하는 모든 조합 (재귀)
+    // time complexity     O(C(N, K) * K)
+    // input               자연수 N, K
+    // output              모든 조합
+    class Combinations
+    {
+    public:
+        Combinations(const int N, const int K) : N(N), K(K) {}
+
+        void Make()
+        {
+            Make(K);
+        }
+
+    private:
+        void Make(int k)
+        {
+            using namespace std;
+
+            if (k == 0)
+            {
+                all_combs.push_back(combs);
+                return;
+            }
+
+            int start = combs.size() > 0 ? combs.back() + 1 : 0;
+            for (int i = start; i < N; ++i)
+            {
+                combs.push_back(i);
+                Make(k - 1);
+                combs.pop_back();
+            }
+        }
+
+    public:
+        std::vector<std::vector<int>> all_combs;
+
+    private:
+        const int N;
+        const int K;
+        std::vector<int> combs;
+    };
+        
+
+    // [0, N - 1] 범위의 수 중, K개를 선택하는 모든 조합 (반복문)
+    // time complexity     O(C(N, K) * K)
+    // input               자연수 N, K
+    // output              모든 조합
+    static void CombinationsIterate(const int N, const int K, std::vector<std::vector<int>>& all_combs)
+    {
+        using namespace std;
+
+        vector<int> combs(K);
+        for (int i = 0; i < K; i++)
+        {
+            combs[i] = i;
+        }
+
+        while (combs[K - 1] < N)
+        {
+            all_combs.push_back(combs);
+
+            int t = K - 1;
+            while (t != 0 && combs[t] == N - K + t)
+            {
+                t--;
+            }
+
+            combs[t]++;
+
+            for (int i = t + 1; i < K; i++)
+            {
+                combs[i] = combs[i - 1] + 1;
+            }
+        }
+    }
+
 };

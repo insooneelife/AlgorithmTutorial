@@ -1,24 +1,16 @@
-// 순위 검색 (조합 + 해시)
+// 순위 검색 (조합 or bitmask and 해시)
 // https://programmers.co.kr/learn/courses/30/lessons/72412
+
 
 #include <string>
 #include <vector>
 #include <sstream>
 #include <iostream>
 #include <map>
+#include <bitset>
+#include "Utility.h"
 
 using namespace std;
-
-const vector<vector<string>> param{ { "-", "cpp", "java", "python" }, { "-", "backend", "frontend" }, { "-", "junior", "senior" }, { "-", "chicken", "pizza" } };
-
-void print(const vector<string>& container)
-{
-    for (auto e : container)
-    {
-        cout << e << " ";
-    }
-    cout << endl;
-}
 
 vector<int> solution(vector<string> info, vector<string> query)
 {
@@ -36,30 +28,19 @@ vector<int> solution(vector<string> info, vector<string> query)
         istringstream iss(e);
         iss >> lang >> job >> career >> food >> check_score;
 
-        for (auto l : param[0])
+        vector<string> input = { lang, job, career, food };
+
+        for (int i = 0; i < 16; ++i)
         {
-            if (!(l == "-" || lang == l))
-                continue;
+            bitset<4> bit(i);
+            vector<string> made(4);
 
-            for (auto j : param[1])
+            for (int b = 0; b < 4; ++b)
             {
-                if (!(j == "-" || job == j))
-                    continue;
-
-                for (auto c : param[2])
-                {
-                    if (!(c == "-" || career == c))
-                        continue;
-
-                    for (auto f : param[3])
-                    {
-                        if (!(f == "-" || food == f))
-                            continue;
-
-                        table[l][j][c][f].push_back(check_score);
-                    }
-                }
+                bit[b] ? made[b] = input[b] : made[b] = "-";
             }
+
+            table[made[0]][made[1]][made[2]][made[3]].push_back(check_score);
         }
     }
 
@@ -79,8 +60,37 @@ vector<int> solution(vector<string> info, vector<string> query)
             }
         }
         answer.push_back(cnt);
-        //print(data);
     }
 
     return answer;
+}
+
+
+int main()
+{
+    vector<string> info =
+    {
+        "java backend junior pizza 150",
+        "python frontend senior chicken 210",
+        "python frontend senior chicken 150",
+        "cpp backend senior pizza 260",
+        "java backend junior chicken 80",
+        "python backend senior chicken 50"
+    };
+
+    vector<string> query =
+    {
+        "java and backend and junior and pizza 100",
+        "python and frontend and senior and chicken 200",
+        "cpp and - and senior and pizza 250",
+        "- and backend and senior and - 150",
+        "- and - and - and chicken 100",
+        "- and - and - and - 150"
+    };
+
+    vector<int> answer = solution(info, query);
+
+    Print::Container(answer);
+
+    return 0;
 }

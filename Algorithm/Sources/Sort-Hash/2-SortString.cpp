@@ -27,12 +27,17 @@ int main()
     //sort(begin(genres), end(genres));
 
     // 람다, 사전식 내림차순
-    //sort(begin(genres), end(genres), [](const string& a, const string& b) { return a > b; });
+    sort(begin(genres), end(genres), [](const string& a, const string& b) { return a > b; });
 
-    // 람다, 사전식 오름차순 (직접)
+    //Print(genres, "--------------sorted-------------");
+
+    // 람다, 사전식 내림차순 내림차순 (직접)
     sort(begin(genres), end(genres), [](const string& a, const string& b)
         {
-            return lexicographical_compare(begin(a), end(a), begin(b), end(b));
+            return lexicographical_compare(begin(a), end(a), begin(b), end(b), [](char a, char b)
+                {
+                    return a > b;
+                });
         });
 
     // 람다, 첫 알파벳, 오름차순
@@ -60,4 +65,5 @@ vector<vector<int>> all =
 // 정렬 예제2
 // 가장 큰 수
 // https://programmers.co.kr/learn/courses/30/lessons/42746
+
 

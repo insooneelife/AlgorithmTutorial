@@ -45,7 +45,7 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42842
 
 
-// 소수 찾기 (순열 and 조합)
+// 소수 찾기 (순열 and 정수론)
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 
 
@@ -75,18 +75,13 @@
 // https://www.acmicpc.net/problem/1194
 
 
-// #다시 풀어보기
-// 순위 검색 (조합 and 해시)
+// 순위 검색 (조합 or bitmask and 해시)
 // https://programmers.co.kr/learn/courses/30/lessons/72412
 
-// #다시 풀어보기
+
 // 메뉴 리뉴얼 (조합 and 해시)
 // https://programmers.co.kr/learn/courses/30/lessons/72411
 
-// #다시 풀어보기
+
 // 카드 짝 맞추기 (순열 and 조합 and BFS)
 // https://programmers.co.kr/learn/courses/30/lessons/72415
-
-
-// Subsets
-// https://leetcode.com/problems/subsets/

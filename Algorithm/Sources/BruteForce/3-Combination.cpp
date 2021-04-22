@@ -42,7 +42,7 @@ void Comb1(int current, std::vector<int>& combs)
         return;
     }
 
-    if (current > K)
+    if (current > N)
     {
         return;
     }
@@ -80,10 +80,53 @@ void Comb2(int n, int pick, vector<int>& combs)
     }
 }
 
+
+// 반복문으로도 구현 가능하다.
+void Comb3(int n, int k)
+{
+    vector<int> choice(k);
+    for (int i = 0; i < k; i++)
+    {
+        choice[i] = i;
+    }
+
+    while (choice[k - 1] < n)
+    {
+        Print::Container(choice);
+
+        int t = k - 1;
+        // 최대값에 도달하지 않은 가장 오른쪽 원소를 찾음
+        while (t != 0 && choice[t] == n - k + t)
+        {
+            t--;
+        }
+
+        // 해당 원소를 증가
+        choice[t]++;
+
+        // 해당 원소 뒤의 모든 원소 증가
+        for (int i = t + 1; i < k; i++)
+        {
+            choice[i] = choice[i - 1] + 1;
+        }
+    }
+}
+
 int main()
 {
     vector<int> combs;
-    Comb2(N, K, combs);
+    //Comb1(1, combs);
+    //Comb2(N, K, combs);
+    //Comb3(N, K);
+
+    /*
+    vector<vector<int>> all_combs;
+    Algorithm::CombinationsIterate(5, 3, all_combs);
+    for (int i = 0; i < all_combs.size(); ++i)
+    {
+        Print::Container(all_combs[i]);
+    }
+    */
 
     return 0;
 }
