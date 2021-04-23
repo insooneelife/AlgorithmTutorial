@@ -8,7 +8,7 @@
 #include <algorithm>
 
 using namespace std;
-
+ 
 void Print(const vector<int>& v, string tag = "----------------------------")
 {
     cout << tag << endl;
