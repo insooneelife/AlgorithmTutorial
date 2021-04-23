@@ -36,11 +36,6 @@
 
 
 // #풀어보기
-// 색종이 붙이기 (백트래킹)
-// https://www.acmicpc.net/problem/17136
-
-
-// #풀어보기
 // 달이 차오른다, 가자. (BFS and bitmask)
 // https://www.acmicpc.net/problem/1194
 
