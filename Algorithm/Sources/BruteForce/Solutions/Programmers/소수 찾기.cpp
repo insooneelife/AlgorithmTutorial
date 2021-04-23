@@ -1,4 +1,4 @@
-// ¼Ò¼ö Ã£±â (¼ø¿­, Á¤¼ö·Ð)
+ï»¿// ì†Œìˆ˜ ì°¾ê¸° (ìˆœì—´, ì •ìˆ˜ë¡ )
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 
 #include <iostream>

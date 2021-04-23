@@ -1,4 +1,4 @@
-// ¸ğÀÇ°í»ç (Brute Force)
+ï»¿// ëª¨ì˜ê³ ì‚¬ (Brute Force)
 // https://programmers.co.kr/learn/courses/30/lessons/42840
 
 #include <iostream>
@@ -30,7 +30,7 @@ vector<int> solution(vector<int> answers)
     for (const vector<int>& selects : all_selects)
     {
         int cnt = 0;
-        // n¹ø ¼öÆ÷ÀÚ
+        // në²ˆ ìˆ˜í¬ì
         for (int i = 0; i < answers.size(); ++i)
         {
             int answer = answers[i];

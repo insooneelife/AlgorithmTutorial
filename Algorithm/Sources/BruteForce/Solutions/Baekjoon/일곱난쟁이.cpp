@@ -1,4 +1,4 @@
-// ÀÏ°ö³­ÀïÀÌ (Brute Force)
+ï»¿// ì¼ê³±ë‚œìŸì´ (Brute Force)
 // https://www.acmicpc.net/problem/2309
 
 #include <iostream>
@@ -6,9 +6,9 @@
 #include <algorithm>
 using namespace std;
 
-// 7¸íÀÇ ÇÕ = 100
-// 9¸íÀÇ ÇÕ = 100 + x + y
-// N <= 9 ÀÌ¹Ç·Î ¼ø¼­½Ö (x, y)ÀÇ °¡´ÉÇÑ ¸ğµç °æ¿ìÀÇ ¼ö´Â C(9, 2) = 36°¡ÁöÀÌ´Ù.
+// 7ëª…ì˜ í•© = 100
+// 9ëª…ì˜ í•© = 100 + x + y
+// N <= 9 ì´ë¯€ë¡œ ìˆœì„œìŒ (x, y)ì˜ ê°€ëŠ¥í•œ ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ëŠ” C(9, 2) = 36ê°€ì§€ì´ë‹¤.
 const int kNum = 9;
 
 int main()

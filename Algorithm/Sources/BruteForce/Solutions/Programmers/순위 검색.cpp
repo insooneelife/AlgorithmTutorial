@@ -1,4 +1,4 @@
-// ¼øÀ§ °Ë»ö (Á¶ÇÕ or bitmask and ÇØ½Ã)
+ï»¿// ìˆœìœ„ ê²€ìƒ‰ (ì¡°í•© or bitmask and í•´ì‹œ)
 // https://programmers.co.kr/learn/courses/30/lessons/72412
 
 

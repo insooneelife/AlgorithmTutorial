@@ -1,4 +1,4 @@
-// ī�� (Brute Force)
+﻿// 카펫 (Brute Force)
 // https://programmers.co.kr/learn/courses/30/lessons/42842
 
 #include <iostream>
