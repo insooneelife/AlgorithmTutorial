@@ -1,4 +1,4 @@
-// °¡Àå Å« ¼ö (Á¤·Ä)
+ï»¿// ê°€ì¥ í° ìˆ˜ (ì •ë ¬)
 // https://programmers.co.kr/learn/courses/30/lessons/42746?language=cpp
 
 

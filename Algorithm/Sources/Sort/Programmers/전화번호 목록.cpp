@@ -1,4 +1,4 @@
-// ÀüÈ­¹øÈ£ ¸ñ·Ï (ÇØ½Ã or Á¤·Ä)
+ï»¿// ì „í™”ë²ˆí˜¸ ëª©ë¡ (í•´ì‹œ or ì •ë ¬)
 // https://programmers.co.kr/learn/courses/30/lessons/42577
 
 
