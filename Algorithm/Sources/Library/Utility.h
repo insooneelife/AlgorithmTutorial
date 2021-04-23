@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <map>
@@ -10,7 +10,7 @@
 class Utility
 {
 public:
-    // b°¡ aÀÇ ºÎºĞÁıÇÕÀÎÁö È®ÀÎ
+    // bê°€ aì˜ ë¶€ë¶„ì§‘í•©ì¸ì§€ í™•ì¸
     template <typename T>
     static bool IsSubset(const std::vector<T>& a, const std::vector<T>& b)
     {
@@ -21,7 +21,7 @@ public:
         return includes(begin(a), end(a), begin(b), end(b));
     }
 
-    // b°¡ aÀÇ ÁøºÎºĞÁıÇÕÀÎÁö È®ÀÎ
+    // bê°€ aì˜ ì§„ë¶€ë¶„ì§‘í•©ì¸ì§€ í™•ì¸
     template <typename T>
     static bool IsProperSubset(const std::vector<T>& a, const std::vector<T>& b)
     {
@@ -35,7 +35,7 @@ public:
         return includes(begin(a), end(a), begin(b), end(b));
     }
 
-    // strÀ» delimiter ´ÜÀ§·Î ÀÚ¸¥´Ù.
+    // strì„ delimiter ë‹¨ìœ„ë¡œ ìë¥¸ë‹¤.
     static std::vector<std::string> Split(const std::string& str, char delimiter)
     {
         std::vector<std::string> tokens;
@@ -49,8 +49,8 @@ public:
     }
 
     
-    // strÀ» whitespace ´ÜÀ§·Î ÀÚ¸¥´Ù.
-    // (whitespace¿¡´Â '\t', ' ', '\n' °ú °°Àº °ÍµéÀÌ ÀÖ´Ù.)
+    // strì„ whitespace ë‹¨ìœ„ë¡œ ìë¥¸ë‹¤.
+    // (whitespaceì—ëŠ” '\t', ' ', '\n' ê³¼ ê°™ì€ ê²ƒë“¤ì´ ìˆë‹¤.)
     // ex)
     // "split\ton   \t white\nspace   ." => { "split", "on", "white", "space", "." }
     static std::vector<std::string> Split(const std::string& str)
@@ -66,7 +66,7 @@ public:
         return results;
     }
 
-    // line¿¡¼­ ¸ğµç word¸¦ Á¦°ÅÇÑ´Ù.
+    // lineì—ì„œ ëª¨ë“  wordë¥¼ ì œê±°í•œë‹¤.
     // ex) ("abcppppppabc", "abc") => "pppppp"
     static void RemoveAllWordsFromLine(std::string& line, const std::string& word)
     {

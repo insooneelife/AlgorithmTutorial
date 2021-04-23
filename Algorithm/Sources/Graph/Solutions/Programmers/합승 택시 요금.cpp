@@ -1,4 +1,4 @@
-// гу╫б ец╫ц ©Д╠щ (гц╥нюл╣Е)
+О╩©// М∙╘Л┼╧ М┐²Л▀° Л ■Й╦┬ (М■▄К║°Л²╢К⌠°)
 // https://programmers.co.kr/learn/courses/30/lessons/72413
 
 #include <iostream>

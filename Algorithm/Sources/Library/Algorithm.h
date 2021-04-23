@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iostream>
 #include <vector>
@@ -7,20 +7,20 @@
 class Algorithm
 {
 public:
-    // p, qÀÇ ÃÖ´ë°ø¾à¼ö¸¦ ±¸ÇÏ´Â ¾Ë°í¸®Áò
+    // p, qì˜ ìµœëŒ€ê³µì•½ìˆ˜ë¥¼ êµ¬í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜
     // time complexity     O(logN)
-    // input               µÎ ¼ö p, q
-    // output              p, qÀÇ ÃÖ´ë°ø¾à¼ö
+    // input               ë‘ ìˆ˜ p, q
+    // output              p, qì˜ ìµœëŒ€ê³µì•½ìˆ˜
     static int GCD(int p, int q)
     {
         if (q == 0) return p;
         return GCD(q, p % q);
     }
 
-    // nÀÌ ¼Ò¼öÀÎÁö ÆÇ´ÜÇÏ´Â ¾Ë°í¸®Áò
+    // nì´ ì†Œìˆ˜ì¸ì§€ íŒë‹¨í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜
     // time complexity     O(N^0.5)
-    // input               ÀÚ¿¬¼ö n
-    // output              ¼Ò¼öÀÌ¸é true, ¾Æ´Ï¸é false
+    // input               ìì—°ìˆ˜ n
+    // output              ì†Œìˆ˜ì´ë©´ true, ì•„ë‹ˆë©´ false
     static bool IsPrime(int n)
     {
         if (n <= 1)
@@ -43,7 +43,7 @@ public:
         return true;
     }
 
-    // ¸ğµâ¶ó ±ÔÄ¢
+    // ëª¨ë“ˆë¼ ê·œì¹™
     class Modular
     {
         // (a + b) % m
@@ -65,11 +65,11 @@ public:
         }
     };
 
-    // n ÀÌÇÏÀÇ ¸ğµç ¼Ò¼ö¸¦ »ı¼ºÇÏ´Â ¾Ë°í¸®Áò
+    // n ì´í•˜ì˜ ëª¨ë“  ì†Œìˆ˜ë¥¼ ìƒì„±í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜
     // time complexity     O(N)
     // space complexity    O(N) 
-    // input               ÀÚ¿¬¼ö n
-    // output              n ÀÌÇÏÀÇ ¸ğµç ¼Ò¼ö
+    // input               ìì—°ìˆ˜ n
+    // output              n ì´í•˜ì˜ ëª¨ë“  ì†Œìˆ˜
     class Eratosthenes
     {
     public:
@@ -119,11 +119,11 @@ public:
         std::vector<int> primes;
     };
 
-    // ¼ÒÀÎ¼ö »ı¼ºÀ» À§ÇÑ ÀüÃ³¸® ¾Ë°í¸®Áò
+    // ì†Œì¸ìˆ˜ ìƒì„±ì„ ìœ„í•œ ì „ì²˜ë¦¬ ì•Œê³ ë¦¬ì¦˜
     // time complexity     O(N)
     // space complexity    O(N) 
-    // input               ¼Ò¼ö »ı¼º ¹üÀ§ n
-    // output              n ÀÌÇÏÀÇ ¸ğµç ¼Ò¼ö
+    // input               ì†Œìˆ˜ ìƒì„± ë²”ìœ„ n
+    // output              n ì´í•˜ì˜ ëª¨ë“  ì†Œìˆ˜
     class EratosthenesFactors
     {
     public:
@@ -164,12 +164,12 @@ public:
         std::vector<int> factors;
     };
 
-    // 2 ÀÌ»óÀÇ ÀÚ¿¬¼ö nÀ» ¼ÒÀÎ¼öºĞÇØÇÏ´Â ¾Ë°í¸®Áò
-    // EratosthenesFactors¿¡ ÃÖ¼Ò ¼ÒÀÎ¼ö°¡ ¹Ì¸® »ı¼ºµÇ¾î ÀÖ¾î¾ß Á¤»óµ¿ÀÛÇÑ´Ù.
+    // 2 ì´ìƒì˜ ìì—°ìˆ˜ nì„ ì†Œì¸ìˆ˜ë¶„í•´í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜
+    // EratosthenesFactorsì— ìµœì†Œ ì†Œì¸ìˆ˜ê°€ ë¯¸ë¦¬ ìƒì„±ë˜ì–´ ìˆì–´ì•¼ ì •ìƒë™ì‘í•œë‹¤.
     // time complexity     O(N)
     // space complexity    O(N) 
-    // input               ÀÚ¿¬¼ö n
-    // output              nÀÇ ¸ğµç ¼ÒÀÎ¼ö
+    // input               ìì—°ìˆ˜ n
+    // output              nì˜ ëª¨ë“  ì†Œì¸ìˆ˜
     static std::vector<int> Factors(const EratosthenesFactors& era, int n)
     {
         using namespace std;
@@ -185,10 +185,10 @@ public:
         return ret;
     }
     
-    // 2 ÀÌ»óÀÇ ÀÚ¿¬¼ö nÀ» ¼ÒÀÎ¼öºĞÇØÇÏ´Â ¾Ë°í¸®Áò
+    // 2 ì´ìƒì˜ ìì—°ìˆ˜ nì„ ì†Œì¸ìˆ˜ë¶„í•´í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜
     // time complexity     O(N^0.5)
-    // input               ÀÚ¿¬¼ö n
-    // output              nÀÇ ¸ğµç ¼ÒÀÎ¼ö
+    // input               ìì—°ìˆ˜ n
+    // output              nì˜ ëª¨ë“  ì†Œì¸ìˆ˜
     static std::vector<int> Factors(int n)
     {
         using namespace std;
@@ -208,12 +208,12 @@ public:
         return ret;
     }
 
-    // 10Áø¼ö -> NÁø¼ö º¯È¯
+    // 10ì§„ìˆ˜ -> Nì§„ìˆ˜ ë³€í™˜
     class DecimalNumberSystem
     {
     public:
-        // input : 10 Áø¼ö n, º¯È¯ ´ë»ó Áø¼ö num_system [2 - 16]
-        // output : num_system Áø¼ö
+        // input : 10 ì§„ìˆ˜ n, ë³€í™˜ ëŒ€ìƒ ì§„ìˆ˜ num_system [2 - 16]
+        // output : num_system ì§„ìˆ˜
         static std::string Convert(long long n, int num_system)
         {
             using namespace std;
@@ -247,14 +247,14 @@ public:
     };
 
     // BigInteger
-    // C++·Î BigInteger ¹®Á¦¸¦ Çª´Â°ÍÀº ¾î¸®¼®Àº ÁşÀÌ´Ù.
-    // pythonÀ¸·Î Ç®µµ·Ï ÇÏÀÚ.
+    // C++ë¡œ BigInteger ë¬¸ì œë¥¼ í‘¸ëŠ”ê²ƒì€ ì–´ë¦¬ì„ì€ ì§“ì´ë‹¤.
+    // pythonìœ¼ë¡œ í’€ë„ë¡ í•˜ì.
 
 
-    // [0, N - 1] ¹üÀ§ÀÇ ¼ö Áß, K°³¸¦ ¼±ÅÃÇÏ´Â ¸ğµç Á¶ÇÕ (Àç±Í)
+    // [0, N - 1] ë²”ìœ„ì˜ ìˆ˜ ì¤‘, Kê°œë¥¼ ì„ íƒí•˜ëŠ” ëª¨ë“  ì¡°í•© (ì¬ê·€)
     // time complexity     O(C(N, K) * K)
-    // input               ÀÚ¿¬¼ö N, K
-    // output              ¸ğµç Á¶ÇÕ
+    // input               ìì—°ìˆ˜ N, K
+    // output              ëª¨ë“  ì¡°í•©
     class Combinations
     {
     public:
@@ -295,10 +295,10 @@ public:
     };
         
 
-    // [0, N - 1] ¹üÀ§ÀÇ ¼ö Áß, K°³¸¦ ¼±ÅÃÇÏ´Â ¸ğµç Á¶ÇÕ (¹İº¹¹®)
+    // [0, N - 1] ë²”ìœ„ì˜ ìˆ˜ ì¤‘, Kê°œë¥¼ ì„ íƒí•˜ëŠ” ëª¨ë“  ì¡°í•© (ë°˜ë³µë¬¸)
     // time complexity     O(C(N, K) * K)
-    // input               ÀÚ¿¬¼ö N, K
-    // output              ¸ğµç Á¶ÇÕ
+    // input               ìì—°ìˆ˜ N, K
+    // output              ëª¨ë“  ì¡°í•©
     static void CombinationsIterate(const int N, const int K, std::vector<std::vector<int>>& all_combs)
     {
         using namespace std;

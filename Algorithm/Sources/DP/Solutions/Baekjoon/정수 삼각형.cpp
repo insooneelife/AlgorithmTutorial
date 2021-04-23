@@ -1,9 +1,9 @@
-// Á¤¼ö »ï°¢Çü
+ï»¿// ì •ìˆ˜ ì‚¼ê°í˜•
 // https://www.acmicpc.net/problem/1932
 
 
-// ¹æ¹ı 1. 
-// ¹è¿­
+// ë°©ë²• 1. 
+// ë°°ì—´
 #include <iostream>
 #include <string>
 using namespace std;
@@ -39,8 +39,8 @@ int main()
 
 
 /*
-// ¹æ¹ı 2.
-// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+// ë°©ë²• 2.
+// ë©”ëª¨ì´ì œì´ì…˜
 #include <iostream>
 #include <string>
 using namespace std;

@@ -1,16 +1,16 @@
-// ÇØ½Ã Å×ÀÌºí(Hash Table)
+ï»¿// í•´ì‹œ í…Œì´ë¸”(Hash Table)
 
-// ÇØ½Ã Å×ÀÌºíÀÌ¶õ?
-// key¿Í value ÇüÅÂ·Î ÀÚ·á¸¦ ÀúÀåÇÏ´Â ÀÚ·á±¸Á¶
-// key´Â À¯ÀÏ¼ºÀ» °®´Â ¼ýÀÚ·Î, ÇØ½Ã¸Ê ÀÎµ¦½ÌÀ» À§ÇØ »ç¿ëµÈ´Ù.
-// value´Â ½ÇÁ¦ µ¥ÀÌÅÍ°¡ ÀúÀåµÇ´Â º¯¼öÀÌ´Ù.
-// key¸¦ ÅëÇØ ºü¸£°Ô ¿øÇÏ´Â value¸¦ ÂüÁ¶ÇØ¿Ã ¼ö ÀÖ´Ù.
+// í•´ì‹œ í…Œì´ë¸”ì´ëž€?
+// keyì™€ value í˜•íƒœë¡œ ìžë£Œë¥¼ ì €ìž¥í•˜ëŠ” ìžë£Œêµ¬ì¡°
+// keyëŠ” ìœ ì¼ì„±ì„ ê°–ëŠ” ìˆ«ìžë¡œ, í•´ì‹œë§µ ì¸ë±ì‹±ì„ ìœ„í•´ ì‚¬ìš©ëœë‹¤.
+// valueëŠ” ì‹¤ì œ ë°ì´í„°ê°€ ì €ìž¥ë˜ëŠ” ë³€ìˆ˜ì´ë‹¤.
+// keyë¥¼ í†µí•´ ë¹ ë¥´ê²Œ ì›í•˜ëŠ” valueë¥¼ ì°¸ì¡°í•´ì˜¬ ìˆ˜ ìžˆë‹¤.
 
 
-// ÇØ½Ã ¿¹Á¦ 1.
+// í•´ì‹œ ì˜ˆì œ 1.
 // vector<int> inputs = { 50, 51, 51, 52, 51, 52, 51, 55, 54, 53, 52, 58, 59, 57 };
-// °¢ ¿ø¼Ò KÀÇ ¹üÀ§ (50 <= K < 60)
-// ´ÙÀ½°ú °°Àº ÀÎÇ²ÀÌ µé¾î¿Â´Ù°í °¡Á¤ÇßÀ» ¶§ °¢ ¿ø¼ÒÀÇ °³¼ö¸¦ Ä«¿îÆÃÇÏ´Â ¾Ë°í¸®ÁòÀ» ÀÛ¼º.
+// ê° ì›ì†Œ Kì˜ ë²”ìœ„ (50 <= K < 60)
+// ë‹¤ìŒê³¼ ê°™ì€ ì¸í’‹ì´ ë“¤ì–´ì˜¨ë‹¤ê³  ê°€ì •í–ˆì„ ë•Œ ê° ì›ì†Œì˜ ê°œìˆ˜ë¥¼ ì¹´ìš´íŒ…í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜ì„ ìž‘ì„±.
 
 
 #include <string>
@@ -27,13 +27,13 @@ void HashExample()
 {
     vector<int> inputs = { 50, 51, 51, 52, 51, 52, 51, 55, 54, 53, 52, 58, 59, 57 };
 
-    // ÇØ½Ã Å×ÀÌºíÀÇ ±Ù¿øÀÌ µÇ´Â ¸Þ¸ð¸®¸¦ bucketÀÌ¶ó ºÎ¸¥´Ù.
+    // í•´ì‹œ í…Œì´ë¸”ì˜ ê·¼ì›ì´ ë˜ëŠ” ë©”ëª¨ë¦¬ë¥¼ bucketì´ë¼ ë¶€ë¥¸ë‹¤.
     int bucket[10] = { 0 };
     int cnt_bucket[10] = { 0 };
 
     for (int i = 0; i < inputs.size(); ++i)
     {
-        // ÀÌ ºÎºÐÀÌ hash functionÀÌ´Ù.
+        // ì´ ë¶€ë¶„ì´ hash functionì´ë‹¤.
         int index = inputs[i] % 50;
         bucket[index] = inputs[i];
         cnt_bucket[index]++;
@@ -55,10 +55,10 @@ int main()
 }
 
 
-// ÇØ½Ã ¿¹Á¦1
-// ¿ÏÁÖÇÏÁö ¸øÇÑ ¼±¼ö
+// í•´ì‹œ ì˜ˆì œ1
+// ì™„ì£¼í•˜ì§€ ëª»í•œ ì„ ìˆ˜
 // https://programmers.co.kr/learn/courses/30/lessons/42576
 
-// ÇØ½Ã ¿¹Á¦2
-// À§Àå
+// í•´ì‹œ ì˜ˆì œ2
+// ìœ„ìž¥
 // https://programmers.co.kr/learn/courses/30/lessons/42578

@@ -1,4 +1,4 @@
-// bitmask
+﻿// bitmask
 
 int main()
 {

@@ -1,4 +1,4 @@
-// ¿ÏÁÖÇÏÁö ¸øÇÑ ¼±¼ö
+ï»¿// ì™„ì£¼í•˜ì§€ ëª»í•œ ì„ ìˆ˜
 // https://programmers.co.kr/learn/courses/30/lessons/42576
 
 #include <string>
