@@ -1,4 +1,4 @@
-// ¾ËÆÄºª (¹éÆ®·¡Å·)
+ï»¿// ì•ŒíŒŒë²³ (ë°±íŠ¸ëž˜í‚¹)
 // https://www.acmicpc.net/problem/1987
 
 #include <iostream>

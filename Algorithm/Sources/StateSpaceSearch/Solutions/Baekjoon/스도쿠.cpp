@@ -1,8 +1,8 @@
-// ½ºµµÄí (¹éÆ®·¡Å·)
+ï»¿// ìŠ¤ë„ì¿  (ë°±íŠ¸ëž˜í‚¹)
 // https://www.acmicpc.net/problem/2580
 
-// ½ÃÇàÂø¿À
-// vectorÀÇ push_backÀÌ ½Ã°£ÃÊ°úÀÇ ¿øÀÎÀÌ µÉ ¼ö ÀÖÀ½
+// ì‹œí–‰ì°©ì˜¤
+// vectorì˜ push_backì´ ì‹œê°„ì´ˆê³¼ì˜ ì›ì¸ì´ ë  ìˆ˜ ìžˆìŒ
 
 #include <iostream>
 #include <vector>
