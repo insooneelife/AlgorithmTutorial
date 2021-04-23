@@ -30,6 +30,9 @@
     <ClCompile Include="Sources\Sort\4-SortCompareValid1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Playground.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Library\Algorithm.h">
