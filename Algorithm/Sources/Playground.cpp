@@ -1,5 +1,5 @@
 // 
-// 정수 삼각형
+// 해시
 // https://www.acmicpc.net/problem/1932
 
 #include <iostream>
