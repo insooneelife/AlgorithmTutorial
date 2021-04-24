@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Library\Algorithm.h" />
+    <ClInclude Include="Sources\Library\Print.h" />
     <ClInclude Include="Sources\Library\STL.h" />
     <ClInclude Include="Sources\Library\Utility.h" />
   </ItemGroup>

@@ -1,5 +1,27 @@
 // 기본 정렬
 
+// plays 컨테이너 정렬하기
+// 예제 1
+// 기본 정렬
+
+// 예제 2
+// 내림차순 정렬
+
+// 예제 3
+// 정렬 람다
+
+// 예제 4
+// threshold 보다 크면 오름차순, 작거나 같으면 내림차순
+
+
+
+
+
+
+
+
+
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -64,6 +86,6 @@ int main()
 }
 
 
-// 정렬 예제1
+// 정렬 문제 1
 // K번째 수
 // https://programmers.co.kr/learn/courses/30/lessons/42748

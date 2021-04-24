@@ -1,5 +1,34 @@
 // 문자열 정렬
 
+// 예제 1
+// 첫 알파벳 기준 정렬
+
+// 예제 2
+// 2중 vector를 사전식 정렬해보기
+/*
+vector<vector<int>> all =
+{
+    { 1, 3 },
+    { 1 },
+    { 1, 2},
+    { 1, 2, 3 },
+    { 2, 1 },
+    { 3, 2, 1 }
+};
+
+answer
+1
+1, 2
+1, 2, 3
+1, 3
+2, 1
+3, 2, 1
+*/
+
+
+
+
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -48,22 +77,8 @@ int main()
     return 0;
 }
 
-// 사전식 정렬해보기
-/*
-vector<vector<int>> all =
-{
-    { 1, 3 },
-    { 1 },
-    { 1, 2},
-    { 1, 2, 3 },
-    { 2, 1 },
-    { 3, 2, 1 }
-};
-*/
 
-
-// 정렬 예제2
+// 정렬 문제 2
 // 가장 큰 수
 // https://programmers.co.kr/learn/courses/30/lessons/42746
-
 

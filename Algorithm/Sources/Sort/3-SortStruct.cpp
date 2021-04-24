@@ -1,5 +1,6 @@
 // 구조체 정렬
 
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -93,7 +94,7 @@ int main()
     return 0;
 }
 
-// 정렬 예제3
+// 정렬 문제 3
 // 베스트앨범
 // https://programmers.co.kr/learn/courses/30/lessons/42579
 
