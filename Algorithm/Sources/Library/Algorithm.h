@@ -26,12 +26,15 @@ public:
         if (n <= 1)
             return false;
 
+        // 2는 예외
         if (n == 2)
             return true;
 
+        // 모든 짝수는 2의 배수니까 소수 x
         if (n % 2 == 0)
             return false;
 
+        // 3 5 7 9 ...
         int sqrtn = (int)(sqrt(n));
         for (int i = 3; i <= sqrtn; i += 2)
         {
@@ -80,6 +83,7 @@ public:
             primes.resize(n + 1);
             primes[0] = primes[1] = false;
 
+            // 모두 true로 세팅
             for (int i = 2; i <= n; ++i)
             {
                 primes[i] = i;
@@ -98,6 +102,7 @@ public:
             }
         }
 
+        // O(1)
         bool IsPrime(int n) const
         {
             return primes[n] != 0;
