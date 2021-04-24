@@ -12,6 +12,7 @@ struct Data
     
     string genre;
     int play;
+    
 };
 
 int main()
