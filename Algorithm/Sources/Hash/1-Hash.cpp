@@ -1,4 +1,9 @@
-﻿#include <string>
+﻿// 해시 예제 1.
+// a-z 까지의 알파벳으로 이루어진 문자열이 들어올 때, 각 알파벳들의 개수를 카운팅하는 알고리즘 구현
+
+
+
+#include <string>
 #include <iostream>
 
 using namespace std;

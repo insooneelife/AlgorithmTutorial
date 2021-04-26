@@ -1,4 +1,14 @@
-﻿#include <string>
+﻿// 해시 테이블 관련 개념들의 탄생
+
+// 'a'와 같은 알파벳들은 데이터 그 자체로서, 해시테이블에 저장될 값(Value)와 대응된다.
+// 'a'의 아스키 값은 데이터의 고유한 식별값으로서, 키(Key)와 대응된다.
+// 배열[26]은 해시 테이블의 저장공간으로서, 버킷(Bucket)과 대응된다.
+// alphabet - 'a'라는 계산식은 각 데이터가 저장될 위치를 결정하는 방법으로서, 해시 함수(Hash Function)에 대응된다.
+// hash function 통해 계산된 index는 실제 값이 bucket에 저장될 위치로서, 해시(Hashes)와 대응된다.
+
+
+
+#include <string>
 #include <iostream>
 #include <unordered_map>
 
