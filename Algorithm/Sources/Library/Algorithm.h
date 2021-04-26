@@ -80,24 +80,17 @@ public:
 
         void Make()
         {
-            primes.resize(n + 1);
+            primes.resize(n + 1, true);
             primes[0] = primes[1] = false;
-
-            // 모두 true로 세팅
-            for (int i = 2; i <= n; ++i)
-            {
-                primes[i] = i;
-            }
 
             int sqrtn = (int)(sqrt(n));
             for (int i = 2; i <= sqrtn; ++i)
             {
-                if (primes[i] != i) continue;
+                if (!primes[i]) continue;
 
                 for (int j = i * i; j <= n; j += i)
                 {
-                    if (primes[j] == j)
-                        primes[j] = false;
+                    primes[j] = false;
                 }
             }
         }
@@ -105,23 +98,23 @@ public:
         // O(1)
         bool IsPrime(int n) const
         {
-            return primes[n] != 0;
+            return primes[n];
         }
 
         void Print() const
         {
             for (int i = 2; i <= n; ++i)
             {
-                if (primes[i] != 0)
+                if (primes[i])
                 {
-                    std::cout << primes[i] << " ";
+                    std::cout << i << " ";
                 }
             }
         }
 
     private:
         size_t n;
-        std::vector<int> primes;
+        std::vector<bool> primes;
     };
 
     // 소인수 생성을 위한 전처리 알고리즘
