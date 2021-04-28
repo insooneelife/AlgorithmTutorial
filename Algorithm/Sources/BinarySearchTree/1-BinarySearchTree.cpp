@@ -19,6 +19,7 @@ public:
     TreeNode* right;
 };
 
+// Tree 생성
 TreeNode* MakeTree()
 {
     TreeNode* left_subtree = new TreeNode(3, 33, new TreeNode(1, 11), new TreeNode(6, 66, new TreeNode(4, 44), new TreeNode(7, 77)));
@@ -30,6 +31,7 @@ TreeNode* MakeTree()
 
 TreeNode* Search(int key, TreeNode* root)
 {
+    // 기저 조건
     if (root == nullptr)
         return nullptr;
 
@@ -46,6 +48,9 @@ TreeNode* Search(int key, TreeNode* root)
 // 참조자를 이용한 방법
 void Insert(int key, int value, TreeNode*& root)
 {
+    // root는 TreeNode 포인터의 참조자이기 때문에,
+    // root가 nullptr인 시점에 그 nullptr을 담고있는 변수 자체일 것이다. (즉, 이 root의 parent의 left나 right 중 하나일 것이다.)
+    // 포인터의 참조로 root를 가져왔기 때문에, root = new TreeNode(key, value)를 통해, 해당 변수가 직접 새 노드를 참조할 수 있을 것이다.
     if (root == nullptr)
         root = new TreeNode(key, value);
 
@@ -62,20 +67,26 @@ void Insert(int key, int value, TreeNode*& root)
 // 반환을 이용한 방법
 TreeNode* Insert2(int key, int value, TreeNode* root)
 {
+    // 삽입되는 경우에만 새로 생성된 노드를 반환하여, root->left나 root->right가 새 노드를 참조하도록 한다.
     if (root == nullptr)
         return new TreeNode(key, value);
 
     else if (key == root->key)
         root->value = value;
 
+    // root->left는 왼쪽 서브트리의 루트를 참조하도록 한다.
+    // 물론 이미 참조하고 있지만, 새 노드가 삽입되는 상황에 대한 예외 반환을 가능하도록 하기 위함이다.
     else if (key < root->key)
         root->left = Insert2(key, value, root->left);
 
+    // left와 마찬가지
     else if (key > root->key)
         root->right = Insert2(key, value, root->right);
 
+    // 특별한 일이 없다면 자기자신을 반환하여, root->left나 root->right의 참조가 변하지 않도록 한다.
     return root;
 }
+
 
 // 1. 자식이 없는 node 제거 - 그냥 제거
 // 2. 한 개의 자식을 갖는 node 제거 - 제거 후 자식으로 대체
@@ -175,24 +186,24 @@ void PostOrder(TreeNode* root)
     cout << root->key << " ";
 }
 
-void DeleteTree(TreeNode* node)
+void DeleteTree(TreeNode* root)
 {
-    if (node == nullptr) return;
+    if (root == nullptr) return;
 
     // first delete both subtrees 
-    DeleteTree(node->left);
-    DeleteTree(node->right);
-    delete node;
+    DeleteTree(root->left);
+    DeleteTree(root->right);
+    delete root;
 }
 
-void PrintAllTraverse(TreeNode* tree)
+void PrintAllTraverse(TreeNode* root)
 {
     cout << "PreOrder" << endl;
-    PreOrder(tree);
+    PreOrder(root);
     cout << endl << "InOrder" << endl;
-    InOrder(tree);
+    InOrder(root);
     cout << endl << "PostOrder" << endl;
-    PostOrder(tree);
+    PostOrder(root);
     cout << endl;
 }
 
