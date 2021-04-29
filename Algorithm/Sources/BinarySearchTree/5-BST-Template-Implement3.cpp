@@ -34,7 +34,6 @@ private:
     TreeNode<KeyType, ValueType>* right;
 };
 
-
 template<typename KeyType, typename ValueType, typename CompareType = less<KeyType>>
 class BinarySearchTree
 {
@@ -251,6 +250,33 @@ private:
 private:
     TreeNode<KeyType, ValueType>* _root;
 };
+
+/*
+// iterator ?
+template<typename KeyType, typename ValueType>
+struct TreeIterator
+{
+    TreeIterator(TreeNode<KeyType, ValueType>* tree_node) : tree_node(tree_node) { }
+    TreeIterator& operator++() {}
+    TreeIterator operator++(int) {}
+    bool operator==(const TreeIterator&) const {}
+
+    TreeIterator* operator->() {}
+    TreeIterator const* operator->() const {}
+
+    TreeIterator& operator*() {}
+    TreeIterator operator*() const {}
+
+private:
+    TreeNode<KeyType, ValueType>* tree_node;
+};
+
+template<typename KeyType, typename ValueType>
+TreeIterator<KeyType, ValueType> begin(const BinarySearchTree<KeyType, ValueType>& tree) {  }
+
+template<typename KeyType, typename ValueType>
+TreeIterator<KeyType, ValueType> end(const BinarySearchTree<KeyType, ValueType>& tree) { return TreeIterator(nullptr); }
+*/
 
 struct Key
 {
