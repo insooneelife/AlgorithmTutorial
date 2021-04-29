@@ -1,10 +1,8 @@
 ﻿// 이진탐색트리 (Binary Search Tree)
-// Binary Search Tree Template Implement (Key & Value)
+// Binary Search Tree Template Implement (Key & Value & Compare)
 
-// 탐색트리의 Key도 반드시 int 타입이 아닐 수 있다.
-// Key도 모든 타입에 대해 동작하도록 구현해보자.
-// 단, Key의 경우 트리 내부 알고리즘에서 Compare(<, >) 연산자와 Equal(==) 연산자를 사용하기 때문에,
-// 객체 내부에서 연산자 오버리딩을 해주어야 한다.
+// 트리의 비교방법은 반드시 오름차순이 아닐수도 있다.
+// 트리의 비교방법 자체를 Compare라는 템플릿 인자로 받아서, less, greater 모두에 대해 열려있도록 설계한다.
 
 #include <iostream>
 #include <vector>
@@ -29,17 +27,20 @@ public:
     ValueType value;
 
 private:
-    template <typename T, typename U>
+    template <typename T, typename U, typename V>
     friend class BinarySearchTree;
 
     TreeNode<KeyType, ValueType>* left;
     TreeNode<KeyType, ValueType>* right;
 };
 
-template<typename KeyType, typename ValueType>
+
+template<typename KeyType, typename ValueType, typename CompareType = less<KeyType>>
 class BinarySearchTree
 {
 public:
+    BinarySearchTree() : _root(nullptr) {}
+
     BinarySearchTree(TreeNode<KeyType, ValueType>* const root) : _root(root) {}
 
     BinarySearchTree(const BinarySearchTree& other)
@@ -66,12 +67,12 @@ public:
         return Search(key, _root);
     }
 
-    void Insert(KeyType key, const ValueType& value)
+    void Insert(const KeyType& key, const ValueType& value)
     {
         Insert(key, value, _root);
     }
 
-    void Delete(KeyType key)
+    void Delete(const KeyType& key)
     {
         Delete(key, _root);
     }
@@ -91,14 +92,14 @@ private:
         if (key == root->key)
             return root;
 
-        if (key < root->key)
+        if (CompareType()(key, root->key))
             return Search(key, root->left);
 
-        if (key > root->key)
+        if (CompareType()(root->key, key))
             return Search(key, root->right);
     }
 
-    static void Insert(KeyType key, const ValueType& value, TreeNode<KeyType, ValueType>*& root)
+    static void Insert(const KeyType& key, const ValueType& value, TreeNode<KeyType, ValueType>*& root)
     {
         if (root == nullptr)
             root = new TreeNode<KeyType, ValueType>(key, value);
@@ -106,10 +107,10 @@ private:
         else if (key == root->key)
             root->value = value;
 
-        else if (key < root->key)
+        else if (CompareType()(key, root->key))
             Insert(key, value, root->left);
 
-        else if (key > root->key)
+        else if (CompareType()(root->key, key))
             Insert(key, value, root->right);
     }
 
@@ -124,18 +125,18 @@ private:
         return min;
     }
 
-    static void Delete(KeyType key, TreeNode<KeyType, ValueType>*& root)
+    static void Delete(const KeyType& key, TreeNode<KeyType, ValueType>*& root)
     {
         // search
         // key not found
         if (root == nullptr)
         {
         }
-        else if (key < root->key)
+        else if (CompareType()(key, root->key))
         {
             Delete(key, root->left);
         }
-        else if (key > root->key)
+        else if (CompareType()(root->key, key))
         {
             Delete(key, root->right);
         }
@@ -256,17 +257,13 @@ struct Key
     Key(int key) : key(key) {}
 
 public:
-    bool operator<(const Key& other)
+    // 이 연산자만으로도 가능
+    bool operator<(const Key& other) const
     {
         return key < other.key;
     }
 
-    bool operator>(const Key& other)
-    {
-        return key > other.key;
-    }
-
-    bool operator==(const Key& other)
+    bool operator==(const Key& other) const 
     {
         return key == other.key;
     }
@@ -289,24 +286,17 @@ public:
 // Tree 생성
 BinarySearchTree<Key, Value> MakeTree()
 {
-    TreeNode<Key, Value>* left_subtree =
-        new TreeNode<Key, Value>(Key(3), Value("a", 33),
-            new TreeNode<Key, Value>(Key(1), Value("b", 11)),
-            new TreeNode<Key, Value>(Key(6), Value("c", 66),
-                new TreeNode<Key, Value>(Key(4), Value("d", 44)),
-                new TreeNode<Key, Value>(Key(7), Value("e", 77))));
+    BinarySearchTree<Key, Value> tree;
 
-    TreeNode<Key, Value>* right_subtree =
-        new TreeNode<Key, Value>(Key(10), Value("f", 1010),
-            nullptr,
-            new TreeNode<Key, Value>(Key(14), Value("g", 1414), new TreeNode<Key, Value>(Key(13), Value("h", 1313))));
+    tree.Insert(Key(8), Value("root", 0));
 
-    TreeNode<Key, Value>* root = new TreeNode<Key, Value>(Key(8), Value("root", 88), left_subtree, right_subtree);
+    tree.Insert(Key(1), Value("a", 0));
+    tree.Insert(Key(4), Value("b", 0));
+    tree.Insert(Key(14), Value("c", 0));
+    tree.Insert(Key(3), Value("d", 0));
 
-    BinarySearchTree<Key, Value> tree(root);
     return tree;
 }
-
 
 int main()
 {

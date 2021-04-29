@@ -1,6 +1,9 @@
 ﻿// 이진탐색트리 (Binary Search Tree)
 // Binary Search Tree Template Implement (Value)
 
+// 트리에 저장되는 데이터는 int 타입에 한정되어서는 안된다.
+// template을 이용하여 모든 타입을 저장할 수 있는 트리를 설계한다.
+
 #include <iostream>
 #include <vector>
 #include <string>
