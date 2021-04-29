@@ -37,10 +37,13 @@ private:
 template<typename KeyType, typename ValueType, typename CompareType = less<KeyType>>
 class BinarySearchTree
 {
+private:
+    using NodeType = TreeNode<KeyType, ValueType>;
+
 public:
     BinarySearchTree() : _root(nullptr) {}
 
-    BinarySearchTree(TreeNode<KeyType, ValueType>* const root) : _root(root) {}
+    BinarySearchTree(NodeType* const root) : _root(root) {}
 
     BinarySearchTree(const BinarySearchTree& other)
     {
@@ -61,7 +64,7 @@ public:
         return *this;
     }
 
-    TreeNode<KeyType, ValueType>* Search(KeyType key) const
+    NodeType* Search(KeyType key) const
     {
         return Search(key, _root);
     }
@@ -82,7 +85,7 @@ public:
     }
 
 private:
-    static TreeNode<KeyType, ValueType>* Search(KeyType key, TreeNode<KeyType, ValueType>* const root)
+    static NodeType* Search(KeyType key, NodeType* const root)
     {
         // 기저 조건
         if (root == nullptr)
@@ -99,10 +102,10 @@ private:
             return Search(key, root->right);
     }
 
-    static void Insert(const KeyType& key, const ValueType& value, TreeNode<KeyType, ValueType>*& root)
+    static void Insert(const KeyType& key, const ValueType& value, NodeType*& root)
     {
         if (root == nullptr)
-            root = new TreeNode<KeyType, ValueType>(key, value);
+            root = new NodeType(key, value);
 
         else if (key == root->key)
             root->value = value;
@@ -115,9 +118,9 @@ private:
     }
 
 
-    static TreeNode<KeyType, ValueType>* FindMin(TreeNode<KeyType, ValueType>* const root)
+    static NodeType* FindMin(NodeType* const root)
     {
-        TreeNode<KeyType, ValueType>* min = root;
+        NodeType* min = root;
         while (min->left != nullptr)
         {
             min = min->left;
@@ -125,7 +128,7 @@ private:
         return min;
     }
 
-    static void Delete(const KeyType& key, TreeNode<KeyType, ValueType>*& root)
+    static void Delete(const KeyType& key, NodeType*& root)
     {
         // search
         // key not found
@@ -153,7 +156,7 @@ private:
             // has right child
             else if (root->left == nullptr && root->right != nullptr)
             {
-                TreeNode<KeyType, ValueType>* delete_node = root;
+                NodeType* delete_node = root;
                 root = root->right;
                 delete delete_node;
             }
@@ -161,7 +164,7 @@ private:
             // has left child
             else if (root->left != nullptr && root->right == nullptr)
             {
-                TreeNode<KeyType, ValueType>* delete_node = root;
+                NodeType* delete_node = root;
                 root = root->left;
                 delete delete_node;
             }
@@ -169,7 +172,7 @@ private:
             else
             {
                 // find minimum node from right subtree
-                TreeNode<KeyType, ValueType>* min = FindMin(root->right);
+                NodeType* min = FindMin(root->right);
 
                 // replace to min node key & value
                 root->key = min->key;
@@ -182,7 +185,7 @@ private:
     }
 
 
-    static void DeleteTree(TreeNode<KeyType, ValueType>* const root)
+    static void DeleteTree(NodeType* const root)
     {
         if (root == nullptr) return;
 
@@ -195,18 +198,18 @@ private:
         delete root;
     }
 
-    static TreeNode<KeyType, ValueType>* CopyTree(const TreeNode<KeyType, ValueType>* const root, TreeNode<KeyType, ValueType>*& copy)
+    static NodeType* CopyTree(const NodeType* const root, NodeType*& copy)
     {
         if (root == nullptr)
             return nullptr;
 
-        copy = new TreeNode<KeyType, ValueType>(root->key, root->value);
+        copy = new NodeType(root->key, root->value);
         copy->left = CopyTree(root->left, copy->left);
         copy->right = CopyTree(root->right, copy->right);
         return copy;
     }
 
-    static void PreOrder(const TreeNode<KeyType, ValueType>* const root)
+    static void PreOrder(const NodeType* const root)
     {
         if (root == nullptr)
             return;
@@ -216,7 +219,7 @@ private:
         PreOrder(root->right);
     }
 
-    static void InOrder(const TreeNode<KeyType, ValueType>* const root)
+    static void InOrder(const NodeType* const root)
     {
         if (root == nullptr)
             return;
@@ -226,7 +229,7 @@ private:
         InOrder(root->right);
     }
 
-    static void PostOrder(const TreeNode<KeyType, ValueType>* const root)
+    static void PostOrder(const NodeType* const root)
     {
         if (root == nullptr)
             return;
@@ -236,7 +239,7 @@ private:
         cout << root->key.key << " ";
     }
 
-    static void PrintAllTraverse(const TreeNode<KeyType, ValueType>* const root)
+    static void PrintAllTraverse(const NodeType* const root)
     {
         cout << "PreOrder" << endl;
         PreOrder(root);
@@ -248,35 +251,8 @@ private:
     }
 
 private:
-    TreeNode<KeyType, ValueType>* _root;
+    NodeType* _root;
 };
-
-/*
-// iterator ?
-template<typename KeyType, typename ValueType>
-struct TreeIterator
-{
-    TreeIterator(TreeNode<KeyType, ValueType>* tree_node) : tree_node(tree_node) { }
-    TreeIterator& operator++() {}
-    TreeIterator operator++(int) {}
-    bool operator==(const TreeIterator&) const {}
-
-    TreeIterator* operator->() {}
-    TreeIterator const* operator->() const {}
-
-    TreeIterator& operator*() {}
-    TreeIterator operator*() const {}
-
-private:
-    TreeNode<KeyType, ValueType>* tree_node;
-};
-
-template<typename KeyType, typename ValueType>
-TreeIterator<KeyType, ValueType> begin(const BinarySearchTree<KeyType, ValueType>& tree) {  }
-
-template<typename KeyType, typename ValueType>
-TreeIterator<KeyType, ValueType> end(const BinarySearchTree<KeyType, ValueType>& tree) { return TreeIterator(nullptr); }
-*/
 
 struct Key
 {
@@ -291,7 +267,7 @@ public:
 
     bool operator>(const Key& other) const
     {
-        return key < other.key;
+        return key > other.key;
     }
 
     bool operator==(const Key& other) const
@@ -313,29 +289,25 @@ public:
     int value;
 };
 
+using Tree = BinarySearchTree<Key, Value, greater<Key>>;
 
 // Tree 생성
-//BinarySearchTree<Key, Value> MakeTree()
-BinarySearchTree<Key, Value, greater<Key>> MakeTree()
+Tree MakeTree()
 {
-    //BinarySearchTree<Key, Value> tree;
-    BinarySearchTree<Key, Value, greater<Key>> tree;
-
+    Tree tree;
     tree.Insert(Key(8), Value("root", 0));
-
     tree.Insert(Key(1), Value("a", 0));
     tree.Insert(Key(4), Value("b", 0));
     tree.Insert(Key(14), Value("c", 0));
     tree.Insert(Key(3), Value("d", 0));
+    tree.Insert(Key(7), Value("e", 0));
 
     return tree;
 }
 
 int main()
 {
-    //BinarySearchTree<Key, Value> tree = MakeTree();
-    BinarySearchTree<Key, Value, greater<Key>> tree = MakeTree();
-
+    Tree tree = MakeTree();
     tree.PrintAllTraverse();
 
     // search
@@ -345,11 +317,9 @@ int main()
     // insert
     cout << endl << "Insert key : 5  value : 55" << endl;
     tree.Insert(Key(5), Value("z", 55));
-
     tree.PrintAllTraverse();
 
-    //BinarySearchTree<Key, Value> tree2 = tree;
-    BinarySearchTree<Key, Value, greater<Key>> tree2 = tree;
+    Tree tree2 = tree;
 
     cout << "copy" << endl;
     tree2.PrintAllTraverse();
