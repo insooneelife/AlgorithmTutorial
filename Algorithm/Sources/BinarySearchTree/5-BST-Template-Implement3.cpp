@@ -92,6 +92,7 @@ private:
         if (key == root->key)
             return root;
 
+        // 함수객체를 활용하여, 일반화된 비교연산을 이용함
         if (CompareType()(key, root->key))
             return Search(key, root->left);
 
@@ -257,13 +258,17 @@ struct Key
     Key(int key) : key(key) {}
 
 public:
-    // 이 연산자만으로도 가능
     bool operator<(const Key& other) const
     {
         return key < other.key;
     }
 
-    bool operator==(const Key& other) const 
+    bool operator>(const Key& other) const
+    {
+        return key < other.key;
+    }
+
+    bool operator==(const Key& other) const
     {
         return key == other.key;
     }
@@ -284,9 +289,11 @@ public:
 
 
 // Tree 생성
-BinarySearchTree<Key, Value> MakeTree()
+//BinarySearchTree<Key, Value> MakeTree()
+BinarySearchTree<Key, Value, greater<Key>> MakeTree()
 {
-    BinarySearchTree<Key, Value> tree;
+    //BinarySearchTree<Key, Value> tree;
+    BinarySearchTree<Key, Value, greater<Key>> tree;
 
     tree.Insert(Key(8), Value("root", 0));
 
@@ -300,7 +307,8 @@ BinarySearchTree<Key, Value> MakeTree()
 
 int main()
 {
-    BinarySearchTree<Key, Value> tree = MakeTree();
+    //BinarySearchTree<Key, Value> tree = MakeTree();
+    BinarySearchTree<Key, Value, greater<Key>> tree = MakeTree();
 
     tree.PrintAllTraverse();
 
@@ -314,7 +322,8 @@ int main()
 
     tree.PrintAllTraverse();
 
-    BinarySearchTree<Key, Value> tree2 = tree;
+    //BinarySearchTree<Key, Value> tree2 = tree;
+    BinarySearchTree<Key, Value, greater<Key>> tree2 = tree;
 
     cout << "copy" << endl;
     tree2.PrintAllTraverse();

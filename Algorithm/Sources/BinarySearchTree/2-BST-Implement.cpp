@@ -17,29 +17,34 @@ public:
     int value;
 
 private:
+    // left, right는 BinarySearchTree에서만 접근 가능하도록 한다.
     friend class BinarySearchTree;
 
     TreeNode* left;
     TreeNode* right;
 };
 
+// TreeNode들의 집합을 관리하는 객체
 class BinarySearchTree
 {
 public:
     BinarySearchTree(TreeNode* root) : _root(root) {}
 
+    // 복사 생성자는 CopyTree를 이용하여 Preorder로 트리를 복사함
     BinarySearchTree(const BinarySearchTree& other)
     {
         cout << "copy construct BinarySearchTree" << endl;
         CopyTree(other._root, _root);
     }
 
+    // 소멸자는 DeleteTree를 이용하여 Postorder로 트리를 파괴함
     ~BinarySearchTree()
     {
         cout << "destruct BinarySearchTree" << endl;
         DeleteTree(_root);
     }
 
+    // 대입 연산자는 CopyTree를 이용하여 Preorder로 트리를 복사함
     BinarySearchTree& operator=(const BinarySearchTree& other)
     {
         cout << "copy assign BinarySearchTree" << endl;
@@ -48,6 +53,9 @@ public:
     }
 
 
+    // 외부에 필요한 인자만 열어 두고, 내부적으로 재귀함수를 호출하도록 함.
+    // 재귀함수에 들어갈 TreeNode root는 내부에서 넘겨줌.
+    // root를 건드리지 않는 함수는 const 처리하여, 디버깅 스코프를 줄인다.
     TreeNode* Search(int key) const
     {
         return Search(key, _root);
@@ -63,12 +71,15 @@ public:
         Delete(key, _root);
     }
 
-    void PrintAllTraverse()
+    void PrintAllTraverse() const
     {
         PrintAllTraverse(_root);
     }
 
 private:
+    // 재귀함수들은 이 객체 외부에서는 사용될 일이 없으므로, private으로 캡슐화 함
+    // 또한, 내부 변수를 건드릴 일도 없으므로, static으로 정의함
+
     static TreeNode* Search(int key, TreeNode* root)
     {
         // 기저 조건

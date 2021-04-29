@@ -256,6 +256,7 @@ struct Key
     Key(int key) : key(key) {}
 
 public:
+    // 트리에서 비교에 필요한 연산자들을 정의해둔다.
     bool operator<(const Key& other)
     {
         return key < other.key;
