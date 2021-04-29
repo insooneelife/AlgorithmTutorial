@@ -107,6 +107,7 @@ TreeNode* FindMin(TreeNode* root)
 
 void Delete(int key, TreeNode*& root)
 {
+    // search
     // key not found
     if (root == nullptr)
     {
@@ -122,12 +123,14 @@ void Delete(int key, TreeNode*& root)
     // key found
     else
     {
+        // has no child
         if (root->left == nullptr && root->right == nullptr)
         {
             delete root;
             root = nullptr;
         }
 
+        // has right child
         else if (root->left == nullptr && root->right != nullptr)
         {
             TreeNode* delete_node = root;
@@ -135,20 +138,24 @@ void Delete(int key, TreeNode*& root)
             delete delete_node;
         }
 
+        // has left child
         else if (root->left != nullptr && root->right == nullptr)
         {
             TreeNode* delete_node = root;
             root = root->left;
             delete delete_node;
         }
+        // has two childs
         else
         {
+            // find minimum node from right subtree
             TreeNode* min = FindMin(root->right);
 
             // replace to min node key & value
             root->key = min->key;
             root->value = min->value;
 
+            // delete
             Delete(min->key, root->right);
         }
     }
@@ -170,9 +177,7 @@ void InOrder(TreeNode* root)
         return;
 
     InOrder(root->left);
-
     cout << root->key << " ";
-
     InOrder(root->right);
 }
 
@@ -193,7 +198,21 @@ void DeleteTree(TreeNode* root)
     // first delete both subtrees 
     DeleteTree(root->left);
     DeleteTree(root->right);
+
+    cout << "delete : " << root->key << endl;
+
     delete root;
+}
+
+TreeNode* CopyTree(TreeNode* root, TreeNode*& copy)
+{
+    if (root == nullptr)
+        return nullptr;
+
+    copy = new TreeNode(root->key, root->value);
+    copy->left = CopyTree(root->left, copy->left);
+    copy->right = CopyTree(root->right, copy->right);
+    return copy;
 }
 
 void PrintAllTraverse(TreeNode* root)
@@ -223,6 +242,11 @@ int main()
 
     PrintAllTraverse(tree);
 
+    TreeNode* copy;
+    CopyTree(tree, copy);
+
+    cout << "copy" << endl;
+    PrintAllTraverse(tree);
 
     cout << endl << "Delete key : 5, key : 8" << endl;
     Delete(5, tree);
@@ -231,9 +255,6 @@ int main()
     PrintAllTraverse(tree);
 
     DeleteTree(tree);
-
-    PrintAllTraverse(tree);
-
 
     return 0;
 }
