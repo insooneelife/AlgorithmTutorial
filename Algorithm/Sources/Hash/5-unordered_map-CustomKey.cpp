@@ -47,6 +47,7 @@ int main()
 {
     // 이 문제를 해결하기 위해 value를 그 자체로 key 처럼 사용해버리는 방법이 있다. 
     unordered_set<Point, KeyHasher> points;
+
     points.insert(Point(5, 4));
     points.insert(Point(25, 14));
     points.insert(Point(57, 41));

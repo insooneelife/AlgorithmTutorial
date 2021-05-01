@@ -20,7 +20,7 @@ public:
     int x, y;
 };
 
-// x, y의 범위가 10000이하인 경우
+// x, y의 범위가 10000 미만인 경우
 int ToKey(Point p)
 {
     return p.x * 10000 + p.y;
@@ -33,6 +33,11 @@ int main()
     umap.insert(make_pair(1, "mom"));
     umap.insert(make_pair(2, "dad"));
     umap.insert(make_pair(3, "baby"));
+
+
+
+
+
 
 
     // 어떤 좌표 (x, y) 가 인풋으로 들어오는 경우도 해시테이블을 이용하여 저장할 수 있을 것이다.
@@ -56,6 +61,7 @@ int main()
 
     Point p2 = Point(2, 32);
     points.insert(make_pair(ToKey(p2), p2));
+
     // 이렇게 사용한다면, key -> value, value -> key 모두 자유롭게 사용할 수 있게 된다.
     // 하지만, 지금 이 방법은 굉장히 제한적인 상황에서만 사용이 가능하다.
     // x, y의 범위가 10000이하로 정해져있기도 하고,

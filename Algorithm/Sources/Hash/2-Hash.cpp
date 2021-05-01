@@ -45,7 +45,8 @@ int main()
     for (int i = 0; i < text.size(); ++i)
     {
         char alphabet = text[i];
-        int index = HashFunction((int)alphabet, BucketSize);
+        int key = (int)alphabet;
+        int index = HashFunction(key, BucketSize);
 
         bucket[index].key = (int)alphabet;
         bucket[index].value.alphabet = alphabet;
