@@ -1,95 +1,91 @@
 ﻿// 베스트앨범 (정렬 + 해시)
 // https://programmers.co.kr/learn/courses/30/lessons/42579
 
-#include <string>
-#include <vector>
 #include <iostream>
-#include <map>
+#include <vector>
+#include <string>
+#include <unordered_map>
 #include <algorithm>
-
+//#include "Print.h"
 using namespace std;
 
 struct Data
 {
-    int genre_play;
-    int play;
-    int i;
+    Data(string genre, int gplays, int plays, int index)
+        :
+        genre(genre), gplays(gplays), plays(plays), index(index)
+    {}
 
-    Data() : genre_play(0), play(0), i(0) {}
-
-    Data(int genre_play, int play, int i) : genre_play(genre_play), play(play), i(i) {}
+public:
+    string genre;
+    int gplays;
+    int plays;
+    int index;
 };
 
-void print(const vector<int>& v)
-{
-    for (auto e : v)
-    {
-        cout << e << " ";
-    }
-    cout << endl;
-}
-
-void print(const vector<Data>& v)
-{
-    for (auto e : v)
-    {
-        cout << e.genre_play << " " << e.play << " " << e.i << endl;;
-    }
-    cout << endl;
-}
 
 vector<int> solution(vector<string> genres, vector<int> plays)
 {
-    map<string, int> genre_plays;
-    map<int, int> selected_counts;
-    vector<Data> datas(genres.size());
+    unordered_map<string, int> genre_plays;
+    unordered_map<string, int> selected_counts;
+
+    vector<Data> vec;
 
     for (int i = 0; i < genres.size(); ++i)
     {
-        genre_plays[genres[i]] += plays[i];
+        string g = genres[i];
+        int p = plays[i];
+
+        genre_plays[g] += p;
+        selected_counts[g] = 0;
     }
 
     for (int i = 0; i < genres.size(); ++i)
     {
-        int genre_play = genre_plays[genres[i]];
-        int play = plays[i];
-
-        selected_counts[genre_play] = 0;
-
-        Data data(genre_play, play, i);
-        datas[i] = data;
+        string g = genres[i];
+        int p = plays[i];
+        int gplays = genre_plays[g];
+        vec.push_back(Data(g, gplays, p, i));
     }
 
-    sort(begin(datas), end(datas),
-        [](const Data& a, const Data& b)
+    sort(begin(vec), end(vec), [](const Data& a, const Data& b)
         {
-            if (a.genre_play == b.genre_play)
+            if (a.gplays == b.gplays)
             {
-                if (a.play == b.play)
+                if (a.plays == b.plays)
                 {
-                    return a.i < b.i;
+                    return a.index < a.index;
                 }
 
-                return a.play > b.play;
+                return a.plays > b.plays;
             }
 
-            return a.genre_play > b.genre_play;
+            return a.gplays > b.gplays;
         });
 
     vector<int> answer;
 
-    // select
-    for (int i = 0; i < datas.size(); ++i)
+    for (Data d : vec)
     {
-        int genre_play = datas[i].genre_play;
-        int count = selected_counts[genre_play];
 
-        if (count < 2)
+        if (selected_counts[d.genre] < 2)
         {
-            selected_counts[genre_play] ++;
-            answer.push_back(datas[i].i);
+            answer.push_back(d.index);
+            selected_counts[d.genre] ++;
         }
     }
 
+
     return answer;
+}
+
+int main()
+{
+    vector<string> genres = { "classic", "pop", "classic", "classic", "pop" };
+    vector<int> plays = { 500, 600, 150, 800, 2500 };
+
+    vector<int> answer = solution(genres, plays);
+    //Print::Container(answer);
+
+    return 0;
 }
