@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <bitset>
 #include <iostream>
 #include <algorithm>
 #include <sstream>
@@ -77,5 +78,14 @@ public:
         }
         cout << endl;
     }
+
+    template <typename T>
+    static void Binary(T val, std::string tag = "val")
+    {
+        using namespace std;
+        cout << tag << endl;
+        cout << bitset<sizeof(T) * 8>(val) << "   " << (unsigned long long)val << endl << endl;
+    }
+
 };
 const std::string Print::kTag = "------------------------------------";
