@@ -1,95 +1,106 @@
-﻿// 베스트앨범 (정렬 + 해시)
-// https://programmers.co.kr/learn/courses/30/lessons/42579
-
-#include <string>
-#include <vector>
+﻿#include <unordered_map>
 #include <iostream>
-#include <map>
 #include <algorithm>
+#include <vector>
+#include "Print.h"
 
 using namespace std;
 
+// 장르별 합   기준 정렬 (내림차순)
+// 플레이      기준 정렬 (내림차순)
+// 고유 번호   기준 정렬 (오름차순)
+
 struct Data
 {
-    int genre_play;
-    int play;
-    int i;
+    Data(string genres, int gplays, int plays, int index) : genres(genres), gplays(gplays), plays(plays), index(index) {}
 
-    Data() : genre_play(0), play(0), i(0) {}
-
-    Data(int genre_play, int play, int i) : genre_play(genre_play), play(play), i(i) {}
+    string genres;
+    int gplays;
+    int plays;
+    int index;
 };
-
-void print(const vector<int>& v)
-{
-    for (auto e : v)
-    {
-        cout << e << " ";
-    }
-    cout << endl;
-}
-
-void print(const vector<Data>& v)
-{
-    for (auto e : v)
-    {
-        cout << e.genre_play << " " << e.play << " " << e.i << endl;;
-    }
-    cout << endl;
-}
 
 vector<int> solution(vector<string> genres, vector<int> plays)
 {
-    map<string, int> genre_plays;
-    map<int, int> selected_counts;
-    vector<Data> datas(genres.size());
 
+    unordered_map<string, int> genres_plays;
+
+    vector <Data> vec;
+
+    //  현재 몇개?
+    unordered_map<string, int> selection_count;
+
+    // genres_plays를 만듬
     for (int i = 0; i < genres.size(); ++i)
     {
-        genre_plays[genres[i]] += plays[i];
-    }
+        string g = genres[i];
+        int p = plays[i];
 
-    for (int i = 0; i < genres.size(); ++i)
-    {
-        int genre_play = genre_plays[genres[i]];
-        int play = plays[i];
+        selection_count[g] = 0;
 
-        selected_counts[genre_play] = 0;
+        auto it = genres_plays.find(g);
 
-        Data data(genre_play, play, i);
-        datas[i] = data;
-    }
-
-    sort(begin(datas), end(datas),
-        [](const Data& a, const Data& b)
+        // 찾음
+        if (it != end(genres_plays))
         {
-            if (a.genre_play == b.genre_play)
+            it->second = it->second + p;
+        }
+        // 못찾음
+        else
+        {
+            genres_plays.insert(make_pair(g, p));
+        }
+    }
+
+    for (int i = 0; i < genres.size(); ++i)
+    {
+        string g = genres[i];
+        int p = plays[i];
+        int gplays = genres_plays[g];
+        int index = i;
+
+        vec.push_back(Data(g, gplays, p, index));
+    }
+
+    sort(begin(vec), end(vec), [](const Data& a, const Data& b)
+        {
+            if (a.gplays == b.gplays)
             {
-                if (a.play == b.play)
+                if (a.plays == b.plays)
                 {
-                    return a.i < b.i;
+                    return a.index < b.index;
                 }
 
-                return a.play > b.play;
+                return a.plays > b.plays;
             }
 
-            return a.genre_play > b.genre_play;
+            return a.gplays > b.gplays;
         });
 
     vector<int> answer;
-
-    // select
-    for (int i = 0; i < datas.size(); ++i)
+    for (Data d : vec)
     {
-        int genre_play = datas[i].genre_play;
-        int count = selected_counts[genre_play];
+        int count = selection_count[d.genres];
 
         if (count < 2)
         {
-            selected_counts[genre_play] ++;
-            answer.push_back(datas[i].i);
+            // select
+            answer.push_back(d.index);
+            selection_count[d.genres] = count + 1;
         }
     }
 
     return answer;
+}
+
+int main()
+{
+    vector<string> genres = { "classic", "pop", "classic", "classic", "pop" };
+    vector<int> plays = { 500, 600, 150, 800, 2500 };
+
+    vector<int> answer = solution(genres, plays);
+
+    Print::Container(answer);
+
+    return 0;
 }

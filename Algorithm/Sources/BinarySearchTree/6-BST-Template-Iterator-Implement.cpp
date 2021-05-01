@@ -40,15 +40,19 @@ public:
     KeyType key;
     ValueType value;
 
-    TreeNode<KeyType, ValueType>* parent;
-    TreeNode<KeyType, ValueType>* left;
-    TreeNode<KeyType, ValueType>* right;
-
 private:
     template <typename T, typename U, typename V>
     friend class BinarySearchTree;
 
+    template <typename T, typename U>
+    friend TreeNode<T, U>* FindMin(TreeNode<T, U>* const);
 
+    template<typename T, typename U>
+    friend struct TreeIterator;
+
+    TreeNode<KeyType, ValueType>* parent;
+    TreeNode<KeyType, ValueType>* left;
+    TreeNode<KeyType, ValueType>* right;
 };
 
 template <typename KeyType, typename ValueType>
