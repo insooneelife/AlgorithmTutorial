@@ -1,7 +1,6 @@
 ﻿#pragma once
 
-#include <iostream>
-#include <vector>
+#include "Headers.h"
 
 
 class Algorithm

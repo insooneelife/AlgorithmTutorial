@@ -1,12 +1,7 @@
 ﻿#pragma once
 
 
-#include <vector>
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <set>
+#include "Headers.h"
 #include "Utility.h"
 
 class STL

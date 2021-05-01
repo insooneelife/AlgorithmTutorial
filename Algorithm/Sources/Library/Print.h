@@ -1,12 +1,6 @@
 ﻿#pragma once
 
-#include <string>
-#include <map>
-#include <vector>
-#include <bitset>
-#include <iostream>
-#include <algorithm>
-#include <sstream>
+#include "Headers.h"
 
 
 class Print
@@ -32,7 +26,9 @@ public:
     static void Container(const T& container, std::string tag = kTag)
     {
         using namespace std;
-        cout << tag << endl;
+        if (tag.size() > 0)
+            cout << tag << endl;
+
         for (auto e : container)
         {
             cout << e << " ";
@@ -45,9 +41,10 @@ public:
     {
         using namespace std;
         cout << tag << endl;
+        
         for (auto container : container_in_vector)
         {
-            Container(container);
+            Container(container, tag);
         }
         cout << tag << endl;
     }

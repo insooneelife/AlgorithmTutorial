@@ -1,11 +1,6 @@
 ﻿#pragma once
 
-#include <string>
-#include <map>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <sstream>
+#include "Headers.h"
 #include "Print.h"
 
 class Utility
@@ -101,4 +96,30 @@ public:
         return stoi(str);
     }
 
+
+    // x, y coordinate -> i, j 2d-array
+    template<int N>
+    static void Set(int board[N][N], int n, int x, int y, int val)
+    {
+        board[n - 1 - y][x] = val;
+    }
+
+    template<int N>
+    static int Get(int board[N][N], int n, int x, int y)
+    {
+        return board[n - 1 - y][x];
+    }
+
+
+    // is in 2d-array range
+    bool InArray2D(int n, int a, int b)
+    {
+        return  0 <= a && a < n && 0 <= b && b < n;
+    }
+
+    // is in 2d-array range
+    bool InArray(int n, int a)
+    {
+        return  0 <= a && a < n;
+    }
 };

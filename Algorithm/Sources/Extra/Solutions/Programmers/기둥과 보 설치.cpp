@@ -2,6 +2,12 @@
 // 기둥과 보 설치
 // https://programmers.co.kr/learn/courses/30/lessons/60061
 
+// 시행착오
+// xy 좌표계와 2차원 배열 인덱스의 차이로 인한 예외 발생
+// Get, Set으로 변환과정중 실수 발생
+// 구조물 파괴 시에 x, y 위치의 구조물에 대한 테스트를 진행함 -> x, y 건물이 아니라 그 주변 구조물에 대해 테스트 해야 함
+// 구조물 파괴 시에 x, y 의 범위값 검사가 유효하지 않다면, 검사 자체를 하지 않아야 함
+// 구조물 파괴 시에 x, y 위치에 파괴대상 구조물이 없다면, 검사 자체를 하지 않아야 함
 
 #include <string>
 #include <vector>
@@ -117,8 +123,7 @@ bool CanDestructPillar(int x, int y)
     bool test = true;
     if (InRange(x, y + 1) && IsPillar(x, y + 1))
     {
-        bool can_construct = CanConstructPillar(x, y + 1);
-        test = test && can_construct;
+        test = test && CanConstructPillar(x, y + 1);
     }
 
     if (InRange(x - 1, y + 1) && IsFloor(x - 1, y + 1))
