@@ -1,4 +1,4 @@
-﻿// 괄호 변환
+﻿// 괄호 변환 (분할정복)
 // https://programmers.co.kr/learn/courses/30/lessons/60058
 
 // 시행착오
@@ -24,11 +24,10 @@ using namespace std;
 const char Open = '(';
 const char Close = ')';
 
-int Divide(string str, bool open)
+void Divide(string str, bool open, string& u, string& v)
 {
     stack<char> st;
     char check_top = open ? Open : Close;
-
     int i = 0;
     st.push(str[i++]);
 
@@ -48,31 +47,26 @@ int Divide(string str, bool open)
         }
         i++;
     }
-    
-    return i;
+
+    u = str.substr(0, i);
+    v = str.substr(i, str.size() - i);
+    //cout << "u : " << u << "  v : " << v << endl << endl;
 }
 
-string solution(string str) 
+string solution(string str)
 {
+    string u, v;
     if (str == "")
         return "";
 
     if (str[0] == Open)
     {
-        int i = Divide(str, true);
-        string u = str.substr(0, i);
-        string v = str.substr(i, str.size() - i);
-        //cout << "Currect  u : " << u << "  v : " << v << endl << endl;
-
+        Divide(str, true, u, v);
         return u + solution(v);
     }
     else
     {
-        int i = Divide(str, false);
-        string u = str.substr(0, i);
-        string v = str.substr(i, str.size() - i);
-        //cout << "Balanced  u : " << u << "  v : " << v << endl << endl;
-
+        Divide(str, false, u, v);
         string temp = Open + solution(v) + Close;
         string cut = u.substr(1, u.size() - 2);
 
@@ -90,17 +84,4 @@ string solution(string str)
 
         return temp + cut;
     }
-}
-
-int main()
-{
-    string p = ")(";
-    //string p = "(()())()";
-    //string p = "()))((()";
-
-    string answer = solution(p);
-
-    cout << answer ;
-
-    return 0;
 }
