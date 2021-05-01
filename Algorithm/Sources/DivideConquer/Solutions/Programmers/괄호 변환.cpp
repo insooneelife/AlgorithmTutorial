@@ -85,3 +85,16 @@ string solution(string str)
         return temp + cut;
     }
 }
+
+int main()
+{
+    //string p = ")(";
+    //string p = "(()())()";
+    string p = "()))((()";
+
+    string answer = solution(p);
+
+    cout << answer;
+
+    return 0;
+}

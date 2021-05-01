@@ -3,8 +3,11 @@
 
 // 시행착오
 // DirectionsCCW 에 잘못된 값이 들어가 있었음
+
 // Move에서 특정 방향일 때 선별적으로 SetBoard를 해줄 필요가 없었음 (시간 조금 낭비)
+
 // IsParallel과 IsOpposite은 사용된적이 없음
+
 // GetState()에서 sort를 해주는것은 상태를 파괴하는 일이었음 (원래는 상태의 정규화를 목표로 했지만, left와 right의 순서도 상태에 영향을 주는 것임)
 
 // robot의 미래 State을 알고 visited에서 검사 후 움직여야하는데, 그러려면 로봇을 직접 움직여야한다. 
