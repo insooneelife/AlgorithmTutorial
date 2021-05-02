@@ -144,6 +144,7 @@ public:
         using namespace std;
 
         std::vector<int> vec{ 1, 2, 3, 4, 5 };
+        // sort(begin(vec), end(vec));
 
         do
         {
@@ -163,7 +164,7 @@ public:
         using namespace std;
 
         std::vector<int> vec{ 5, 4, 3, 2, 1 };
-
+        // sort(begin(vec), end(vec));
         do
         {
             Print::Container(vec);
