@@ -231,6 +231,19 @@ public:
             cout << temp << endl;
         }
     }
+
+    // set은 return의 두번째 값을 통해 중복여부를 확인할 수 있다.
+    static void Set_Return()
+    {
+        using namespace std;
+        set<int> s = { 1, 2, 3 };
+
+        pair<set<int>::iterator, int> pair = s.insert(4);
+        cout << pair.second << endl;
+
+        pair = s.insert(4);
+        cout << pair.second << endl;
+    }
 };
 
 

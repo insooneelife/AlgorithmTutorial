@@ -1,4 +1,4 @@
-﻿// 외벽 점검 (완전탐색)
+﻿// 외벽 점검 (완전탐색, 순열)
 // https://programmers.co.kr/learn/courses/30/lessons/60062
 
 // 문제 해결

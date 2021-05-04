@@ -37,5 +37,17 @@ int main()
     Print(bit_shift_right, "shift right a 1");
 
 
+
+
+    /*
+    uint8_t a = 0b01101110;
+    uint8_t b = 0b01111110;
+
+    if ((a & b) == a)
+    {
+        cout << bitset<8>(a & b);
+    }
+    */
+
     return 0;
 }

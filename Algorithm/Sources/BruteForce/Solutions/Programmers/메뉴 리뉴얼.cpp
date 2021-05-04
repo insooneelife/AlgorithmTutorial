@@ -1,4 +1,4 @@
-﻿// 메뉴 리뉴얼
+﻿// 메뉴 리뉴얼 (조합)
 // https://programmers.co.kr/learn/courses/30/lessons/72411
 
 #include "Algorithm.h"
