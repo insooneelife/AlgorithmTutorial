@@ -32,10 +32,10 @@ int solution(vector<int> food_times, long long k)
     {
         ptop = top;
         top = pq.top();
-        int mul = top.first - ptop.first;
+        int elapse = top.first - ptop.first;
 
         pk = k;
-        k = k - pq.size() * mul;
+        k = k - pq.size() * elapse;
 
         if (k < 0)
             break;
