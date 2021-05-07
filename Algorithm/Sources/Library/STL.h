@@ -98,9 +98,12 @@ public:
         vector<int> v = { 1, 2, 3, 4, 5 };
         vector<int> u = { 1, 3, 5 };
         vector<int> output;
+
+        sort(begin(v), end(v));
+        sort(begin(u), end(u));
         set_difference(begin(v), end(v), begin(u), end(u), std::back_inserter(output));
 
-        Print::Container(v);
+        Print::Container(output);
     }
 
     // 컨테이너의 종류가 다르더라도 가능하다.
@@ -111,6 +114,8 @@ public:
         vector<int> v = { 1, 2, 3, 4, 5 };
         set<int> u = { 1, 3, 5 };
         vector<int> output;
+
+        sort(begin(v), end(v));
         set_difference(begin(v), end(v), begin(u), end(u), std::back_inserter(output));
 
         Print::Container(v);
@@ -144,7 +149,7 @@ public:
         using namespace std;
 
         std::vector<int> vec{ 1, 2, 3, 4, 5 };
-        // sort(begin(vec), end(vec));
+        sort(begin(vec), end(vec));
 
         do
         {
@@ -243,6 +248,22 @@ public:
 
         pair = s.insert(4);
         cout << pair.second << endl;
+    }
+
+    // string에서 문자열을 찾는 예제(html에서 body부분만 잘라오기)
+    static void StringFindBody()
+    {
+        using namespace std;
+        const string page = "<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta property=\"og:url\" content=\"https://a.com\"/>\n</head>  \n<body>\nBlind Lorem Blind ipsum dolor Blind test sit amet, consectetur adipiscing elit. \n<a href=\"https://b.com\"> Link to b </a>\n</body>\n</html>";
+
+        static const string kStartBody = "<body>";
+        static const string kEndBody = "</body>";
+        int start_idx = page.find(kStartBody) + kStartBody.size();
+        int end_idx = page.find(kEndBody, start_idx);
+        int size = end_idx - start_idx;
+
+        string body = page.substr(start_idx, size);
+        cout << body;
     }
 };
 

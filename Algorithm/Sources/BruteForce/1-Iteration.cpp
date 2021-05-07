@@ -47,11 +47,9 @@ int main()
 // 시간복잡도?
 
 
-
-
 // 반복문 예제 3.
-// 유레카 이론
-// https://www.acmicpc.net/problem/10448
+// 소수 만들기
+// https://programmers.co.kr/learn/courses/30/lessons/12977
 
 // 가능한 모든 경우의 수는?
 // 시간복잡도?

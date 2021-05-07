@@ -62,6 +62,36 @@ public:
         return results;
     }
 
+    // 소문자 alphabet이 아닌 문자로 자른다.
+    std::vector<std::string> SplitNoneAlphabet(const std::string& str)
+    {
+        using namespace std;
+        vector<string> split;
+        std::string::const_iterator from = begin(str);
+        std::string::const_iterator to = from;
+
+        while (true)
+        {
+            to = std::find_if(from, end(str), [](char c)
+                {
+                    return !('a' <= c && c <= 'z');
+                });
+
+            string substr = string(from, to);
+            if (substr.size() > 0)
+            {
+                split.push_back(substr);
+            }
+
+            if (to == end(str))
+                break;
+
+            from = to + 1;
+        }
+
+        return split;
+    }
+
     // line에서 모든 word를 제거한다.
     // ex) ("abcppppppabc", "abc") => "pppppp"
     static void RemoveAllWordsFromLine(std::string& line, const std::string& word)

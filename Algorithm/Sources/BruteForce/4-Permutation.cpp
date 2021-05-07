@@ -1,14 +1,24 @@
 ﻿// 순열
 
+
 // 순열 예제 1.
-// 재귀함수로 순열 알고리즘 구현
+// 재귀함수로 순열 알고리즘 구현 (N! = nPn)
 
 // 순열 예제 2.
+// 재귀함수로 k-순열 알고리즘 구현 (nPk)
+// 방법1. k개를 뽑아놓고 순서를 준다
+// 방법2. 순서대로 k개를 뽑는다
+
+
+// 순열 예제 3. (k-순열)
 // 소수 찾기
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 
 
 
+// 순열 예제 4. 
+// 불량 사용자
+// https://programmers.co.kr/learn/courses/30/lessons/64064
 
 
 
@@ -34,6 +44,7 @@
 using namespace std;
 
 
+// nPn (N!) 순열
 // 메모리를 이용하면 조금 쉽게 갈 수 있음
 // 1부터 N까지의 정수를 모두 한번씩 선택해봄.
 // i1를 선택한 경우,
@@ -59,6 +70,31 @@ void Permutation(vector<int>& permutations)
             selected[i] = true;
 
             Permutation(permutations);
+
+            permutations.pop_back();
+            selected[i] = false;
+        }
+    }
+}
+
+// k-순열
+// 방법1. k개를 뽑아놓고 순서를 준다
+// 방법2. 순서대로 k개를 뽑는다
+void Permutation(vector<int>& permutations, int k)
+{
+    if (permutations.size() == k)
+    {
+        Print::Container(permutations);
+    }
+
+    for (int i = 1; i <= kNum; ++i)
+    {
+        if (!selected[i])
+        {
+            permutations.push_back(i);
+            selected[i] = true;
+
+            Permutation(permutations, k);
 
             permutations.pop_back();
             selected[i] = false;
