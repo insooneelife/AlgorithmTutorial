@@ -1,70 +1,7 @@
 ﻿
-// 징검다리 건너기 (이분탐색, 힙 and Union-Find)
+// 징검다리 건너기 (힙 & Union-Find)
 // https://programmers.co.kr/learn/courses/30/lessons/64062
 
-
-// 방법 1. 이분탐색
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
-using namespace std;
-
-int Search(const vector<int>& stones, int k, int start, int end)
-{
-    if (start >= end)
-        return start;
-
-    int mid = (start + end) / 2;
-    int cnt = 0;
-    bool success = true;
-
-    for (int i = 0; i < stones.size(); ++i)
-    {
-        if (stones[i] - mid <= 0)
-        {
-            cnt++;
-            if (cnt == k)
-                success = false;
-        }
-        else
-        {
-            cnt = 0;
-        }
-    }
-
-    if (success)
-    {
-        return Search(stones, k, mid + 1, end);
-    }
-    else
-    {
-        return Search(stones, k, start, mid);
-    }
-}
-
-int solution(vector<int> stones, int k)
-{
-    int val = Search(stones, k, 0, 200000000);
-    return val;
-}
-
-int main()
-{
-    vector<int> stones = { 2, 4, 5, 3, 2, 1, 4, 2, 5, 1 };
-    int k = 3;
-
-    //vector<int> stones = { 1 };
-    //int k = 1;
-
-    cout << solution(stones, k);
-
-    return 0;
-}
-
-
-
-// 방법 2. Union-Find
 
 // 시행착오
 // 1. 인풋이 1개인 케이스
