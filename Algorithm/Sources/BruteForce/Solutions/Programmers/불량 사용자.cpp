@@ -29,6 +29,7 @@ void Comb(int n, int k, vector<vector<int>>& all_combs, vector<int>& combs)
     }
 }
 
+// interface
 void Comb(int n, int k, vector<vector<int>>& all_combs)
 {
     vector<int> combs;
@@ -42,15 +43,9 @@ bool CompareId(const string& uid, const string& bid)
 
     for (int i = 0; i < uid.size(); ++i)
     {
-        if (bid[i] == '*')
+        if (bid[i] != '*' && bid[i] != uid[i])
         {
-        }
-        else
-        {
-            if (bid[i] != uid[i])
-            {
-                return false;
-            }
+            return false;
         }
     }
     return true;
@@ -106,8 +101,8 @@ int solution(vector<string> user_id, vector<string> banned_id)
 int main()
 {
     vector<string> user_id = { "frodo", "fradi", "crodo", "abc123", "frodoc" };
-    //vector<string> banned_id = { "*rodo", "*rodo", "******" };
-    vector<string> banned_id = { "fr*d*", "*rodo", "******", "******" };
+    vector<string> banned_id = { "*rodo", "*rodo", "******" };
+    //vector<string> banned_id = { "fr*d*", "*rodo", "******", "******" };
 
     int answer = solution(user_id, banned_id);
     cout << answer;
