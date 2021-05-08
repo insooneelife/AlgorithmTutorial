@@ -1,6 +1,11 @@
 ﻿// 광고 삽입 (구간합)
 // https://programmers.co.kr/learn/courses/30/lessons/72414
 
+// 구간중첩값의 표현을 위해 구간 시작지점을 1, 구간 끝지점을 -1로 체크한다.
+// 중첩값[i] = 중첩값[i] + 중첩값[i - 1]을 통해 i~i+1 구간의 중첩값을 만든다. (스위핑)
+// 다시 이 중첩값 배열을 이용해 누적값을 만든다.
+// 누적값[i] = 누적값[i] + 누적값[i - 1]
+
 #include <string>
 #include <vector>
 #include <sstream>
