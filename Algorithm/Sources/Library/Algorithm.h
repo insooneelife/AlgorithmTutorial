@@ -206,40 +206,60 @@ public:
     }
 
     // 10진수 -> N진수 변환
+    // N진수 -> 10진수 변환
+    // (36진수까지 허용)
     class DecimalNumberSystem
     {
     public:
-        // input : 10 진수 n, 변환 대상 진수 num_system [2 - 16]
-        // output : num_system 진수
-        static std::string Convert(long long n, int num_system)
+        // input : 10-진수 n, 변환 대상 진수 num_system [2 - 36]
+        // output : num_system-진수 값
+        static std::string Convert(long long num, int num_system)
         {
             using namespace std;
 
-            char arr[100];
-            int k = 0;
-
-            if (n == 0)
+            string out = "";
+            if (num == 0)
                 return "0";
 
-            while (n)
+            while (num)
             {
-                arr[k++] = ToASCII(n % num_system);
-                n /= num_system;
+                out += ToASCII(num % num_system);
+                num /= num_system;
             }
 
-            string out = "";
-            for (int i = k - 1; i >= 0; i--)
+            reverse(begin(out), end(out));
+            return out;
+        }
+
+        // input : number_system-진수 num, 변환 대상 진수 10
+        // output : 10-진수 값
+        static long long ToDecimal(const std::string& val, int num_system)
+        {
+            long long out = 0;
+            long long mul = 1;
+            for (int i = val.size() - 1; i >= 0; --i)
             {
-                out += arr[i];
+                char n = val[i];
+                long long num = ToNumber(n);
+
+                out += num * mul;
+                mul *= (long long)num_system;
             }
+
             return out;
         }
 
     private:
-        static char ToASCII(char n)
+        static char ToASCII(int n)
         {
             if (n < 10) return '0' + n;
             else return 'A' + n - 10;
+        }
+
+        static int ToNumber(char n)
+        {
+            if ('0' <= n && n <= '9') return n - '0';
+            else return n - 'A' + 10;
         }
     };
 

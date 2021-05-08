@@ -88,6 +88,38 @@ public:
         cout << max_val << " " << min_val;
     }
 
+    // count, count_if
+    // 컨테이너 내에서 특정 원소를 카운팅한다.
+    static void CountElement()
+    {
+        using namespace std;
+
+        vector<int> v = { 10, 20, 30, 30, 20, 10, 10, 20 };
+
+        int cnt1 = std::count(begin(v), end(v), 20);
+        int cnt2 = std::count_if(begin(v), end(v), [](int e) { return e <= 20; });
+
+        cout << cnt1 << " " << cnt2;
+    }
+
+    // set_intersection
+    // 두 컨테이너에 공통적으로 포함된 원소들을 넣은 컨테이너를 반환한다.
+    // 일반 컨테이너의 경우 원소가 정렬된 상태여야 한다.
+    static void SetIntersection()
+    {
+        using namespace std;
+
+        vector<int> v = { 1, 2, 3, 4, 5 };
+        vector<int> u = { 1, 3, 5 };
+        vector<int> output;
+
+        sort(begin(v), end(v));
+        sort(begin(u), end(u));
+        set_intersection(begin(v), end(v), begin(u), end(u), std::back_inserter(output));
+
+        Print::Container(output);
+    }
+
     // set_difference
     // 컨테이너에서 다른 컨테이너의 모든 원소를 제거한 새로운 컨테이너를 반환한다.
     // 일반 컨테이너의 경우 원소가 정렬된 상태여야 한다.
