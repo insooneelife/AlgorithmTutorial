@@ -10,10 +10,19 @@ public:
     // time complexity     O(logN)
     // input               두 수 p, q
     // output              p, q의 최대공약수
-    static int GCD(int p, int q)
+    static long long GCD(long long p, long long q)
     {
         if (q == 0) return p;
         return GCD(q, p % q);
+    }
+
+    // p, q의 최소공배수를 구하는 알고리즘
+    // time complexity     O(logN)
+    // input               두 수 p, q
+    // output              p, q의 최소공배수
+    static long long LCM(long long p, long long q)
+    {
+        return p * q / GCD(p, q);
     }
 
     // n이 소수인지 판단하는 알고리즘
@@ -124,7 +133,10 @@ public:
     class EratosthenesFactors
     {
     public:
-        EratosthenesFactors(size_t n) : n(n) {}
+        EratosthenesFactors(size_t n) : n(n) 
+        {
+            Make();
+        }
 
         void Make()
         {

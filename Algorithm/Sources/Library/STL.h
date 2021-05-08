@@ -20,6 +20,32 @@ public:
         Print::Container(numbers);
     }
 
+    // 문자열 정렬
+    // 사전식 오름차순, 사전식 내림차순, 사전식 비교
+    static void StringSort()
+    {
+        using namespace std;
+        vector<string> v = { "zaa", "abc", "bac" "classicc", "pop", "classic", "pop", "pop", "classicc", "sga" };
+
+        // 기본, 사전식 오름차순
+        sort(begin(v), end(v));
+        Print::Container(v, "--------------sorted1-------------");
+
+        // 람다, 사전식 내림차순
+        sort(begin(v), end(v), [](const string& a, const string& b) { return a > b; });
+        Print::Container(v, "--------------sorted2-------------");
+
+        // 람다, 사전식 내림차순 내림차순 (직접)
+        sort(begin(v), end(v), [](const string& a, const string& b)
+            {
+                return lexicographical_compare(begin(a), end(a), begin(b), end(b), [](char a, char b)
+                    {
+                        return a > b;
+                    });
+            });
+        Print::Container(v, "--------------sorted3-------------");
+    }
+
     // find
     // 특정 원소를 찾고, 그 원소의 반복자를 반환한다.
     static void Find()
@@ -100,6 +126,20 @@ public:
         int cnt2 = std::count_if(begin(v), end(v), [](int e) { return e <= 20; });
 
         cout << cnt1 << " " << cnt2;
+    }
+
+    // fill
+    // 컨테이너에서 원소를 다른 값으로 수정한다.
+    // 마찬가지로 vector와 같은 다른 컨테이너에서도 사용 가능하다.
+    static void FillElement()
+    {
+        using namespace std;
+
+        string str = "01033334444";
+        fill(begin(str), end(str) - 4, '*');
+
+        // ******4444
+        cout << str;
     }
 
     // set_intersection

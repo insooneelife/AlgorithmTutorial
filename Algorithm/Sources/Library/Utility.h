@@ -126,6 +126,18 @@ public:
         return stoi(str);
     }
 
+    static long long StringToLongLong(const std::string& str)
+    {
+        return stoll(str);
+    }
+
+    // "0000.44324" => 0000.44324
+    // "-1.44324"   => -1.44324,
+    // "-1.44324f"  => -1.44324,
+    static float StringToFloat(const std::string& str)
+    {
+        return stof(str);
+    }
 
     // x, y coordinate -> i, j 2d-array
     template<int N>
