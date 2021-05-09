@@ -29,6 +29,11 @@ void Print(T val, string tag = "val")
     cout << bitset<sizeof(T) * 8>(val) << "   " << (uint64)val << endl << endl;
 }
 
+bool IsBitSet(unsigned long long bit, int n)
+{
+    return (bit & ((unsigned long long)1) << n) > 0;
+}
+
 int main()
 {
     uint8 a = 0b10101001;
