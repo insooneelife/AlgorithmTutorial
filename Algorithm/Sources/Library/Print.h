@@ -77,11 +77,23 @@ public:
     }
 
     template <typename T>
-    static void Binary(T val, std::string tag = "val")
+    static void Binary(T val, std::string tag = "")
     {
         using namespace std;
-        cout << tag << endl;
-        cout << bitset<sizeof(T) * 8>(val) << "   " << (unsigned long long)val << endl << endl;
+        if(tag != "")
+            cout << tag << endl;
+        cout << "val\t: " << (unsigned long long)val << endl;
+        cout << "binary\t: " << bitset<sizeof(T) * 8>(val) << endl << endl;
+    }
+
+    template <typename T, typename FormatType>
+    static void Binary(T val, std::string tag = "")
+    {
+        using namespace std;
+        if (tag != "")
+            cout << tag << endl;
+        cout << "val\t: " << (unsigned long long)val << endl;
+        cout << "binary\t: " << bitset<sizeof(FormatType) * 8>(val) << endl << endl;
     }
 
 };

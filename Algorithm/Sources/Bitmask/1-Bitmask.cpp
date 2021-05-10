@@ -1,19 +1,5 @@
 ﻿// bitmask
-
-// 1. 매우 빠른 시간에 동작한다.
-// 2. 간결하게 코드를 작성할 수 있다.
-// 3. 메모리 절약이 가능하다.
-// 4. 중첩 컨테이너를 단순 컨테이너로 대체할 수 있다.
-// ex) map<vector<bool>, int>  ->  vector<int>
-// 5. 집합 개념으로 활용될 수 있고, 집합 연산(합집합, 교집합, 차집합 ..)이 가능하다.
-// 6. 어떤 원소들에 대한 모든 조합을 표현하기에 아주 편리하다.
-
-// 주의할 점
-// 1. 항상 연산자 우선순위에 유의하여야 한다.
-// 2. 상수 범위 오버플로우로 인한 문제
-// 3. 부호 있는 타입을 이용하는 경우의 문제
-// 4. N-비트 크기의 변수를 N-비트 이상 시프트 연산하는 경우
-
+// 기본 연산
 
 #include <iostream>
 #include <bitset>
@@ -22,6 +8,7 @@ using namespace std;
 using uint64 = unsigned long long;
 using uint8 = unsigned char;
 
+// 비트 출력
 template <typename T>
 void Print(T val, string tag = "val")
 {
@@ -39,6 +26,7 @@ int main()
     uint8 a = 0b10101001;
     uint8 b = 0b01010110;
 
+    // 기본적인 비트연산
     uint8 bit_and = a & b;
     uint8 bit_or = a | b;
     uint8 bit_xor = a ^ b;
@@ -57,17 +45,31 @@ int main()
     Print(bit_shift_right, "shift right a 1");
 
 
+    // 2의 N승
+    const int N = 3;
+    uint8 bit = 1 << N;
+    Print(bit, "2 ^ N");
 
 
-    /*
-    uint8_t a = 0b01101110;
-    uint8_t b = 0b01111110;
+    // N번째 비트가 켜져 있는지?
+    uint8 testbit = 0b00011000;
+    uint8 mask = 1 << N;
+    bool isbitset = (testbit & mask) > 0;
+    Print(testbit, "testbit");
+    Print(mask, "testbit");
+    Print(isbitset, "isbitset");
 
-    if ((a & b) == a)
+
+    // 어떤 숫자의 모든 비트를 순회하며 켜져있는지 확인
+    uint8 num = 47;
+    Print(num, "num");
+    for (int i = 0; i < 8; ++i)
     {
-        cout << bitset<8>(a & b);
+        if (IsBitSet(num, i))
+            cout << i << " true" << endl;
+        else
+            cout << i << " false" << endl;
     }
-    */
 
     return 0;
 }
