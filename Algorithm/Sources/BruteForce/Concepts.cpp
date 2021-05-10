@@ -34,7 +34,6 @@
 // https://programmers.co.kr/learn/courses/30/lessons/42839
 
 
-// #다시 풀어보기
 // 부분수열의 합 (조합 or bitmask)
 // https://www.acmicpc.net/problem/1182
 

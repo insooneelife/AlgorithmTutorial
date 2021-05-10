@@ -3,6 +3,7 @@
 // bitmask를 활용하여 집합을 구현할 수 있다.
 // 기업 목록의 선택지를 집합으로 표현해보자.
 
+
 #include <iostream>
 #include <bitset>
 #include <string>
@@ -199,6 +200,11 @@ int main()
 
         Print::Binary(val);
     }
+
+    // 최소 원소 관련 연산들은 이후 최적화 자료구조 제작에 활용된다.
+    // 펜윅트리, O(1)-우선순위 큐
+
+
 
     // 부분집합의 모든 부분집합 순회하기
     {
