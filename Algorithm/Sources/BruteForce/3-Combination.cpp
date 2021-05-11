@@ -112,12 +112,24 @@ void Comb3(int n, int k)
     }
 }
 
+// 모든 부분집합
+void AllSubsets()
+{
+    vector<int> combs;
+    for (int k = 0; k < K; ++k)
+    {
+        Comb3(N, k);
+    }
+}
+
 int main()
 {
     vector<int> combs;
     //Comb1(1, combs);
     //Comb2(N, K, combs);
     Comb3(N, K);
+
+    AllSubsets();
 
     /*
     vector<vector<int>> all_combs;

@@ -27,12 +27,12 @@ int main()
     uint8 b = 0b01010110;
 
     // 기본적인 비트연산
-    uint8 bit_and = a & b;
-    uint8 bit_or = a | b;
-    uint8 bit_xor = a ^ b;
-    uint8 bit_not = ~a;
-    uint8 bit_shift_left = a << 1;
-    uint8 bit_shift_right = a >> 1;
+    uint8 bit_and = (a & b);
+    uint8 bit_or = (a | b);
+    uint8 bit_xor = (a ^ b);
+    uint8 bit_not = (~a);
+    uint8 bit_shift_left = (a << 1);
+    uint8 bit_shift_right = (a >> 1);
 
     Print(a, "a");
     Print(b, "b");
@@ -47,13 +47,13 @@ int main()
 
     // 2의 N승
     const int N = 3;
-    uint8 bit = 1 << N;
+    uint8 bit = (1 << N);
     Print(bit, "2 ^ N");
 
 
     // N번째 비트가 켜져 있는지?
     uint8 testbit = 0b00011000;
-    uint8 mask = 1 << N;
+    uint8 mask = (1 << N);
     bool isbitset = (testbit & mask) > 0;
     Print(testbit, "testbit");
     Print(mask, "testbit");
