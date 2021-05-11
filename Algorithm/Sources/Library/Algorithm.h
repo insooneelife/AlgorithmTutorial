@@ -287,7 +287,10 @@ public:
     class Combinations
     {
     public:
-        Combinations(const int N, const int K) : N(N), K(K) {}
+        Combinations(const int N, const int K) : N(N), K(K) 
+        {
+            Make();
+        }
 
         void Make()
         {
@@ -333,6 +336,12 @@ public:
         using namespace std;
 
         vector<int> combs(K);
+        if (K == 0)
+        {
+            all_combs.push_back(combs);
+            return;
+        }
+
         for (int i = 0; i < K; i++)
         {
             combs[i] = i;

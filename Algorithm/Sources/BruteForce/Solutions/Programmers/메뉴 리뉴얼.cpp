@@ -1,98 +1,143 @@
 ﻿// 메뉴 리뉴얼 (조합)
 // https://programmers.co.kr/learn/courses/30/lessons/72411
 
-#include "Algorithm.h"
-#include "Utility.h"
+// 시행착오
+// 1. cnt < 2인 케이스 제거를 놓침
 
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <string>
-#include <map>
+#include <set>
+#include <algorithm>
+#include "Print.h"
 
 using namespace std;
 
-void Comb(const string& order, int k, vector<string>& combs)
+class Combinations
 {
-    vector<vector<int>> all_combs;
-    Algorithm::CombinationsIterate(order.size(), k, all_combs);
-
-    for (int i = 0; i < all_combs.size(); ++i)
+public:
+    Combinations(const int N, const int K) : N(N), K(K)
     {
-        string comb = "";
-        for (auto idx : all_combs[i])
-        {
-            comb += order[idx];
-        }
-        combs.push_back(comb);
-    }
-}
-
-void MaxOrders(const map<string, int>& counts, vector<string>& outs)
-{
-    int maxval = 0;
-    for (auto e : counts)
-    {
-        if (maxval < e.second)
-        {
-            maxval = e.second;
-        }
+        Make();
     }
 
-    for (auto e : counts)
+    void Make()
     {
-        if (e.second == maxval && maxval >= 2)
+        Make(K);
+    }
+
+private:
+    void Make(int k)
+    {
+        using namespace std;
+
+        if (k == 0)
         {
-            outs.push_back(e.first);
+            all_combs.push_back(combs);
+            return;
+        }
+
+        int start = combs.size() > 0 ? combs.back() + 1 : 0;
+        for (int i = start; i < N; ++i)
+        {
+            combs.push_back(i);
+            Make(k - 1);
+            combs.pop_back();
         }
     }
-}
+
+public:
+    std::vector<std::vector<int>> all_combs;
+
+private:
+    const int N;
+    const int K;
+    std::vector<int> combs;
+};
 
 vector<string> solution(vector<string> orders, vector<int> courses)
 {
     vector<string> answer;
+    vector<char> all;
 
-    for (int i = 0; i < orders.size(); ++i)
+    // make universal set
+    for (auto order : orders)
     {
-        sort(begin(orders[i]), end(orders[i]));
-    }
-
-    for (int c = 0; c < courses.size(); ++c)
-    {
-        map<string, int> counts;
-        for (int i = 0; i < orders.size(); ++i)
+        for (char o : order)
         {
-            vector<string> combs;
+            all.push_back(o);
+        }
+    }
+    // remove overlap
+    sort(begin(all), end(all));
+    auto it = unique(begin(all), end(all));
+    all.erase(it, end(all));
 
-            Comb(orders[i], courses[c], combs);
+    //Print::Container(all);
 
-            for (string com : combs)
+    for (int i = 0; i < courses.size(); ++i)
+    {
+        int k = courses[i];
+        Combinations combination(all.size(), k);
+        vector<pair<int, string>> save;
+
+        for (const vector<int>& v : combination.all_combs)
+        {
+            string combs;
+            for (int index : v)
             {
-                counts[com]++;
+                char c = all[index];
+                combs.push_back(c);
+            }
+
+            // check include
+            sort(begin(combs), end(combs));
+            int cnt = 0;
+
+            for (string order : orders)
+            {
+                sort(begin(order), end(order));
+                if (includes(begin(order), end(order), begin(combs), end(combs)))
+                {
+                    cnt++;
+                }
+            }
+
+            if (cnt >= 2)
+                save.push_back(make_pair(cnt, combs));
+        }
+
+        // make answer
+        if (save.size() > 0)
+        {
+            sort(begin(save), end(save), greater<pair<int, string>>());
+
+            int cnt = save[0].first;
+            for (auto e : save)
+            {
+                if (cnt != e.first)
+                    break;
+
+                string combs = e.second;
+                answer.push_back(combs);
             }
         }
-        MaxOrders(counts, answer);
-    }
 
+    }
     sort(begin(answer), end(answer));
     return answer;
 }
 
-
-
 int main()
 {
-    // Case 1.
-    // answer {"AC", "ACDE", "BCFG", "CDE"}
-    {
-        vector<string> orders = { "ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH" };
-        vector<int> courses = { 2, 3, 4 };
+    //vector<string> orders = { "ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH" };
+    //vector<int> courses = { 2,3,4 };
 
-        vector<string> answer = solution(orders, courses);
+    vector<string> orders = { "ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD" };
+    vector<int> courses = { 2, 3, 5 };
 
-        Print::Container(answer);
-    }
+    vector<string> answer = solution(orders, courses);
 
+    Print::Container(answer);
 
     return 0;
 }

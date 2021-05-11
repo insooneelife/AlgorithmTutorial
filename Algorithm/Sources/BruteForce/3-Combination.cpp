@@ -4,8 +4,9 @@
 // 재귀함수로 조합 알고리즘 구현
 
 
-
-
+// 조합 문제
+// 메뉴 리뉴얼 (조합)
+// https://programmers.co.kr/learn/courses/30/lessons/72411
 
 
 
@@ -33,28 +34,6 @@ using namespace std;
 const int N = 4;
 const int K = 2;
 
-// current를 1부터 K까지 이동시켜보며 선택 or 선택x 
-void Comb1(int current, std::vector<int>& combs)
-{
-    if (combs.size() == K)
-    {
-        Print::Container(combs);
-        return;
-    }
-
-    if (current > N)
-    {
-        return;
-    }
-
-    // 선택
-    combs.push_back(current);
-    Comb1(current + 1, combs);
-    combs.pop_back();
-
-    // 선택 x
-    Comb1(current + 1, combs);
-}
 
 // 1부터 N까지를 하나씩 선택해봄.
 // i1 선택인 경우,
@@ -63,9 +42,9 @@ void Comb1(int current, std::vector<int>& combs)
 // i2 + 1부터 N까지를 하나씩 선택해봄. 
 // i3 선택인 경우 ...
 // ...
-void Comb2(int n, int pick, vector<int>& combs)
+void Comb1(int n, int k, vector<int>& combs)
 {
-    if (pick == 0)
+    if (k == 0)
     {
         Print::Container(combs);
         return;
@@ -75,16 +54,29 @@ void Comb2(int n, int pick, vector<int>& combs)
     for (int i = start; i <= n; ++i)
     {
         combs.push_back(i);
-        Comb2(n, pick - 1, combs);
+        Comb1(n, k - 1, combs);
         combs.pop_back();
     }
 }
 
+// 인터페이스 함수
+void Comb1(int n, int k)
+{
+    vector<int> combs;
+    Comb1(n, k, combs);
+}
+
 
 // 반복문으로도 구현 가능하다.
-void Comb3(int n, int k)
+void Comb2(int n, int k)
 {
     vector<int> choice(k);
+    if (k == 0)
+    {
+        Print::Container(choice);
+        return;
+    }
+
     for (int i = 0; i < k; i++)
     {
         choice[i] = i;
@@ -113,12 +105,13 @@ void Comb3(int n, int k)
 }
 
 // 모든 부분집합
+// 모든 k에 대한 조합을 합친다.
 void AllSubsets()
 {
     vector<int> combs;
-    for (int k = 0; k < K; ++k)
+    for (int k = 0; k <= N; ++k)
     {
-        Comb3(N, k);
+        Comb1(N, k);
     }
 }
 
@@ -127,34 +120,28 @@ int main()
     vector<int> combs;
     //Comb1(1, combs);
     //Comb2(N, K, combs);
-    Comb3(N, K);
+    //Comb3(N, K);
 
-    AllSubsets();
+    //AllSubsets();
 
+
+    // 사용 예제
     /*
+    vector<string> company = { "Apple", "Google", "Amazon", "Facebook" };
     vector<vector<int>> all_combs;
-    Algorithm::CombinationsIterate(5, 3, all_combs);
+    Algorithm::CombinationsIterate(company.size(), 2, all_combs);
+
     for (int i = 0; i < all_combs.size(); ++i)
     {
-        Print::Container(all_combs[i]);
+        for (int j = 0; j < all_combs[i].size(); ++j)
+        {
+            int index = all_combs[i][j];
+            cout << company[index] << " ";
+        }
+        cout << endl;
     }
     */
 
+
     return 0;
-}
-
-
-// 다음 조합 구하기
-bool next_combination(vector<int>& a, int n)
-{
-    int k = (int)a.size();
-    for (int i = k - 1; i >= 0; i--) {
-        if (a[i] < n - k + i + 1) {
-            a[i]++;
-            for (int j = i + 1; j < k; j++)
-                a[j] = a[j - 1] + 1;
-            return true;
-        }
-    }
-    return false;
 }
