@@ -51,6 +51,9 @@ bool CompareId(const string& uid, const string& bid)
     return true;
 }
 
+// 순열로 만들어진 모든 순서들 중 적어도 하나의 x에 대해, 
+// 모든 user_id와 banned_id가 같은
+// 경우가 존재한다.
 bool CheckInPermutation(const vector<string>& user_id, const vector<string>& banned_id, const vector<int>& combs)
 {
     vector<int> bindex(banned_id.size());
