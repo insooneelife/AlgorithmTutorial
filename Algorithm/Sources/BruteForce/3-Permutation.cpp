@@ -102,13 +102,41 @@ void Permutation(vector<int>& permutations, int k)
     }
 }
 
+// 순열 사용 예제
 void PermutationSTL()
 {
-    vector<int> permutations = { 1, 2, 3, 4 };
+    vector<string> company = { "Attack", "Move", "Jump", "Lie" };
+    vector<int> permutations = { 0, 1, 2, 3 };
 
     do
     {
-        Print::Container(permutations);
+        //Print::Container(permutations);
+        for (int i = 0; i < permutations.size(); ++i)
+        {
+            int index = permutations[i];
+            cout << company[index] << " ";
+        }
+        cout << endl;
+
+    } while (next_permutation(permutations.begin(), permutations.end()));
+}
+
+
+// 중복이 있는 순열 사용 예제
+void OverlapPermutationSTL()
+{
+    vector<string> company = { "Attack", "Move", "Jump" };
+    vector<int> permutations = { 0, 0, 1, 2 };
+
+    do
+    {
+        //Print::Container(permutations);
+        for (int i = 0; i < permutations.size(); ++i)
+        {
+            int index = permutations[i];
+            cout << company[index] << " ";
+        }
+        cout << endl;
 
     } while (next_permutation(permutations.begin(), permutations.end()));
 }
@@ -119,8 +147,10 @@ int main()
     Permutation(permutations);
 
     cout << endl;
-
     PermutationSTL();
+
+    cout << endl;
+    OverlapPermutationSTL();
 
     return 0;
 }

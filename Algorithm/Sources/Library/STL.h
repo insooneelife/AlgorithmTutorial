@@ -143,7 +143,7 @@ public:
     }
 
     // set_intersection
-    // 두 컨테이너에 공통적으로 포함된 원소들을 넣은 컨테이너를 반환한다.
+    // 두 컨테이너에 교집합을 구한다.
     // 일반 컨테이너의 경우 원소가 정렬된 상태여야 한다.
     static void SetIntersection()
     {
@@ -158,6 +158,41 @@ public:
         set_intersection(begin(v), end(v), begin(u), end(u), std::back_inserter(output));
 
         Print::Container(output);
+    }
+
+    // set_union
+    // 두 컨테이너의 합집합을 구한다.
+    // 일반 컨테이너의 경우 원소가 정렬된 상태여야 한다.
+    static void SetUnion()
+    {
+        using namespace std;
+        vector<int> a = { 1, 2, 3 };
+        vector<int> b = { 1, 2, 4, 5 };
+        vector<int> c;
+
+        sort(begin(a), end(a));
+        sort(begin(b), end(b));
+        std::set_union(begin(a), end(a), begin(b), end(b), back_inserter(c));
+
+        Print::Container(c);
+    }
+
+    // set_union
+    // 중복이 있는 경우도 합집합을 구할 수 있다.
+    // 일반 컨테이너의 경우 원소가 정렬된 상태여야 한다.
+    static void SetUnionWithOverlap()
+    {
+        using namespace std;
+
+        vector<int> a = { 1, 1, 2, 2, 3 };
+        vector<int> b = { 1, 2, 2, 4, 5 };
+        vector<int> c;
+
+        sort(begin(a), end(a));
+        sort(begin(b), end(b));
+        std::set_union(begin(a), end(a), begin(b), end(b), back_inserter(c));
+
+        Print::Container(c);
     }
 
     // set_difference
@@ -211,8 +246,7 @@ public:
 
         cout << does_includes << endl;
     }
-
-
+    
     // next_permutation
     // 컨테이너의 다음 순열을 반환한다.
     // 다음과 같은 방법으로 모든 순열을 출력할 수 있다.

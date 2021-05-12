@@ -139,6 +139,48 @@ public:
         return stof(str);
     }
 
+    static void ToLowercase(std::string& str)
+    {
+        for (char& c : str)
+        {
+            if (IsUppercase(c))
+            {
+                c = GetLowercase(c);
+            }
+        }
+    }
+
+    static void ToUppercase(std::string& str)
+    {
+        for (char& c : str)
+        {
+            if (IsLowercase(c))
+            {
+                GetUppercase(c);
+            }
+        }
+    }
+
+    static bool IsLowercase(char c)
+    {
+        return 'a' <= c && c <= 'z';
+    }
+
+    static bool IsUppercase(char c)
+    {
+        return 'A' <= c && c <= 'Z';
+    }
+
+    static char GetLowercase(char c)
+    {
+        return c - 'A' + 'a';
+    }
+
+    static char GetUppercase(char c)
+    {
+        return c - 'a' + 'A';
+    }
+
     // x, y coordinate -> i, j 2d-array
     template<int N>
     static void Set(int board[N][N], int n, int x, int y, int val)
