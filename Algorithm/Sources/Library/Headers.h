@@ -14,5 +14,7 @@
 #include <bitset>
 #include <functional>
 #include <sstream>
+#include <chrono>
+#include <iomanip>
 #include <cmath> // pow
 #include <memory.h> // memset
