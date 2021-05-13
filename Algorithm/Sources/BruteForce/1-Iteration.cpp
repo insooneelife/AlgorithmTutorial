@@ -1,11 +1,31 @@
 // 반복문
 
-// 반복문 예제 1.
-// 반복문 조합
-// n이 7인 경우, n개의 원소 중 4개를 고르는 모든 경우를 출력하는 알고리즘
+// 1. 미지수와 순서쌍
+// 두 자연수 n과 k에 대해 (1 <= n, k < 1000),
+// 다음 식을 만족시키는 모든 순서쌍을 구하여라
+// 2 * n * n - (k * k + 2) * n + (3 * k - 2) == 0
 
 #include <iostream>
 using namespace std;
+
+void OrderedPair()
+{
+    for (int n = 1; n < 1000; ++n)
+    {
+        for (int k = 1; k < 1000; ++k)
+        {
+            if (2 * n * n - (k * k + 2) * n + (3 * k - 2) == 0)
+            {
+                cout << n << " " << k << endl;
+            }
+        }
+    }
+}
+
+// 2. 반복문 조합
+// n이 7인 경우, n개의 원소 중 4개를 고르는 모든 경우를 출력하는 알고리즘
+
+
 
 void CombIterate(int n)
 {
@@ -23,6 +43,31 @@ void CombIterate(int n)
         }
     }
 }
+
+// 3. 충돌 판정
+
+struct Object
+{
+    Object(int x, int y, int r) : x(x), y(y), r(r) {}
+    int x, int y, int r;
+};
+
+bool Collide(Object a, Object b)
+{
+    int distance = (b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y);
+    return distance < ra + rb;
+}
+
+void CollideTest()
+{
+
+}
+
+
+// 한정 명제
+// 전칭명제, 존재명제
+
+
 
 #include <iostream>
 #include <vector>
@@ -55,53 +100,7 @@ int main()
 // 시간복잡도?
 
 
-// 전칭 한정 기호
-// for all x, P(x)
-// 모든 x에 대해 P(x)는 참이다.
 
-// 구현단계에서는 모든 명제가 참임을 보이는 것보다,
-// 거짓인 케이스를 단 하나만 찾는 방향이 간단하다.
-
-// 다음 명제를 생각해보자.
-// 모든 x에 대해, x는 5보다 크다.
-int All(vector<int> elements)
-{
-    for (int x : elements)
-    {
-        if (x <= 5)
-            return false;
-    }
-    return true;
-}
-
-
-
-// 존재 한정 기호
-// there exists x, P(x)
-// 적어도 하나의 x에 대해 P(x)는 참이다.
-
-// 구현단계에서도 논리 그대로 적용할 수 있다.
-
-// 다음 명제를 생각해보자.
-// 적어도 하나의 x에 대해 x는 5보다 크다.
-
-int Exists(vector<int> elements)
-{
-    for (int x : elements)
-    {
-        if (x > 5)
-            return true;
-    }
-    return false;
-}
-
-
-// ex)
-// 생성된 모든 조합들 중, 적어도 하나의 조합에 대해,
-// 원소의 모든 값이 같은 경우가 존재한다.
-
-// 생성된 모든 순열들 중, 적어도 하나의 순열에 대해,
-// 원소의 값 중 적어도 하나가 같은 경우가 존재한다.
 
 
 
