@@ -11,6 +11,12 @@ public:
         Time() : tm(), milisec(0) {}
 
         // "08:31", "19:59"
+        void ParseHourMinSecMilisec(std::string time)
+        {
+            Parse(time, "%H:%M:%S.%s");
+        }
+
+        // "08:31", "19:59"
         void ParseHourMinSec(std::string time)
         {
             Parse(time, "%H:%M:%S");
@@ -28,17 +34,17 @@ public:
             Parse(time, "%M:%S");
         }
 
-        // time : "2017.10.30 08:31:05.312"
-        // format : "%Y.%m.%d %H:%M:%S.%s"
+        // time : "2017.10.30 08:31:05.312",    "2017-10-30 08-31-05-312"
+        // format : "%Y.%m.%d %H:%M:%S.%s",     "%Y-%m-%d %H-%M-%S-%s"
         void Parse(std::string time, std::string format)
         {
-            size_t index = format.find(".%s");
+            size_t index = format.find("%s");
 
             if (index != std::string::npos)
             {
-                size_t rindex = time.rfind(format[index]);
-                std::string sub = time.substr(rindex, time.size() - rindex);
-                milisec = stof(sub) * 1000;
+                size_t rindex = time.rfind(format[index - 1]);
+                std::string sub = time.substr(rindex + 1, 3);
+                milisec = stof(sub);
             }
 
             std::istringstream ss(time);
@@ -98,12 +104,16 @@ public:
             total += tm.tm_min;
             total *= 60;
             total += tm.tm_sec;
+            total *= 1000;
+            total += milisec;
 
             return total;
         }
 
         void FromKey(long long key)
         {
+            milisec = key % 1000;
+            key /= 1000;
             tm.tm_sec = key % 60;
             key /= 60;
             tm.tm_min = key % 60;

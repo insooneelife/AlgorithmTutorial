@@ -104,6 +104,7 @@ public:
 
     // max_element, min_element
     // 컨테이너 내의 최대 원소와, 최소 원소의 반복자를 반환한다.
+    // 컨테이너가 비어있는 경우 segment error
     static void MinMaxElement()
     {
         using namespace std;
@@ -112,6 +113,11 @@ public:
         int max_val = *max_element(begin(v), end(v));
         int min_val = *min_element(begin(v), end(v));
         cout << max_val << " " << min_val;
+
+        // lambda
+        vector<int> data = { 1, 2, 3, 7, -10, 5 };
+        int min = *min_element(begin(data), end(data), [](int a, int b) { return a < b; });
+        cout << min;
     }
 
     // count, count_if
