@@ -54,8 +54,17 @@ public:
 
         vector<int> numbers = { 3, 2, 1, 5, 4 };
         auto it = find(begin(numbers), end(numbers), 3);
+        int index = it - numbers.begin();
 
-        cout << *it << endl;
+        if (it != end(numbers))
+        {
+            cout << *it << " " << index << endl;
+        }
+        else
+        {
+            // (index == numbers.size) in here
+            cout << index << endl;
+        }
     }
 
     // erase
