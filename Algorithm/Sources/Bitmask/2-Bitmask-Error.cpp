@@ -10,9 +10,11 @@
 #include <bitset>
 using namespace std;
 
+using uint8 = unsigned char;
+
 int main()
 {
-    uint8 a = 0b10101001;
+    uint8 a = 0b10101000;
 
     // 연산자 우선순위로 인한 에러
     // 일반적으로 비트연산들은 일반연산보다 우선순위가 낮기 때문에,

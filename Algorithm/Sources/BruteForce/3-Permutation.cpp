@@ -60,6 +60,7 @@ void Permutation(vector<int>& permutations)
     if (permutations.size() == kNum)
     {
         Print::Container(permutations);
+        return;
     }
 
     for (int i = 1; i <= kNum; ++i)
@@ -85,6 +86,7 @@ void Permutation(vector<int>& permutations, int k)
     if (permutations.size() == k)
     {
         Print::Container(permutations);
+        return;
     }
 
     for (int i = 1; i <= kNum; ++i)

@@ -71,7 +71,7 @@ int main()
     // 전체집합의 모든 부분집합 순회하기
     {
         for (int bit = 0; bit < (1 << company.size()); ++bit)
-            //for (uint8 bit = 0; bit < (1 << company.size()); ++bit) // 값 오버플로우로 무한루프
+        //for (uint8 bit = 0; bit < (1 << company.size()); ++bit) // 값 오버플로우로 무한루프
         {
             // 출력
             PrintSelections(company, bit);
@@ -163,7 +163,7 @@ int main()
         uint8 intersection_ab = (a & b);
 
         // 차집합
-        uint8 difference_ab = (a & b);
+        uint8 difference_ab = (a & ~b);
 
         // 대칭차집합
         uint8 symmetric_difference_ab = (a ^ b);
