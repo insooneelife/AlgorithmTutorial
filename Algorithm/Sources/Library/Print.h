@@ -62,14 +62,14 @@ public:
     }
 
     template<size_t M, size_t N>
-    static void Board(const int board[M][N])
+    static void Board(const int board[M][N], int rows = M, int columns = N, std::string whitespace = "\t")
     {
         using namespace std;
-        for (int i = 0; i < M; ++i)
+        for (int i = 0; i < rows; ++i)
         {
-            for (int j = 0; j < N; ++j)
+            for (int j = 0; j < columns; ++j)
             {
-                cout << board[i][j] << " ";
+                cout << board[i][j] << whitespace;
             }
             cout << endl;
         }
