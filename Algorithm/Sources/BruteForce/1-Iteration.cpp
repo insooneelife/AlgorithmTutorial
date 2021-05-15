@@ -5,6 +5,7 @@
 // 다음 식을 만족시키는 모든 순서쌍을 구하여라
 // 2 * n * n - (k * k + 2) * n + (3 * k - 2) == 0
 
+
 #include <iostream>
 using namespace std;
 
@@ -91,8 +92,12 @@ int main()
 // 가능한 모든 경우의 수는?
 // 시간복잡도?
 
-
 // 반복문 예제 3.
+// 카펫
+// https://programmers.co.kr/learn/courses/30/lessons/42842
+
+
+// 반복문 예제 4.
 // 소수 만들기
 // https://programmers.co.kr/learn/courses/30/lessons/12977
 
