@@ -217,6 +217,26 @@ public:
         return ret;
     }
 
+    static int CalcDivisors(int n)
+    {
+        using namespace std;
+        const vector<int>& factors = Factors(n);
+
+        map<int, int> counts;
+        for (int f : factors)
+        {
+            counts[f]++;
+        }
+        
+        int mul = 1;
+        for (auto e : counts)
+        {
+            mul *= (e.second + 1);
+        }
+
+        return mul;
+    }
+
     // 10진수 -> N진수 변환
     // N진수 -> 10진수 변환
     // (36진수까지 허용)
