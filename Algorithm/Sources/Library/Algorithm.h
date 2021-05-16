@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include "Headers.h"
+#include "Utility.h"
+#include "Data.h"
 
 
 class Algorithm
@@ -288,10 +290,10 @@ public:
             else return 'A' + n - 10;
         }
 
-        static int ToNumber(char n)
+        static long long ToNumber(char n)
         {
-            if ('0' <= n && n <= '9') return n - '0';
-            else return n - 'A' + 10;
+            if ('0' <= n && n <= '9') return (long long)n - (long long)'0';
+            else return (long long)(n - 'A') + 10LL;
         }
     };
 
@@ -386,4 +388,148 @@ public:
         }
     }
 
+
+    vector<vector<int>> MakeAdjArrayGraph(const int N)
+    {
+        vector<vector<int>> graph(N, vector<int>(N, 0));
+
+        for (int from = 0; from < N; ++from)
+        {
+            for (int to = 0; to < N; ++to)
+            {
+                // 여기에 조건 추가
+                bool other_conditions_here = true;
+                if (from == to || other_conditions_here)
+                {
+                    graph[from][to] = 1;
+                    graph[to][from] = 1;
+                }
+            }
+        }
+    }
+
+    // 그래프(인접행렬) 깊이우선탐색
+    // time complexity     O(N ^ 2)
+    // input               인접행렬 그래프(N ^ 2), 방문기록 배열(N), 탐색시작 노드
+    // { 1, 1, 0 },
+    // { 1, 1, 0 },
+    // { 0, 0, 1 }
+    // output              방문한 노드 수, 방문기록
+    int DFS(const vector<vector<int>>& graph, vector<bool>& visited, int node)
+    {
+        if (visited[node])
+            return 0;
+
+        const int N = graph.size();
+        int cnt = 1;
+        visited[node] = true;
+
+        for (int i = 0; i < N; ++i)
+        {
+            if (graph[node][i] == 1 && !visited[i])
+                cnt += DFS(graph, visited, i);
+        }
+        return cnt;
+    }
+
+    // 2D 배열(게임판) 너비우선탐색
+    // time complexity     O(N ^ 2)
+    // input               2D 배열(N ^ 2), 탐색시작 위치, 탐색중단 위치
+    // 1은 갈 수 있는 길이고, 0은 갈 수 없는 길이다.
+    // { 1, 0, 1, 1, 1 },
+    // { 1, 0, 1, 0, 1 },
+    // { 1, 0, 1, 1, 1 },
+    // { 1, 1, 1, 0, 1 },
+    // { 0, 0, 0, 0, 1 }
+    // output              최단방문회수(길이 없는 경우 : -1)
+    static int BFS(const std::vector<std::vector<int>>& maps, Vec from, Vec to)
+    {
+        using namespace std;
+        const int CanMove = 1;
+        const int rows = maps.size();
+        const int columns = maps[0].size();
+        const vector<Vec> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+        vector<vector<bool>> visited(rows, vector<bool>(columns, false));
+        queue<State> que;
+
+        int ret = -1;
+
+        que.push({ from.i, from.j, 1 });
+        visited[from.i][from.j] = true;
+
+        while (!que.empty())
+        {
+            State state = que.front();
+
+            if (state.i == to.i && state.j == to.j)
+            {
+                ret = state.cnt;
+                break;
+            }
+
+            for (auto d : directions)
+            {
+                int nexti = state.i + d.i;
+                int nextj = state.j + d.j;
+
+                if (Utility::InArray2D(rows, columns, nexti, nextj) &&
+                    maps[nexti][nextj] == CanMove &&
+                    !visited[nexti][nextj])
+                {
+                    que.push({ nexti, nextj, state.cnt + 1 });
+                    visited[nexti][nextj] = true;
+                }
+            }
+            que.pop();
+        }
+
+        return ret;
+    }
+
+    // 그래프(인접행렬) 너비우선탐색
+    // time complexity     O(N ^ 2)
+    // input               인접행렬 그래프(N ^ 2), 탐색시작 노드, 탐색중단 노드
+    // { 1, 1, 0 },
+    // { 1, 1, 0 },
+    // { 0, 0, 1 }
+    // output              최단방문회수(길이 없는 경우 : -1)
+    static int BFS(const std::vector<std::vector<int>>& graph, int start, int finish)
+    {
+        using namespace std;
+        using Node = pair<int, int>;
+
+        const int N = graph.size();
+        vector<bool> visited(N, false);
+        queue<Node> que;
+        int ret = -1;
+
+        que.push({ start, 1 });
+        visited[start] = true;
+
+        while (!que.empty())
+        {
+            Node state = que.front();
+            int node = state.first;
+            int cnt = state.second;
+
+            if (node == finish)
+            {
+                ret = cnt;
+                break;
+            }
+
+            for (int next = 0; next < N; ++next)
+            {
+                if (graph[node][next] == 1 && !visited[next])
+                {
+                    que.push({ next, cnt + 1 });
+                    visited[next] = true;
+                }
+            }
+
+            que.pop();
+        }
+
+        return ret;
+    }
 };

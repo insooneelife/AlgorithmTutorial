@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Library\Algorithm.h" />
+    <ClInclude Include="Sources\Library\Data.h" />
     <ClInclude Include="Sources\Library\Headers.h" />
     <ClInclude Include="Sources\Library\Print.h" />
     <ClInclude Include="Sources\Library\STL.h" />

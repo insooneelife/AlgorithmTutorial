@@ -386,6 +386,33 @@ public:
         string body = page.substr(start_idx, size);
         cout << body;
     }
+
+    // 숫자를 표현하는데에 공간을 할당해주고, 할당공간에서 여분공간이 생기면 특정 문자로 출력해준다.
+    // 숫자가 할당공간을 넘어가면 그냥 숫자값으로 출력된다.
+    // ex)
+    // 할당공간 : 5, 문자 : '0'
+    // 25 -> 00025
+    // 255555 -> 255555
+    void SetFill()
+    {
+        using namespace std;
+
+        cout << setfill('0') << setw(6) << 333 << endl;
+
+        cout << setfill('f') << setw(6) << 333 << endl;
+
+        cout << setfill('0') << setw(6) << "333" << endl;
+
+        cout << setfill('0') << setw(6) << 3333333 << endl;
+
+        
+        // stringstream 으로 이용하면 직접 문자열로 가져올 수 있다.
+        // stringstream 을 이용하는 경우 endl을 조심하자
+        stringstream ss;
+        ss << setfill('0') << setw(5) << 255;
+        string str = ss.str();
+        cout << str << endl;
+    }
      
 };
 
