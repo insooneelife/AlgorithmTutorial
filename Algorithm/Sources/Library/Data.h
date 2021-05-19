@@ -3,6 +3,57 @@
 #include "Headers.h"
 #include "Print.h"
 
+template<typename T>
+struct Vec
+{
+    Vec() : x(0), y(0) {}
+    Vec(int x, int y) : x(x), y(y) {}
+
+public:
+    bool operator==(const Vec& other) const
+    {
+        return x == other.x && y == other.y;
+    }
+
+    bool operator<(const Vec& other) const
+    {
+        if (x == other.x)
+        {
+            return y < other.y;
+        }
+
+        return x < other.x;
+    }
+
+    // for greater
+    bool operator>(const Vec& other) const
+    {
+        if (x == other.x)
+            return y > other.y;
+
+        return x > other.x;
+    }
+
+    Vec operator+(const Vec& other) const
+    {
+        return Vec(x + other.x, y + other.y);
+    }
+
+    Vec operator-(const Vec& other) const
+    {
+        return Vec(x - other.x, y - other.y);
+    }
+
+    // unary minus
+    Vec operator- ()
+    {
+        return Vec(-x, -y);
+    }
+
+public:
+    T x;
+    T y;
+};
 
 struct Time
 {

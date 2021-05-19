@@ -408,6 +408,43 @@ public:
         }
     }
 
+    // 2D 배열(게임판) 깊이우선탐색
+    // time complexity     O(N ^ 2)
+    // input               2D 배열(N ^ 2), 방문기록 배열(N ^ 2), 탐색 가능한 값, 탐색시작 위치, 탐색중단 위치
+    // 1은 갈 수 있는 길이고, 0은 갈 수 없는 길이다.
+    // { 1, 0, 1, 1, 1 },
+    // { 1, 0, 1, 0, 1 },
+    // { 1, 0, 1, 1, 1 },
+    // { 1, 1, 1, 0, 1 },
+    // { 0, 0, 0, 0, 1 }
+    // output              최단방문회수(길이 없는 경우 : -1)
+    int DFS(const vector<vector<int>>& board, vector<vector<bool>>& visited, const int available, int i, int j)
+    {
+        const int M = board.size();
+        const int N = board[0].size();
+
+        if (visited[i][j])
+            return 0;
+
+        const vector<pair<int, int>> directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
+        int cnt = 1;
+        visited[i][j] = true;
+
+        for (auto p : directions)
+        {
+            int nexti = i + p.first;
+            int nextj = j + p.second;
+
+            if (!Utility::InArray2D(M, N, nexti, nextj))
+                continue;
+
+            if (board[nexti][nextj] == available && !visited[nexti][nextj])
+                cnt += DFS(board, visited, available, nexti, nextj);
+
+        }
+        return cnt;
+    }
+
     // 그래프(인접행렬) 깊이우선탐색
     // time complexity     O(N ^ 2)
     // input               인접행렬 그래프(N ^ 2), 방문기록 배열(N), 탐색시작 노드
@@ -442,26 +479,26 @@ public:
     // { 1, 1, 1, 0, 1 },
     // { 0, 0, 0, 0, 1 }
     // output              최단방문회수(길이 없는 경우 : -1)
-    static int BFS(const std::vector<std::vector<int>>& maps, Vec from, Vec to)
+    static int BFS(const std::vector<std::vector<int>>& maps, Vec<int> from, Vec<int> to)
     {
         using namespace std;
         const int CanMove = 1;
         const int rows = maps.size();
         const int columns = maps[0].size();
-        const vector<Vec> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+        const vector<Vec<int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
         vector<vector<bool>> visited(rows, vector<bool>(columns, false));
         queue<State> que;
 
         int ret = -1;
 
-        que.push({ from.i, from.j, 1 });
-        visited[from.i][from.j] = true;
+        que.push({ from.x, from.y, 1 });
+        visited[from.x][from.y] = true;
 
         while (!que.empty())
         {
             State state = que.front();
 
-            if (state.i == to.i && state.j == to.j)
+            if (state.i == to.x && state.j == to.y)
             {
                 ret = state.cnt;
                 break;
@@ -469,8 +506,8 @@ public:
 
             for (auto d : directions)
             {
-                int nexti = state.i + d.i;
-                int nextj = state.j + d.j;
+                int nexti = state.i + d.x;
+                int nextj = state.j + d.y;
 
                 if (Utility::InArray2D(rows, columns, nexti, nextj) &&
                     maps[nexti][nextj] == CanMove &&
