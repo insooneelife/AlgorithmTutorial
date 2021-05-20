@@ -186,11 +186,6 @@ private:
     int milisec;
 };
 
-struct Vec
-{
-    int i, j;
-};
-
 struct State
 {
     int i, j, cnt;

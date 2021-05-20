@@ -388,9 +388,64 @@ public:
         }
     }
 
-
-    vector<vector<int>> MakeAdjArrayGraph(const int N)
+    /*
+    // 인풋을 통해 인접리스트 그래프를 생성한다.
+    static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
+        int N,
+        const std::vector<std::vector<int>>& input,
+        bool bigraph = true)
     {
+        using namespace std;
+        vector <vector<int>> graph(N + 1);
+        for (const vector<int>& adj : input)
+        {
+            int from = adj[0];
+            int to = adj[1];
+            int cost = adj[2];
+
+            graph[from].push_back(to);
+            if (bigraph)
+            {
+                graph[to].push_back(from);
+            }
+        }
+
+        return graph;
+    }
+    */
+
+    // 인풋을 통해 인접행렬 그래프를 생성한다.
+    // input    2D Array Size N, 간선(노드는 1부터 시작), 양방향 여부
+    // output   인접행렬 그래프
+    static std::vector<std::vector<long long>> MakeAdjArrayGraphFromInput(
+        const int N,
+        std::vector<std::vector<int>> inputs,
+        bool bigraph = true)
+    {
+        using namespace std;
+        vector<vector<long long>> graph(N, vector<long long>(N, std::numeric_limits<int>::max()));
+
+        for (int i = 0; i < inputs.size(); ++i)
+        {
+            int from = inputs[i][0] - 1;
+            int to = inputs[i][1] - 1;
+            int cost = inputs[i][2];
+
+            graph[from][to] = (long long)cost;
+            if (bigraph)
+            {
+                graph[to][from] = (long long)cost;
+            }
+        }
+        return graph;
+    }
+
+    // 특정 조건에 맞는
+    // 인접행렬 그래프를 생성한다.
+    static std::vector<std::vector<int>> MakeAdjArrayGraph(const int N)
+    {
+        using namespace std;
+
         vector<vector<int>> graph(N, vector<int>(N, 0));
 
         for (int from = 0; from < N; ++from)
@@ -410,16 +465,23 @@ public:
 
     // 2D 배열(게임판) 깊이우선탐색
     // time complexity     O(N ^ 2)
-    // input               2D 배열(N ^ 2), 방문기록 배열(N ^ 2), 탐색 가능한 값, 탐색시작 위치, 탐색중단 위치
-    // 1은 갈 수 있는 길이고, 0은 갈 수 없는 길이다.
+    // input               2D 배열(N ^ 2), 방문기록 배열(N ^ 2), 탐색 가능한 값, 탐색시작 위치
+    // available(1)은 갈 수 있는 길이고, 그 외는 갈 수 없는 값이다.
     // { 1, 0, 1, 1, 1 },
     // { 1, 0, 1, 0, 1 },
     // { 1, 0, 1, 1, 1 },
     // { 1, 1, 1, 0, 1 },
     // { 0, 0, 0, 0, 1 }
-    // output              최단방문회수(길이 없는 경우 : -1)
-    int DFS(const vector<vector<int>>& board, vector<vector<bool>>& visited, const int available, int i, int j)
+    // output              방문한 노드 수, 방문기록
+    static int DFS(
+        const std::vector<std::vector<int>>& board,
+        std::vector<std::vector<bool>>& visited,
+        const int available, 
+        int i, 
+        int j)
     {
+        using namespace std;
+
         const int M = board.size();
         const int N = board[0].size();
 
@@ -452,8 +514,10 @@ public:
     // { 1, 1, 0 },
     // { 0, 0, 1 }
     // output              방문한 노드 수, 방문기록
-    int DFS(const vector<vector<int>>& graph, vector<bool>& visited, int node)
+    static int DFS(const std::vector<std::vector<int>>& graph, std::vector<bool>& visited, int node)
     {
+        using namespace std;
+
         if (visited[node])
             return 0;
 
@@ -569,4 +633,37 @@ public:
 
         return ret;
     }
+
+    // 플로이드 알고리즘
+    // input        인접행렬 그래프 (node는 1부터 시작)
+    // output       모든 정점 쌍에 대한 최단거리
+    class Floyd
+    {
+    public:
+        Floyd(const int N, std::vector<std::vector<int>> inputs) : N(N), adj(MakeAdjArrayGraphFromInput(N, inputs))
+        {
+            Make();
+        }
+
+        int GetCost(int from, int to) const
+        {
+            return adj[from - 1][to - 1];
+        }
+
+    private:
+        void Make()
+        {
+            for (int i = 0; i < N; ++i)
+                adj[i][i] = 0;
+
+            for (int k = 0; k < N; ++k)
+                for (int i = 0; i < N; ++i)
+                    for (int j = 0; j < N; ++j)
+                        adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);
+        }
+
+    private:
+        const int N;
+        std::vector<std::vector<long long>> adj;
+    };
 };
