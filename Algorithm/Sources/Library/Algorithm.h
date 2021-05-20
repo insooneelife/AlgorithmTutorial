@@ -8,6 +8,34 @@
 class Algorithm
 {
 public:
+    // [1, n] 까지의 합
+    // time complexity     O(1)
+    // input               자연수 n
+    // output              [1, n] 까지의 합
+    long long Sum(long long n)
+    {
+        return n * (n + 1) / (long long)2;
+    }
+
+    // [a, b] 까지의 합
+    // time complexity     O(1)
+    // input               정수 a, b (음수에서도 동작함)
+    // output              [a, b] 까지의 합
+    long long RangeSum(long long a, long long b)
+    {
+        if (a > b)
+            swap(a, b);
+
+        if (a >= 0)
+        {
+            return Sum(b) - Sum(a) + a;
+        }
+        else
+        {
+            return -Sum(abs(a)) + Sum(b);
+        }
+    }
+
     // p, q의 최대공약수를 구하는 알고리즘
     // time complexity     O(logN)
     // input               두 수 p, q
@@ -18,6 +46,25 @@ public:
         return GCD(q, p % q);
     }
 
+    // N개의 수들의 최대공약수를 구하는 알고리즘
+    // time complexity      O(N * logM) (M = smallest element in array)
+    // input                N개의 수
+    // output               N개의 수의 최대공약수
+    static long long GCD(vector<long long> numbers)
+    {
+        int result = numbers[0];
+        for (int i = 1; i < numbers.size(); i++)
+        {
+            result = GCD(numbers[i], result);
+
+            if (result == 1)
+            {
+                return 1;
+            }
+        }
+        return result;
+    }
+
     // p, q의 최소공배수를 구하는 알고리즘
     // time complexity     O(logN)
     // input               두 수 p, q
@@ -25,6 +72,20 @@ public:
     static long long LCM(long long p, long long q)
     {
         return p * q / GCD(p, q);
+    }
+
+    // N개의 수들의 최소공배수를 구하는 알고리즘
+    // time complexity      O(N * logM) (M = smallest element in array)
+    // input                N개의 수
+    // output               N개의 수의 최소공배수
+    static long long LCM(vector<long long> numbers)
+    {
+        long long result = numbers[0];
+
+        for (int i = 1; i < numbers.size(); i++)
+            result = (numbers[i] * result) / (GCD(numbers[i], result));
+
+        return result;
     }
 
     // n이 소수인지 판단하는 알고리즘
@@ -386,6 +447,36 @@ public:
                 combs[i] = combs[i - 1] + 1;
             }
         }
+    }
+
+    // 괄호의 유효성 여부 판단
+    // time complexity     O(N)
+    // input               괄호 문자열 "[]{([]){}}"
+    // output              유효성 여부
+    static bool IsBracketValid(const std::string& s)
+    {
+        using namespace std;
+        map<char, char> mapping = { {'[', ']'}, {'(', ')'}, {'{', '}' } };
+        stack<char> st;
+        int i = 0;
+        st.push(s[i++]);
+
+        while (i < s.size())
+        {
+            char c = s[i++];
+            if (st.size() > 0)
+            {
+                char top = st.top();
+                if (mapping[top] == c)
+                {
+                    st.pop();
+                    continue;
+                }
+            }
+            st.push(c);
+        }
+
+        return st.empty();
     }
 
     /*

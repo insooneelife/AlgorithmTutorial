@@ -1,5 +1,5 @@
-﻿// 알파벳 (백트래킹)
-// https://www.acmicpc.net/problem/1987
+﻿// 암호 만들기 (백트래킹)
+// https://www.acmicpc.net/problem/1759
 
 #include<vector>
 #include<iostream>
