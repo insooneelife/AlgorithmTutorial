@@ -1,4 +1,6 @@
 ﻿/*
+문제.
+
 조련사  l              l    
 사자    l              l
 아빠    l      강      l   마을
@@ -29,6 +31,12 @@
 
 using namespace std;
 typedef bitset<7> State;
+
+struct Node
+{
+    State state;
+    int cnt;
+};
 
 enum
 {
@@ -93,7 +101,7 @@ bool CheckAlive(const State& state)
 
 bool CheckBothAlive(const State& state)
 {
-    State opposite(~state);    
+    State opposite(~state);
 
     if (!CheckAlive(opposite))
     {
@@ -114,34 +122,30 @@ bool CanControlBoat(State move)
     return false;
 }
 
-void Push(queue<State>& que, vector<bool>& visited, vector<int>& backtrack, const State& state, int saveStateId)
+void Push(queue<Node>& que, vector<bool>& visited, vector<int>& backtrack, const Node& next, int current_key)
 {
-    int stateId = state.to_ulong();
-    que.push(state);
-    visited[stateId] = true;
-    backtrack[stateId] = saveStateId;
+    int next_key = next.state.to_ulong();
+    que.push(next);
+    visited[next_key] = true;
+    backtrack[next_key] = current_key;
 }
 
 void BFS(State start, State finish, vector<int>& backtrack)
 {
-    queue<State> que;
-    vector<bool> visited(128);
+    queue<Node> que;
+    vector<bool> visited(1 << Max);
 
-    Push(que, visited, backtrack, start, 0);
+    Push(que, visited, backtrack, { start, 0 }, 0);
 
     while (!que.empty())
     {
-        State data = que.front();
-        unsigned long saveStateId = data.to_ulong();
+        Node node = que.front();
+        State state = node.state;
+        unsigned long key = state.to_ulong();
 
-        if (!CheckBothAlive(data))
+        if (state == finish)
         {
-            que.pop();
-            continue;
-        }
-
-        if (data == finish)
-        {
+            cout << "min cost : " << node.cnt << endl;
             break;
         }
 
@@ -149,7 +153,7 @@ void BFS(State start, State finish, vector<int>& backtrack)
         // one entity move
         for (int i = 0; i < Boat; ++i)
         {
-            if (data[i] != data[Boat])
+            if (state[i] != state[Boat])
                 continue;
 
             moves.push_back(State(1 << i));
@@ -160,7 +164,7 @@ void BFS(State start, State finish, vector<int>& backtrack)
         {
             for (int j = i + 1; j < Boat; ++j)
             {
-                if (data[i] != data[Boat] || data[j] != data[Boat])
+                if (state[i] != state[Boat] || state[j] != state[Boat])
                     continue;
 
                 moves.push_back(State((1 << i) | (1 << j)));
@@ -170,12 +174,12 @@ void BFS(State start, State finish, vector<int>& backtrack)
         for (State move : moves)
         {
             // toggle move, entities means they are moved to other side 
-            State next(data ^ (move | State(1 << Boat)));
-            int key = next.to_ulong();
+            State next(state ^ (move | State(1 << Boat)));
+            unsigned long next_key = next.to_ulong();
 
-            if (!visited[key] && CanControlBoat(move))
+            if (CheckBothAlive(next) && !visited[next_key] && CanControlBoat(move))
             {
-                Push(que, visited, backtrack, next, saveStateId);
+                Push(que, visited, backtrack, { next, node.cnt + 1 }, key);
             }
         }
         que.pop();
@@ -220,7 +224,7 @@ int main()
     vector<int> backtrack(128);
     BFS(start, finish, backtrack);
     MakePath(backtrack, start, finish);
-      
+
 
     return 0;
 }
