@@ -627,7 +627,10 @@ public:
     // { 1, 1, 0 },
     // { 0, 0, 1 }
     // output              방문한 노드 수, 방문기록
-    static int DFS(const std::vector<std::vector<int>>& graph, std::vector<bool>& visited, int node)
+    static int DFS(
+        const std::vector<std::vector<int>>& graph,
+        std::vector<bool>& visited,
+        int node)
     {
         using namespace std;
 
