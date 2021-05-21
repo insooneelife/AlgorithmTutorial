@@ -61,8 +61,8 @@ public:
         cout << endl;
     }
 
-    template<size_t M, size_t N>
-    static void Board(const int board[M][N], int rows = M, int columns = N, std::string whitespace = "\t")
+    template<typename T, size_t M, size_t N>
+    static void Board(const T board[M][N], int rows = M, int columns = N, std::string whitespace = "\t")
     {
         using namespace std;
         for (int i = 0; i < rows; ++i)

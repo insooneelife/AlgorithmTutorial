@@ -120,20 +120,21 @@ public:
     // 모듈라 규칙
     class Modular
     {
+    public:
         // (a + b) % m
-        static int Sum(int a, int b, int m)
+        static long long Sum(long long a, long long b, long long m)
         {
             return ((a % m) + (b % m)) % m;
         }
 
         // (a - b) % m
-        static int Sub(int a, int b, int m)
+        static long long Sub(long long a, long long b, long long m)
         {
             return ((a % m) - (b % m) + m) % m;
         }
 
         // (a * b) % m
-        static int Mul(int a, int b, int m)
+        static long long Mul(long long a, long long b, long long m)
         {
             return ((a % m) * (b % m)) % m;
         }
@@ -554,6 +555,27 @@ public:
         }
     }
 
+    // 2D 배열판 탐색 경로를 구한다.
+    // 단, 탐색중에 backtrack 정보를 생성하며 탐색해야한다.
+    // input        backtrack 정보, 마지막 방문 위치
+    // output       탐색 경로
+    static vector<Vec<int>> MakeSearchPath(const map<Vec<int>, Vec<int>>& backtrack, Vec<int> last)
+    {
+        using namespace std;
+        vector<Vec<int>> path;
+        Vec<int> node = last;
+        while (!(node == backtrack.at(node)))
+        {
+            path.push_back(node);
+            node = backtrack.at(node);
+        }
+        path.push_back(node);
+
+        reverse(begin(path), end(path));
+
+        return path;
+    }
+
     // 2D 배열(게임판) 깊이우선탐색
     // time complexity     O(N ^ 2)
     // input               2D 배열(N ^ 2), 방문기록 배열(N ^ 2), 탐색 가능한 값, 탐색시작 위치
@@ -678,6 +700,57 @@ public:
         return ret;
     }
 
+
+    // 2D 배열(게임판) 너비우선탐색 + 경로생성
+    static int BFS(const std::vector<std::vector<int>>& maps, Vec<int> from, Vec<int> to, vector<Vec<int>>& path)
+    {
+        using namespace std;
+        const int CanMove = 1;
+        const int rows = maps.size();
+        const int columns = maps[0].size();
+        const vector<Vec<int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+        vector<vector<bool>> visited(rows, vector<bool>(columns, false));
+        queue<State> que;
+        map<Vec<int>, Vec<int>> backtrack;
+        backtrack.insert(make_pair(from, from));
+
+        int ret = -1;
+
+        que.push({ from.x, from.y, 1 });
+        visited[from.x][from.y] = true;
+
+        while (!que.empty())
+        {
+            State state = que.front();
+
+            if (state.i == to.x && state.j == to.y)
+            {
+                ret = state.cnt;
+                path = MakeSearchPath(backtrack, to);
+                break;
+            }
+
+            for (auto d : directions)
+            {
+                int nexti = state.i + d.x;
+                int nextj = state.j + d.y;
+
+                if (Utility::InArray2D(rows, columns, nexti, nextj) &&
+                    maps[nexti][nextj] == CanMove &&
+                    !visited[nexti][nextj])
+                {
+                    que.push({ nexti, nextj, state.cnt + 1 });
+                    visited[nexti][nextj] = true;
+                    backtrack.insert(make_pair<Vec<int>, Vec<int>>({ nexti, nextj }, { state.i, state.j }));
+                }
+            }
+            que.pop();
+        }
+
+        return ret;
+    }
+
+
     // 그래프(인접행렬) 너비우선탐색
     // time complexity     O(N ^ 2)
     // input               인접행렬 그래프(N ^ 2), 탐색시작 노드, 탐색중단 노드
@@ -724,6 +797,8 @@ public:
 
         return ret;
     }
+
+    
 
     // 플로이드 알고리즘
     // input        인접행렬 그래프 (node는 1부터 시작)
