@@ -179,7 +179,7 @@ void BFS(State start, State finish, vector<int>& backtrack)
             State next(state ^ (move | State(1 << Boat)));
             unsigned long next_key = next.to_ulong();
 
-            if (CheckBothAlive(next) && !visited[next_key] && CanControlBoat(move))
+            if (CheckBothAlive(next) && !visited[next_key] && CanControlBoat(move) && CheckAlive(move))
             {
                 Push(que, visited, backtrack, { next, node.cnt + 1 }, key);
             }

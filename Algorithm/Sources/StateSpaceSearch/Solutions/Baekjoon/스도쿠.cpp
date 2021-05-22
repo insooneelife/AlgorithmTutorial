@@ -11,8 +11,9 @@
 #include <set>
 #include <map>
 #include <list>
+#include "Print.h"
 
-using namespace std; 
+using namespace std;
 
 struct Data
 {
@@ -23,82 +24,11 @@ public:
     int i, j;
 };
 
-class Print
-{
-private:
-    const static string kTag;
-
-public:
-    template <typename T, typename U>
-    static void Map(const map<T, U>& container, string tag = kTag)
-    {
-        cout << tag << endl;
-        for (auto e : container)
-        {
-            cout << e.first << " " << e.second << endl;
-        }
-        cout << endl;
-    }
-
-    template <typename T>
-    static void Container(const T& container, string tag = kTag)
-    {
-        cout << tag << endl;
-        for (auto e : container)
-        {
-            cout << e << " ";
-        }
-        cout << endl;
-    }
-
-    template <typename CustomType>
-    static void Custom(const vector<CustomType>& container, string tag = kTag)
-    {
-        cout << tag << endl;
-        for (auto e : container)
-        {
-            e.Print();
-        }
-        cout << endl;
-    }
-
-    template<size_t M, size_t N>
-    static void Board(const int board[M][N], string tag = kTag)
-    {
-        //cout << tag << endl;
-        for (int i = 0; i < M; ++i)
-        {
-            for (int j = 0; j < N; ++j)
-            {
-                cout << board[i][j] << " ";
-            }
-            cout << endl;
-        }
-        //cout << endl;
-    }
-
-
-    static void Data(const vector<Data>& positions, string tag = kTag)
-    {
-        cout << tag << endl;
-        for (auto p : positions)
-        {
-            int i = p.i;
-            int j = p.j;
-
-            cout << i << " " << j << endl;
-        }
-        cout << endl;
-    }
-};
-const string Print::kTag = "------------------------------------";
-
-
 const int N = 9;
 const vector<int> base_numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 int board[N][N] = { };
 
-
+// 해당 칸에 가능한 숫자 후보를 얻어온다.
 void GetPossibleNumbers(int si, int sj, vector<int>& out)
 {
     vector<int> numbers(N * 3);
@@ -141,7 +71,7 @@ void GetPossibleNumbers(int si, int sj, vector<int>& out)
     auto it = unique(begin(numbers), end(numbers));
     numbers.erase(it, end(numbers));
 
-    set_difference(begin(base_numbers), end(base_numbers), begin(numbers), it, back_inserter(out));
+    set_difference(begin(base_numbers), end(base_numbers), begin(numbers), end(numbers), back_inserter(out));
 
 }
 
@@ -150,12 +80,13 @@ void Sudoku(const vector<Data>& positions, int current)
 {
     if (current == positions.size())
     {
-        Print::Board<N, N>(board);
+        Print::Board<int, N, N>(board);
         found = true;
         return;
     }
 
-    if (found)return;
+    if (found)
+        return;
 
     const Data& data = positions[current];
 
@@ -175,7 +106,7 @@ void Sudoku(const vector<Data>& positions, int current)
 int main()
 {
     vector<Data> positions;
-    
+
     for (int i = 0; i < N; ++i)
     {
         for (int j = 0; j < N; ++j)

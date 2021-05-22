@@ -1,13 +1,14 @@
-﻿// 암호 만들기 (백트래킹)
+﻿
+// 암호 만들기 (백트래킹)
 // https://www.acmicpc.net/problem/1759
 
-#include<vector>
-#include<iostream>
-#include<string>
-#include<algorithm>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <algorithm>
 using namespace std;
 
-bool check(int n, string s) 
+bool Check(int n, string s) 
 {
     int ja = 0;
     int mo = 0;
@@ -33,7 +34,7 @@ void Go(int n, vector<char>& alpha, string password, int i)
     if (n == password.length()) 
     {
         //cout << "p: " << password << endl;
-        if (check(n, password)) 
+        if (Check(n, password)) 
         {
             cout << password << '\n';
         }
