@@ -12,9 +12,10 @@ struct Vec
     int i, j;
 };
 
-struct State
+struct Node
 {
-    int i, j, cnt;
+    Vec pos;
+    int cnt;
 };
 
 static bool InArray2D(int rows, int columns, int i, int j)
@@ -32,7 +33,7 @@ static int BFS(const std::vector<std::vector<int>>& maps, Vec from, Vec to)
     const int columns = maps[0].size();
     const vector<Vec> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
     vector<vector<bool>> visited(rows, vector<bool>(columns, false));
-    queue<State> que;
+    queue<Node> que;
 
     int ret = -1;
 
@@ -41,9 +42,9 @@ static int BFS(const std::vector<std::vector<int>>& maps, Vec from, Vec to)
 
     while (!que.empty())
     {
-        State state = que.front();
+        Node state = que.front();
 
-        if (state.i == to.i && state.j == to.j)
+        if (state.pos.i == to.i && state.pos.j == to.j)
         {
             ret = state.cnt;
             break;
@@ -51,8 +52,8 @@ static int BFS(const std::vector<std::vector<int>>& maps, Vec from, Vec to)
 
         for (auto d : directions)
         {
-            int nexti = state.i + d.i;
-            int nextj = state.j + d.j;
+            int nexti = state.pos.i + d.i;
+            int nextj = state.pos.j + d.j;
 
             if (InArray2D(rows, columns, nexti, nextj) &&
                 maps[nexti][nextj] == 1 &&
