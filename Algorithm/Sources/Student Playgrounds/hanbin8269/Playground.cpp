@@ -17,12 +17,19 @@
 // DFS
 // 프로그래머스 타겟넘버
 // https://hanbin8269.tistory.com/30
+// [피드백]
+// bitmask를 이용해서도 풀어보세요
+
 
 // Hash
 // 프로그래머스 위장
 // https://hanbin8269.tistory.com/18
+// [피드백]
+// 굳 :)
+
 // 프로그래머스 베스트 앨범
 // https://hanbin8269.tistory.com/19
+
 // 프로그래머스 전화번호 목록
 // https://hanbin8269.tistory.com/26
 
@@ -30,3 +37,6 @@
 // Greedy
 // 프로그래머스 체육복
 // https://hanbin8269.tistory.com/20
+// [피드백]
+// 차집합을 이용해보세요
+// https://www.geeksforgeeks.org/python-set-difference/
