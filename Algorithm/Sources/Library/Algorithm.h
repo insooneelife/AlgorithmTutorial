@@ -480,6 +480,51 @@ public:
         return st.empty();
     }
 
+    // 문자열 s가 회문인지 판별
+    // time complexity     O(N)
+    // input               문자열
+    // output              회문 여부
+    static bool IsPalindrome(const std::string& s)
+    {
+        for (int i = 0; i < s.size() / 2; ++i)
+        {
+            if (s[i] != s[s.size() - 1 - i])
+                return false;
+        }
+        return true;
+    }
+
+    // 문자열 str의 모든 시작위치 s로부터 길이 len의 부분문자열이 회문인지 판별
+    // time complexity     O(N ^ 2)
+    // input               문자열
+    // output              인덱스 s로 시작하는 길이 len인 모든 부분문자열의 회문 여부
+    static void Palindrome(const string& str, std::vector<std::vector<bool>>& mem)
+    {
+        using namespace std;
+        mem.resize(str.size(), vector<bool>(str.size() + 1, false));
+
+        // 길이 0, 1, 2 palindrome 전처리
+        for (int s = 0; s < str.size(); ++s)
+        {
+            mem[s][0] = false;
+            mem[s][1] = true;
+            if (s + 1 < str.size())
+                mem[s][2] = str[s] == str[s + 1];
+        }
+
+        // 길이 3 palindrome 판별
+        // 길이 4 palindrome 판별
+        // ...
+        // 길이 N palindrome 판별
+        for (int len = 3; len <= str.size(); ++len)
+        {
+            for (int s = 0; s + len - 1 < str.size(); ++s)
+            {
+                mem[s][len] = mem[s + 1][len - 2] && (str[s] == str[s + len - 1]);
+            }
+        }
+    }
+
     /*
     // 인풋을 통해 인접리스트 그래프를 생성한다.
     static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
@@ -557,6 +602,7 @@ public:
 
     // 2D 배열판 탐색 경로를 구한다.
     // 단, 탐색중에 backtrack 정보를 생성하며 탐색해야한다.
+    // time complexity     O(D)
     // input        backtrack 정보, 마지막 방문 위치
     // output       탐색 경로
     static vector<Vec<int>> MakeSearchPath(const map<Vec<int>, Vec<int>>& backtrack, Vec<int> last)
