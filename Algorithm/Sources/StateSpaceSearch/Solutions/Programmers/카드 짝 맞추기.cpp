@@ -2,10 +2,8 @@
 
 // 카드 짝 맞추기 (조합 and 순열 and BFS)
 // https://programmers.co.kr/learn/courses/30/lessons/72415
- 
-#include "STL.h"
-#include "Utility.h"
-#include "Algorithm.h"
+
+
 
 
 #include <string>
@@ -37,15 +35,17 @@ public:
 
 struct State
 {
-    State() : i(0), j(0), cost(0) {}
-    State(int i, int j, int cost) : i(i), j(j), cost(cost) {}
-
-    void Print() const { cout << "(" << i << " " << j << "   " << cost << ") "; }
-
-public:
-    int cost;
     int i;
     int j;
+};
+
+struct Node
+{
+public:
+    void Print() const { cout << "(" << state.i << " " << state.j << "   " << cost << ") "; }
+public:
+    State state;
+    int cost;
 };
 
 bool IsValid(int i, int j)
@@ -88,18 +88,20 @@ void NextPos(const vector<vector<int>>& board, int si, int sj, int dir, int& i, 
 
 int BFS(const vector<vector<int>>& board, int from_i, int from_j, int to_i, int to_j)
 {
-    queue<State> que;
+    queue<Node> que;
     bool visited[N][N] = { 0 };
     int cost = 0;
 
-    que.push(State(from_i, from_j, 0)); visited[from_i][from_j] = true;
+    que.push({ {from_i, from_j}, 0 });
+    visited[from_i][from_j] = true;
 
     while (!que.empty())
     {
-        State s = que.front();
+        Node node = que.front();
+        State s = node.state;
         int i = s.i;
         int j = s.j;
-        cost = s.cost;
+        cost = node.cost;
 
         int ni, nj;
 
@@ -109,7 +111,7 @@ int BFS(const vector<vector<int>>& board, int from_i, int from_j, int to_i, int 
             NextPos(board, i, j, d, ni, nj);
             if (IsValid(ni, nj) && !visited[ni][nj])
             {
-                que.push(State(ni, nj, cost + 1));
+                que.push({ ni, nj, cost + 1 });
                 visited[ni][nj] = true;
             }
         }
@@ -273,7 +275,5 @@ int main()
 
     return 0;
 }
-
-
 
 

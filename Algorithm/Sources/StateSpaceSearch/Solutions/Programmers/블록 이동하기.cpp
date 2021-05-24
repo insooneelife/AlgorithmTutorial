@@ -275,40 +275,42 @@ private:
     Vec right;
 };
 
-struct State
+struct Node
 {
     int cost;
-    vector<Vec> positions;
 
-    State(vector<Vec> positions, int cost)
+    // left, right pos of robot
+    vector<Vec> state;
+
+    Node(vector<Vec> state, int cost)
         :
         cost(cost),
-        positions(positions)
+        state(state)
     {}
 };
 
 int BFS(vector<vector<int>>& board, Vec start, Vec finish)
 {
     set<vector<Vec>> visited;
-    queue<State> que;
+    queue<Node> que;
     Robot robot(board, start, Vec(start.i, start.j + 1));
 
     int cost = 0;
     auto state = robot.GetState();
-    que.push(State(state, 0));
+    que.push({ state, 0 });
     visited.insert(state);
 
     while (!que.empty())
     {
-        State s = que.front();
-        cost = s.cost;
-
-        Robot robot(board, s.positions[0], s.positions[1]);
+        Node node = que.front();
+        cost = node.cost;
+        Vec left = node.state[0];
+        Vec right = node.state[1];
 
         // move actions
         for (int i = 0; i < DirectionsCCW.size(); ++i)
         {
-            Robot robot(board, s.positions[0], s.positions[1]);
+            Robot robot(board, left, right);
             Vec direction = DirectionsCCW[i];
 
             if (robot.CanMove(direction))
@@ -317,7 +319,7 @@ int BFS(vector<vector<int>>& board, Vec start, Vec finish)
 
                 if (visited.find(robot.GetState()) == end(visited))
                 {
-                    que.push(State(robot.GetState(), cost + 1));
+                    que.push({ robot.GetState(), cost + 1 });
                     visited.insert(robot.GetState());
                 }
             }
@@ -326,7 +328,7 @@ int BFS(vector<vector<int>>& board, Vec start, Vec finish)
         // rotate actions
         for (int i = 0; i < DirectionsCCW.size(); ++i)
         {
-            Robot robot(board, s.positions[0], s.positions[1]);
+            Robot robot(board, left, right);
 
             pair<RotateAxis, int> rotation = Rotations[i];
             RotateAxis axis = rotation.first;
@@ -338,12 +340,13 @@ int BFS(vector<vector<int>>& board, Vec start, Vec finish)
 
                 if (visited.find(robot.GetState()) == end(visited))
                 {
-                    que.push(State(robot.GetState(), cost + 1));
+                    que.push({ robot.GetState(), cost + 1 });
                     visited.insert(robot.GetState());
                 }
             }
         }
 
+        Robot robot(board, left, right);
         if (robot.HasArrived(finish))
         {
             break;
