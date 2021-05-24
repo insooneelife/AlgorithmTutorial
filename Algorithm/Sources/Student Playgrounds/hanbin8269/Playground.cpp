@@ -38,5 +38,7 @@
 // 프로그래머스 체육복
 // https://hanbin8269.tistory.com/20
 // [피드백]
-// 차집합을 이용해보세요
+// 1. 차집합을 이용해보세요
 // https://www.geeksforgeeks.org/python-set-difference/
+
+// 2. O(NlogN)으로 풀려면 어떻게 해야 할까요?
