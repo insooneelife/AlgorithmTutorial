@@ -387,6 +387,15 @@ public:
         cout << body;
     }
 
+    // string을 특정 character로 특정 개수만큼 채우며 초기화한다.
+    static void StringInit()
+    {
+        using namespace std;
+        string A(15, 'A');
+        string B(1, 'B');
+        cout << A;
+    }
+
     // 숫자를 표현하는데에 공간을 할당해주고, 할당공간에서 여분공간이 생기면 특정 문자로 출력해준다.
     // 숫자가 할당공간을 넘어가면 그냥 숫자값으로 출력된다.
     // ex)

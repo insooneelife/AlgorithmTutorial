@@ -45,7 +45,65 @@ public:
         return tokens;
     }
 
+    // str을 모든 delimiter 단위로 자른다. 
+    static void Split(const std::string& str, const std::vector<char>& delimiters, std::vector<std::string>& out)
+    {
+        return Split(str, delimiters, 0, out);
+    }
+
+    // str을 모든 delimiter 단위로 자른다. 
+    // delimiter도 배열에 포함시킨다.
+    static void SplitIncludeDelimiter(
+        const std::string& str, const std::vector<char>& delimiters, std::vector<std::string>& out)
+    {
+        return SplitIncludeDelimiter(str, delimiters, 0, out);
+    }
+
+private:
+    static void Split(const std::string& str, const std::vector<char>& delimiters, int i, std::vector<std::string>& out)
+    {
+        using namespace std;
+        if (i >= delimiters.size())
+        {
+            out.push_back(str);
+            return;
+        }
+
+        char d = delimiters[i];
+        vector<string> v = Split(str, d);
+
+        for (int j = 0; j < v.size(); ++j)
+        {
+            Split(v[j], delimiters, i + 1, out);
+        }
+    }
+
+
+    static void SplitIncludeDelimiter(
+        const std::string& str, const std::vector<char>& delimiters, int i, std::vector<std::string>& out)
+    {
+        using namespace std;
+        if (i >= delimiters.size())
+        {
+            out.push_back(str);
+            return;
+        }
+
+        char d = delimiters[i];
+        vector<string> v = Split(str, d);
+
+        for (int j = 0; j < v.size(); ++j)
+        {
+            Split(v[j], delimiters, i + 1, out);
+            if (j < v.size() - 1)
+                out.push_back(string(1, d));
+        }
+    }
+public:
+
     
+    
+
     // str을 whitespace 단위로 자른다.
     // (whitespace에는 '\t', ' ', '\n' 과 같은 것들이 있다.)
     // ex)
@@ -214,4 +272,18 @@ public:
     {
         return  0 <= a && a < n;
     }
+
+    static void ReverseStack(std::stack<string>& st)
+    {
+        using namespace std;
+        stack<string> temp;
+        while (!st.empty())
+        {
+            string top = st.top();
+            temp.push(top);
+            st.pop();
+        }
+        st = temp;
+    }
+
 };

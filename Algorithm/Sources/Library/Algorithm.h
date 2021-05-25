@@ -140,6 +140,76 @@ public:
         }
     };
 
+    class VectorOperations
+    {
+    public:
+        std::vector<int> AddVec(const std::vector<int>& a, const std::vector<int>& b)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] + b[i];
+            }
+            return c;
+        }
+
+        std::vector<int> SubVec(const std::vector<int>& a, const std::vector<int>& b)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] - b[i];
+            }
+            return c;
+        }
+
+        std::vector<int> MulVec(const std::vector<int>& a, int k)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] * k;
+            }
+            return c;
+        }
+
+        std::vector<int> MulVec(const std::vector<int>& a, const std::vector<int>& b)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] * b[i];
+            }
+            return c;
+        }
+
+        std::vector<int> DivVec(const std::vector<int>& a, int k)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] / k;
+            }
+            return c;
+        }
+
+        std::vector<int> DivVec(const std::vector<int>& a, const std::vector<int>& b)
+        {
+            using namespace std;
+            vector<int> c(a.size());
+            for (int i = 0; i < a.size(); ++i)
+            {
+                c[i] = a[i] / b[i];
+            }
+            return c;
+        }
+    };
+
     // n 이하의 모든 소수를 생성하는 알고리즘
     // time complexity     O(N)
     // space complexity    O(N) 
@@ -523,6 +593,44 @@ public:
                 mem[s][len] = mem[s + 1][len - 2] && (str[s] == str[s + len - 1]);
             }
         }
+    }
+
+    // 이항 계수
+    class Coeff
+    {
+    public:
+        Coeff(int n, int k) : C(n + 1, std::vector<long long>(k + 1, 0))
+        {
+            Make(n, k);
+        }
+
+        long long Get(int n, int k) const { return C[n][k]; }
+
+    private:
+        long long Make(int n, int k)
+        {
+            if (k == 0)
+                return 1;
+            if (n == k)
+                return 1;
+
+            if (C[n][k] != 0)
+                return C[n][k];
+
+            return C[n][k] = Make(n - 1, k - 1) + Make(n - 1, k);
+        }
+
+    private:
+        std::vector<std::vector<long long>> C;
+    };
+
+    // 카탈란 수
+    static long long Catalan(int n)
+    {
+        Coeff coeff(2 * n, n);
+
+        // 카탈란 수
+        return coeff.Get(2 * n, n) / (long long)(n + 1);
     }
 
     /*
