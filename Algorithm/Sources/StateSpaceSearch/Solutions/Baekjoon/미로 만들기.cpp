@@ -18,16 +18,16 @@ struct State
 struct Node 
 {
 public:
-    Node(State state, int cnt) : state(state), cnt(cnt) {}
+    Node(State state, int level) : state(state), level(level) {}
 
     bool operator<(Node other) const
     {
-        return cnt > other.cnt;
+        return level > other.level;
     }
 
 public:
     State state;
-    int cnt;
+    int level;
 };
 
 void Input(int& n)
@@ -80,12 +80,12 @@ int main()
     {
         node = pque.top();
         State state = node.state;
-        int cnt = node.cnt;
+        int level = node.level;
         int i = state.i;
         int j = state.j;
 
         if (i == n && j == n)
-            all = cnt;
+            all = level;
 
         for (auto d : directions)
         {
@@ -95,7 +95,7 @@ int main()
 
             if (val != -1 && !visit[nexti][nextj])
             {
-                pque.push({ {nexti, nextj}, cnt + val });
+                pque.push({ {nexti, nextj}, level + val });
                 visit[nexti][nextj] = true;
             }
         }
