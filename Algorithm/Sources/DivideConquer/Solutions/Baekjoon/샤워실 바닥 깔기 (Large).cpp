@@ -2,6 +2,9 @@
 // 샤워실 바닥 깔기 (Large)
 // https://www.acmicpc.net/problem/14601
 
+// 시행착오
+// 1. level을 인자로 넘겨서 증가시키는 경우 중복되는 숫자가 있었음
+
 #include <string>
 #include <vector>
 #include <iostream>

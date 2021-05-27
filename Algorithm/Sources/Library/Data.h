@@ -191,7 +191,14 @@ private:
     int milisec;
 };
 
-struct State
+struct Idx
 {
-    int i, j, cnt;
+    int i, j;
 };
+
+struct QueueData
+{
+    Idx state;
+    int cnt;
+};
+

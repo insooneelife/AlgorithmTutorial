@@ -24,7 +24,7 @@ public:
     long long RangeSum(long long a, long long b)
     {
         if (a > b)
-            swap(a, b);
+            std::swap(a, b);
 
         if (a >= 0)
         {
@@ -50,7 +50,7 @@ public:
     // time complexity      O(N * logM) (M = smallest element in array)
     // input                N개의 수
     // output               N개의 수의 최대공약수
-    static long long GCD(vector<long long> numbers)
+    static long long GCD(std::vector<long long> numbers)
     {
         int result = numbers[0];
         for (int i = 1; i < numbers.size(); i++)
@@ -78,7 +78,7 @@ public:
     // time complexity      O(N * logM) (M = smallest element in array)
     // input                N개의 수
     // output               N개의 수의 최소공배수
-    static long long LCM(vector<long long> numbers)
+    static long long LCM(std::vector<long long> numbers)
     {
         long long result = numbers[0];
 
@@ -146,7 +146,7 @@ public:
         std::vector<int> AddVec(const std::vector<int>& a, const std::vector<int>& b)
         {
             using namespace std;
-            vector<int> c(a.size());
+            std::vector<int> c(a.size());
             for (int i = 0; i < a.size(); ++i)
             {
                 c[i] = a[i] + b[i];
@@ -568,7 +568,7 @@ public:
     // time complexity     O(N ^ 2)
     // input               문자열
     // output              인덱스 s로 시작하는 길이 len인 모든 부분문자열의 회문 여부
-    static void Palindrome(const string& str, std::vector<std::vector<bool>>& mem)
+    static void Palindrome(const std::string& str, std::vector<std::vector<bool>>& mem)
     {
         using namespace std;
         mem.resize(str.size(), vector<bool>(str.size() + 1, false));
@@ -599,7 +599,7 @@ public:
     class Coeff
     {
     public:
-        Coeff(int n, int k) : C(n + 1, std::vector<long long>(k + 1, 0))
+        Coeff(int n, int k) : C(n + 1, std::vector<long long>(k + 1, 0LL))
         {
             Make(n, k);
         }
@@ -632,6 +632,8 @@ public:
         // 카탈란 수
         return coeff.Get(2 * n, n) / (long long)(n + 1);
     }
+
+    
 
     /*
     // 인풋을 통해 인접리스트 그래프를 생성한다.
@@ -713,7 +715,7 @@ public:
     // time complexity     O(D)
     // input        backtrack 정보, 마지막 방문 위치
     // output       탐색 경로
-    static vector<Vec<int>> MakeSearchPath(const map<Vec<int>, Vec<int>>& backtrack, Vec<int> last)
+    static std::vector<Vec<int>> MakeSearchPath(const std::map<Vec<int>, Vec<int>>& backtrack, Vec<int> last)
     {
         using namespace std;
         vector<Vec<int>> path;
@@ -821,7 +823,7 @@ public:
         const int columns = maps[0].size();
         const vector<Vec<int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
         vector<vector<bool>> visited(rows, vector<bool>(columns, false));
-        queue<State> que;
+        queue<QueueData> que;
 
         int ret = -1;
 
@@ -830,11 +832,12 @@ public:
 
         while (!que.empty())
         {
-            State state = que.front();
+            QueueData data = que.front();
+            Idx state = data.state;
 
             if (state.i == to.x && state.j == to.y)
             {
-                ret = state.cnt;
+                ret = data.cnt;
                 break;
             }
 
@@ -847,7 +850,7 @@ public:
                     maps[nexti][nextj] == CanMove &&
                     !visited[nexti][nextj])
                 {
-                    que.push({ nexti, nextj, state.cnt + 1 });
+                    que.push({ nexti, nextj, data.cnt + 1 });
                     visited[nexti][nextj] = true;
                 }
             }
@@ -859,7 +862,7 @@ public:
 
 
     // 2D 배열(게임판) 너비우선탐색 + 경로생성
-    static int BFS(const std::vector<std::vector<int>>& maps, Vec<int> from, Vec<int> to, vector<Vec<int>>& path)
+    static int BFS(const std::vector<std::vector<int>>& maps, Vec<int> from, Vec<int> to, std::vector<Vec<int>>& path)
     {
         using namespace std;
         const int CanMove = 1;
@@ -867,7 +870,7 @@ public:
         const int columns = maps[0].size();
         const vector<Vec<int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
         vector<vector<bool>> visited(rows, vector<bool>(columns, false));
-        queue<State> que;
+        queue<QueueData> que;
         map<Vec<int>, Vec<int>> backtrack;
         backtrack.insert(make_pair(from, from));
 
@@ -878,11 +881,12 @@ public:
 
         while (!que.empty())
         {
-            State state = que.front();
+            QueueData data = que.front();
+            Idx state = data.state;
 
             if (state.i == to.x && state.j == to.y)
             {
-                ret = state.cnt;
+                ret = data.cnt;
                 path = MakeSearchPath(backtrack, to);
                 break;
             }
@@ -896,7 +900,7 @@ public:
                     maps[nexti][nextj] == CanMove &&
                     !visited[nexti][nextj])
                 {
-                    que.push({ nexti, nextj, state.cnt + 1 });
+                    que.push({ nexti, nextj, data.cnt + 1 });
                     visited[nexti][nextj] = true;
                     backtrack.insert(make_pair<Vec<int>, Vec<int>>({ nexti, nextj }, { state.i, state.j }));
                 }
@@ -982,7 +986,7 @@ public:
             for (int k = 0; k < N; ++k)
                 for (int i = 0; i < N; ++i)
                     for (int j = 0; j < N; ++j)
-                        adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);
+                        adj[i][j] = std::min(adj[i][j], adj[i][k] + adj[k][j]);
         }
 
     private:

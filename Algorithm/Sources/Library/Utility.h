@@ -273,7 +273,7 @@ public:
         return  0 <= a && a < n;
     }
 
-    static void ReverseStack(std::stack<string>& st)
+    static void ReverseStack(std::stack<std::string>& st)
     {
         using namespace std;
         stack<string> temp;
