@@ -16,5 +16,6 @@
 #include <sstream>
 #include <chrono>
 #include <iomanip>
+#include <random>
 #include <cmath> // pow
 #include <memory.h> // memset

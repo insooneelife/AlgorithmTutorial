@@ -286,4 +286,14 @@ public:
         st = temp;
     }
 
+    // [from, to] 의 난수를 생성한다.
+    static int Rand(int from, int to)
+    {
+        static std::random_device rd;
+        static std::mt19937 gen(rd());
+
+        std::uniform_int_distribution<int> dis(from, to);
+        return dis(gen);
+    }
+
 };
