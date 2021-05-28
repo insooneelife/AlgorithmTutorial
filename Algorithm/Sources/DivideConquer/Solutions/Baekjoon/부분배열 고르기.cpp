@@ -11,6 +11,8 @@ using namespace std;
 using ll = long long;
 
 // MaxScore는 [from, to] 범위의 부분배열들 중 최대의 점수를 반환한다.
+// MaxScore(from, to)는
+// MaxScore(from, mid), MaxScore(mid + 1, to), 가운데 2개 원소를 포함하는 최대점수의 부분배열 중 최대점수를 반환.
 ll MaxScore(const vector<ll>& scores, const vector<ll>& sum, int from, int to)
 {
     if (from == to)
