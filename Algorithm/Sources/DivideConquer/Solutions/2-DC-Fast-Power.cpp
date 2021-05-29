@@ -2,6 +2,8 @@
 // 분할정복
 // https://algorfati.tistory.com/133
 
+// Fast Power
+
 
 #include <iostream>
 using namespace std;

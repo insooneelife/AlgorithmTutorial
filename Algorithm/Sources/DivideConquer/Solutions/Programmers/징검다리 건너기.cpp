@@ -2,6 +2,7 @@
 // 징검다리 건너기 (이분탐색)
 // https://programmers.co.kr/learn/courses/30/lessons/64062
 
+// 목표 변수 = 다리를 건너간 사람 수 [0, 200000000]
 
 #include <iostream>
 #include <vector>
