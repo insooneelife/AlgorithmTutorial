@@ -1,8 +1,6 @@
 ﻿
-// 징검다리 건너기 (이분탐색)
+// 징검다리 건너기
 // https://programmers.co.kr/learn/courses/30/lessons/64062
-
-// 목표 변수 = 다리를 건너간 사람 수 [0, 200000000]
 
 #include <iostream>
 #include <vector>
@@ -10,37 +8,39 @@
 #include <algorithm>
 using namespace std;
 
-int Search(const vector<int>& stones, int k, int start, int end)
+// 징검다리를 건너본다.
+bool Try(const vector<int>& stones, const int k, int number)
 {
-    if (start >= end)
-        return start;
-
-    int mid = (start + end) / 2;
     int cnt = 0;
-    bool success = true;
-
     for (int i = 0; i < stones.size(); ++i)
     {
-        if (stones[i] - mid <= 0)
+        if (stones[i] - number <= 0)
         {
             cnt++;
             if (cnt == k)
-                success = false;
+                return false;
         }
         else
         {
             cnt = 0;
         }
     }
+    return true;
+}
 
-    if (success)
-    {
-        return Search(stones, k, mid + 1, end);
-    }
+// 건너가는 회수를 탐색 대상으로 잡고 이분탐색을 수행한다.
+// 건너가는 회수 범위 [0, 200000000] 
+int Search(const vector<int>& stones, const int k, int from, int to)
+{
+    if (from >= to)
+        return from;
+
+    int mid = (from + to) / 2;
+
+    if (Try(stones, k, mid))
+        return Search(stones, k, mid + 1, to);
     else
-    {
-        return Search(stones, k, start, mid);
-    }
+        return Search(stones, k, from, mid);
 }
 
 int solution(vector<int> stones, int k)
@@ -53,9 +53,6 @@ int main()
 {
     vector<int> stones = { 2, 4, 5, 3, 2, 1, 4, 2, 5, 1 };
     int k = 3;
-
-    //vector<int> stones = { 1 };
-    //int k = 1;
 
     cout << solution(stones, k);
 

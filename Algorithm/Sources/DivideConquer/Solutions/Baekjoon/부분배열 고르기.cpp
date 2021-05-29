@@ -5,6 +5,24 @@
 // 시행착오
 // 1. int 오버플로우 -> long long 사용
 
+// 문제 해결
+// 6
+// 3 1 6 4 5 2
+
+// 왼쪽 부분문제
+// 3 1 6 의 최대점수는 구했다고 가정
+
+// 오른쪽 부분문제
+// 4 5 2 의 최대점수는 구했다고 가정
+
+// 왼쪽과 오른쪽을 모두 걸쳐서 만들어지는 부분배열들 중,
+// 쓸만한 후보들 검사 O(N)
+// 6 4          최대점수 (6 + 4) * 4  {6, 4}의 현재까지의 최소값, 합
+// 6 4 5        {1, 5} 중, 5 선택 -> 최대점수를 구함 -> 최종 점수 갱신              -> {6, 4, 5}의 최소값, 합 (델타값만 활용하여 현재까지의 값 갱신)
+// 6 4 5 2      {1, 2} 중, 2 선택 -> 최대점수를 구함 -> 최종 점수 갱신              -> {6, 4, 5, 2}의 최소값, 합 (델타값만 활용) 
+// 1 6 4 5 2    오른쪽 구간이 끝났으므로 1 선택 -> 최대점수를 구함 -> 최종 점수 갱신   -> {1, 6, 4, 5, 2}의 최소값, 합 (델타값만 활용)
+// 3 1 6 4 5 2  오른쪽 구간이 끝났으므로 3 선택 -> 최대점수를 구함 -> 최종 점수 갱신   -> {3, 1, 6, 4, 5, 2}의 최소값, 합 (델타값만 활용)
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -20,6 +38,7 @@ ll MaxScore(const vector<ll>& scores, const vector<ll>& sum, int from, int to)
     
     const int mid = from + (to - from) / 2;
 
+    // 후보들 나열 후 검사 O(N)
     int left = mid;
     int right = mid + 1;
     ll minscore = min(scores[left], scores[right]);
@@ -43,7 +62,12 @@ ll MaxScore(const vector<ll>& scores, const vector<ll>& sum, int from, int to)
     }
 
 
+    // 부분문제 1.
+    // 왼쪽 배열의 최대점수를 반환한다.
     ll lscore = MaxScore(scores, sum, from, mid);
+
+    // 부분문제 2.
+    // 오른쪽 배열의 최대점수를 반환한다.
     ll rscore = MaxScore(scores, sum, mid + 1, to);
     finalscore = max(finalscore, lscore);
     finalscore = max(finalscore, rscore);

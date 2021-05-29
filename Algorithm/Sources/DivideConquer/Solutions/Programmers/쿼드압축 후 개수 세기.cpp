@@ -5,8 +5,21 @@
 #include <iostream>
 using namespace std;
 
-const vector<int> one = { 0, 1 };
+struct Idx
+{
+    int i, j;
+};
+
 const vector<int> zero = { 1, 0 };
+const vector<int> one = { 0, 1 };
+
+bool CheckAll(const vector<vector<int>>& all, const vector<int>& target)
+{
+    for (const auto& e : all)
+        if (e != target)
+            return false;
+    return true;
+}
 
 vector<int> AddVec(const vector<int>& a, const vector<int>& b)
 {
@@ -18,34 +31,47 @@ vector<int> AddVec(const vector<int>& a, const vector<int>& b)
     return c;
 }
 
-vector<int> Quadtree(const vector<vector<int>>& arr, int si, int sj, int ei, int ej)
+// 전체 구간에 대한 arr를 압축 후 (0, 1) 개수 반환
+vector<int> Quadtree(const vector<vector<int>>& arr, Idx from, Idx to)
 {
-    if (si == ei)
-        return arr[si][sj] == 0 ? zero : one;
+    if (from.i == to.i)
+        return arr[from.i][from.j] == 0 ? zero : one;
 
-    const int N = (ei - si) + 1;
-    int mi = si + N / 2 - 1;
-    int mj = sj + N / 2 - 1;
+    const int N = (to.i - from.i) + 1;
+    Idx mid = { from.i + N / 2 - 1, from.j + N / 2 - 1 };
 
-    vector<int> lt = Quadtree(arr, si, sj, mi, mj);
-    vector<int> rt = Quadtree(arr, si, mj + 1, mi, ej);
-    vector<int> lb = Quadtree(arr, mi + 1, sj, ei, mj);
-    vector<int> rb = Quadtree(arr, mi + 1, mj + 1, ei, ej);
+    vector<pair<Idx, Idx>> ranges =
+    {
+        { from, mid },
+        {{ from.i, mid.j + 1 }, { mid.i, to.j }},
+        {{ mid.i + 1, from.j }, { to.i, mid.j }},
+        {{ mid.i + 1, mid.j + 1 }, to}
+    };
 
-    if (lt == one && lt == rt && lt == lb && lt == rb)
+    // 각 구간에 대한 (0, 1) 개수
+    vector<vector<int>> all(ranges.size(), vector<int>(2, 0));
+    vector<int> sum(2, 0);
+
+    for (int i = 0; i < ranges.size(); ++i)
+    {
+        const auto& e = ranges[i];
+        all[i] = Quadtree(arr, e.first, e.second);
+        sum = AddVec(sum, all[i]);
+    }
+
+    if (CheckAll(all, one))
         return one;
 
-    if (lt == zero && lt == rt && lt == lb && lt == rb)
+    if (CheckAll(all, zero))
         return zero;
 
-    return AddVec(AddVec(lt, rt), AddVec(lb, rb));
+    return sum;
 }
 
-
-vector<int> solution(vector<vector<int>> arr) 
+vector<int> solution(vector<vector<int>> arr)
 {
     const int N = arr.size();
-    return Quadtree(arr, 0, 0, N - 1, N - 1);
+    return Quadtree(arr, { 0, 0 }, { N - 1, N - 1 });
 }
 
 
