@@ -8,6 +8,23 @@ class STL
 {
 public:
 
+    // reserve
+    // 컨테이너의 capacity를 바꾸어준다.
+    static void Reserve()
+    {
+        using namespace std;
+
+        vector<int> candidates;
+        candidates.reserve(100);
+
+        for (int i = 0; i < 50; ++i)
+        {
+            candidates.push_back(i);
+        }
+
+        cout << candidates.size();
+    }
+
     // sort
     // 정렬된 컨테이너를 반환한다.
     static void Sort()
