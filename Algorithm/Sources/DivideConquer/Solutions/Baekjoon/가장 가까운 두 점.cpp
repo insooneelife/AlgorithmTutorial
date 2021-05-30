@@ -63,7 +63,6 @@ int Closest(const vector<Point>& points, int from, int to)
     int mid = (from + to) / 2;
     int ldis = Closest(points, from, mid);
     int rdis = Closest(points, mid + 1, to);
-
     int mindis = min(ldis, rdis);
     int x = (points[mid].x + points[mid + 1].x) / 2;
     
