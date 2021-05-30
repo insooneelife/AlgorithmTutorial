@@ -198,47 +198,49 @@ public:
         return stof(str);
     }
 
-    static void ToLowercase(std::string& str)
+    struct CharacterCase
     {
-        for (char& c : str)
+        static void ToLowercase(std::string& str)
         {
-            if (IsUppercase(c))
-            {
-                c = GetLowercase(c);
-            }
+            transform(begin(str), end(str), begin(str), [](char c)
+                {
+                    if (IsUppercase(c))
+                        return GetLowercase(c);
+                    return c;
+                });
         }
-    }
 
-    static void ToUppercase(std::string& str)
-    {
-        for (char& c : str)
+        static void ToUppercase(std::string& str)
         {
-            if (IsLowercase(c))
-            {
-                GetUppercase(c);
-            }
+            transform(begin(str), end(str), begin(str), [](char c)
+                {
+                    if (IsLowercase(c))
+                        return GetUppercase(c);
+                    return c;
+                });
         }
-    }
 
-    static bool IsLowercase(char c)
-    {
-        return 'a' <= c && c <= 'z';
-    }
+        static bool IsLowercase(char c)
+        {
+            return 'a' <= c && c <= 'z';
+        }
 
-    static bool IsUppercase(char c)
-    {
-        return 'A' <= c && c <= 'Z';
-    }
+        static bool IsUppercase(char c)
+        {
+            return 'A' <= c && c <= 'Z';
+        }
 
-    static char GetLowercase(char c)
-    {
-        return c - 'A' + 'a';
-    }
+        static char GetLowercase(char c)
+        {
+            return c - 'A' + 'a';
+        }
 
-    static char GetUppercase(char c)
-    {
-        return c - 'a' + 'A';
-    }
+        static char GetUppercase(char c)
+        {
+            return c - 'a' + 'A';
+        }
+    };
+    
 
     // x, y coordinate -> i, j 2d-array
     template<int N>
@@ -296,4 +298,35 @@ public:
         return dis(gen);
     }
 
+
+    // 문자열에서 가장 먼저 등장하는 숫자의 idx를 반환한다.
+    static int FindNumIdx(const std::string& str)
+    {
+        int idx = -1;
+        for (int i = 0; i < str.size(); i++)
+        {
+            char c = str[i];
+            if ('0' <= c && c <= '9')
+            {
+                idx = i;
+                break;
+            }
+        }
+        return idx;
+    }
+
+    // 문자열에서 가장 먼저 등장하는 숫자를 파싱한다.
+    // 숫자의 idx를 반환한다.
+    static int FindFirstNumber(const std::string& str, int& number)
+    {
+        using namespace std;
+        int idx = FindNumIdx(str);
+        if (idx < 0)
+            return idx;
+
+        string num_and_str = str.substr(idx);
+        number = stoi(num_and_str);
+
+        return idx;
+    }
 };

@@ -8,6 +8,19 @@ class STL
 {
 public:
 
+    // cin, cout의 입출력 속도를 증가시켜준다. (백준에서 입출력 속도로 통과되지 않는 경우 해결)
+    // 주의
+    // 1. scanf, printf와 함께 사용하면 문제가 생길 수 있다.
+    // 2. 싱글 쓰레드 환경에서만 사용 가능하다.
+
+    static void InputOutputSpeed()
+    {
+        using namespace std;
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+    }
+
     // reserve
     // 컨테이너의 capacity를 바꾸어준다.
     static void Reserve()
@@ -413,13 +426,27 @@ public:
         cout << A;
     }
 
+    // string을 int로 변환하는 예제이다.
+    static void StringToInt()
+    {
+        using namespace std;
+        string valid = "12333aaa";
+        string not_valid = "a12333abb";
+
+        // print 12333
+        cout << stoi(valid) << endl;
+
+        // error
+        //cout << stoi(not_valid) << endl;
+    }
+
     // 숫자를 표현하는데에 공간을 할당해주고, 할당공간에서 여분공간이 생기면 특정 문자로 출력해준다.
     // 숫자가 할당공간을 넘어가면 그냥 숫자값으로 출력된다.
     // ex)
     // 할당공간 : 5, 문자 : '0'
     // 25 -> 00025
     // 255555 -> 255555
-    void SetFill()
+    static void SetFill()
     {
         using namespace std;
 
@@ -439,7 +466,24 @@ public:
         string str = ss.str();
         cout << str << endl;
     }
-     
+    
+    // transform
+    // 컨테이너의 원소들을 순회하며 바꾸는 함수이다.
+    static void Transform()
+    {
+        using namespace std;
+        vector<int> vec = { 1, 2, 3, 4, 5 };
+        Print::Container(vec);
+
+        // vec 컨테이너의 [begin, end) 범위의 값에 2를 곱한 값을 begin부터 저장한다.
+        transform(begin(vec), end(vec), begin(vec), [](int e) { return e * 2; });
+        Print::Container(vec);
+
+        // 다른 컨테이너로 출력도 가능하다.
+        vector<int> out(vec.size());
+        transform(begin(vec), end(vec), begin(out), [](int e) { return e * 2; });
+        Print::Container(out);
+    }
 };
 
 
