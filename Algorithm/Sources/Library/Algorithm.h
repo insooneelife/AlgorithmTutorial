@@ -635,19 +635,20 @@ public:
 
     
 
-    /*
+    
     // 인풋을 통해 인접리스트 그래프를 생성한다.
+    /*
     static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
         int N,
         const std::vector<std::vector<int>>& input,
         bool bigraph = true)
     {
         using namespace std;
-        vector <vector<int>> graph(N + 1);
+        vector <vector<int>> graph(N);
         for (const vector<int>& adj : input)
         {
-            int from = adj[0];
-            int to = adj[1];
+            int from = adj[0] - 1;
+            int to = adj[1] - 1;
             int cost = adj[2];
 
             graph[from].push_back(to);
@@ -805,6 +806,29 @@ public:
         return cnt;
     }
 
+    // 인접리스트 깊이우선탐색
+    static void ListGraphDFS(
+        const std::vector<std::vector<int>>& graph,
+        std::vector<bool>& visited,
+        int node)
+    {
+        using namespace std;
+
+        if (visited[node])
+            return;
+
+        const int N = graph.size();
+        visited[node] = true;
+
+        for (int i = 0; i < graph[node].size(); ++i)
+        {
+            int next = graph[node][i];
+            if (!visited[next])
+                ListGraphDFS(graph, visited, next);
+        }
+        return;
+    }
+
     // 2D 배열(게임판) 너비우선탐색
     // time complexity     O(N ^ 2)
     // input               2D 배열(N ^ 2), 탐색시작 위치, 탐색중단 위치
@@ -959,7 +983,47 @@ public:
         return ret;
     }
 
-    
+    // 인접리스트 너비우선탐색
+    static int BFS(const std::vector<std::vector<int>>& graph, int start, int finish)
+    {
+        using namespace std;
+        using Node = pair<int, int>;
+
+        const int N = graph.size();
+        vector<bool> visited(N, false);
+        queue<Node> que;
+        int ret = -1;
+
+        que.push({ start, 1 });
+        visited[start] = true;
+
+        while (!que.empty())
+        {
+            Node state = que.front();
+            int node = state.first;
+            int cnt = state.second;
+
+            if (node == finish)
+            {
+                ret = cnt;
+                break;
+            }
+
+            for (int i = 0; i < graph[node].size(); ++i)
+            {
+                int next = graph[node][i];
+                if (!visited[next])
+                {
+                    que.push({ next, cnt + 1 });
+                    visited[next] = true;
+                }
+            }
+
+            que.pop();
+        }
+
+        return ret;
+    }
 
     // 플로이드 알고리즘
     // input        인접행렬 그래프 (node는 1부터 시작)

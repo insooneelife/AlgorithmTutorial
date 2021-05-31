@@ -484,6 +484,27 @@ public:
         transform(begin(vec), end(vec), begin(out), [](int e) { return e * 2; });
         Print::Container(out);
     }
+
+    // set을 이중 우선순위큐로 사용하는 예제이다.
+    static void MinMaxElementInSet()
+    {
+        using namespace std;
+        set<int> S = { 1, 5, 7, 3, 15, 2 };
+
+        auto it = S.begin();
+        auto rit = S.end();
+        --rit;
+
+        cout << *it << " " << *rit << endl;
+
+        S.erase(it);
+        S.erase(rit);
+
+        for (auto e : S)
+        {
+            cout << e << endl;
+        }
+    }
 };
 
 
