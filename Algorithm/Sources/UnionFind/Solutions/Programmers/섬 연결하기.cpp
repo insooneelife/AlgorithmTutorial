@@ -1,5 +1,5 @@
 ﻿
-// 섬 연결하기 (크루스칼)
+// 섬 연결하기 (Union-Find, 그래프, 크루스칼 MST)
 // https://programmers.co.kr/learn/courses/30/lessons/42861
 
 #include <string>
