@@ -2,6 +2,9 @@
 // 도둑질 (DP)
 // https://programmers.co.kr/learn/courses/30/lessons/42897
 
+// 스티커 모으기(2)   =>   동일 문제
+// https://programmers.co.kr/learn/courses/30/lessons/12971
+
 // 시행착오
 // 1. 다음과 같이 오류 수정
 //    수정 전, money[to] max(F(money, from, to - 2), F(money, from, to - 1));
