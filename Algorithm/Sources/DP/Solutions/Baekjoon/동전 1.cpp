@@ -1,6 +1,6 @@
 ﻿
 // 동전 1 (DP)
-// https://www.acmicpc.net/status?user_id=insooneelife&problem_id=2293&from_mine=1
+// https://www.acmicpc.net/problem/2293
 
 // 문제 풀이
 // 점화식

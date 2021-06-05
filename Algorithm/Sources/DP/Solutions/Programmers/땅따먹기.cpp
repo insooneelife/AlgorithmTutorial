@@ -1,11 +1,24 @@
 ﻿// 땅따먹기
 // https://programmers.co.kr/learn/courses/30/lessons/12913
 
+// 문제풀이
+// 점화식
+// F(n, k) : n, k 위치까지 내려오며 얻을 수 있는 최대 점수
+
+// n, k 위치까지 얻을 수 있는 최대점수는
+// n - 1, 0 위치까지의 최대점수,
+// n - 1, 1 위치까지의 최대점수,
+// n - 1, 2 위치까지의 최대점수,
+// n - 1, 3 위치까지의 최대점수,
+// 위 경우들 중에서 열 번호가 k와 다른 경우의 최대점수들 중 가장 큰 값 + 현재 점수
+
+// 점화식
+// F(n, k) = max(for l : F(n - 1, l)) + land[n][k]  (l은 k가 아닌 [0, k] 범위의 값)
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 using namespace std;
-
 using ll = long long;
 
 ll mem[100000][4] = {};
