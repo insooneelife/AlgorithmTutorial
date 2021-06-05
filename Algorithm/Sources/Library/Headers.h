@@ -17,5 +17,6 @@
 #include <chrono>
 #include <iomanip>
 #include <random>
+#include <limits>
 #include <cmath> // pow
 #include <memory.h> // memset

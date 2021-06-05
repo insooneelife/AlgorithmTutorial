@@ -1,4 +1,7 @@
 ﻿
+// 3 x n 타일링
+// https://programmers.co.kr/learn/courses/30/lessons/12902
+
 // 문제해결
 // 점화식 
 // F(N) = 3 * F(N - 2) + 2 * F(N - 2) + 2 * F(N - 4) + ... + 2 * F(0)

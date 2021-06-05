@@ -2,6 +2,40 @@
 // 보행자 천국 (DP)
 // https://programmers.co.kr/learn/courses/30/lessons/1832
 
+
+
+
+
+
+
+// ㅁㅁㅁㅁㅁ
+// ㅁㅁ  ㅁㅁ
+// ㅁㅁㅁㅁㅁ
+
+// F(i, j, d) = i, j 위치에서 d 방향으로 갈 수 있는 경우의 수
+
+// 점화식
+
+// i, j 길이 막혀있다면,
+// F(i, j, d) = 0
+
+// i, j 길에 방향제한이 있다면,
+// d의 방향이 Down인 경우,
+
+
+// d의 방향이 Right인 경우,
+
+
+// else
+// F(i, j, d) = F(i - 1, j, Down) + F(i, j - 1, Right)
+
+
+
+
+
+
+
+
 // 1. 전역 변수 선언 시, 함수 내에 초기화 코드를 작성해야함
 // 2. 문제에서 방향 정보를 요구하므로, 방향에 대한 인자를 추가하여야 하는데, 두 가지 방법이 있다.
 // 방법 1. F(i, j, d) = d 방향으로 i, j 위치에 오는 경우의 수
@@ -24,6 +58,11 @@ const ll Right = 0;
 const ll Down = 1;
 const ll Blocked = 1;
 const ll Directed = 2;
+
+static long long Sum(long long a, long long b, long long m = MOD)
+{
+    return ((a % m) + (b % m)) % m;
+}
 
 ll mem[500][500][2] = { 0 };
 bool visited[500][500][2] = { false };
@@ -62,7 +101,7 @@ ll F(const vector<vector<int>>& map, ll i, ll j, ll dir)
         }
         else
         {
-            ret = (F(map, i, j - 1, Right) % MOD + F(map, i - 1, j, Down) % MOD) % MOD;
+            ret = Sum(F(map, i, j - 1, Right), F(map, i - 1, j, Down));
         }
     }
 

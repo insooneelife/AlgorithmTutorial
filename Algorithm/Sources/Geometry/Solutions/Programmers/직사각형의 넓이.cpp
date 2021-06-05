@@ -367,259 +367,109 @@ int main()
 
 
 /*
+// https://arnold518.tistory.com/35
+
 #include <iostream>
-#include <vector>
 #include <algorithm>
-#include <map>
+#include <vector>
+
 using namespace std;
 
-using ll = long long;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
-// 1048576
-const int N = 1 << 20;
+const int MAXN = 200000;
 
-class LazySegmentTree
+struct Line
 {
-public:
-    LazySegmentTree() :LazySegmentTree(N) {}
-    LazySegmentTree(int size) : root(1), size(size), tree(size * 2), ylens(size * 2), counts(size * 2)
-    { }
-
-    void InsertElement(int index, int ylength)
-    {
-        int leaf_start = size;
-        ylens[leaf_start + index] = ylength;
-    }
-    void ConstructElements()
-    {
-        for (int i = size - 1; i > 0; i--)
-        {
-            ylens[i] = ylens[i * 2] + ylens[(i * 2) + 1];
-        }
-    }
-
-
-    void Add(int add_start, int add_end)
-    {
-        Add(add_start, add_end, root, 0, size - 1);
-    }
-
-    void Del(int del_start, int del_end)
-    {
-        Del(del_start, del_end, root, 0, size - 1);
-    }
-
-    int Query()
-    {
-        return tree[root];
-    }
-
-
-private:
-    void Add(int add_start, int add_end, int node, int start, int end)
-    {
-        // index가 노드가 표현하는 구간과 상관없는 경우 무시
-        if (add_end < add_start || add_end < start || end < add_start)
-            return;
-
-        // 현재 구간이 완전히 포함되면,
-        if (add_start <= start && end <= add_end)
-        {
-            counts[node] ++;
-            tree[node] = ylens[node];
-
-            return;
-        }
-
-        int mid = (start + end) / 2;
-        Add(add_start, add_end, 2 * node, start, mid);
-        Add(add_start, add_end, 2 * node + 1, mid + 1, end);
-
-        if(counts[node] == 0)
-            tree[node] = tree[2 * node] + tree[2 * node + 1];
-    }
-
-    void Del(int add_start, int add_end, int node, int start, int end)
-    {
-        // index가 노드가 표현하는 구간과 상관없는 경우 무시
-        if (add_end < add_start || add_end < start || end < add_start)
-            return;
-
-        if (add_start <= start && end <= add_end)
-        {
-            counts[node] --;
-
-            if (counts[node] == 0)
-            {
-                if (node < size)
-                    tree[node] = tree[2 * node] + tree[2 * node + 1];
-                else
-                    tree[node] = 0;
-            }
-            return;
-        }
-
-        int mid = (start + end) / 2;
-        Del(add_start, add_end, 2 * node, start, mid);
-        Del(add_start, add_end, 2 * node + 1, mid + 1, end);
-
-        if (counts[node] == 0)
-            tree[node] = tree[2 * node] + tree[2 * node + 1];
-    }
-
-
-private:
-    int root;
-    int size;
-    vector<ll> tree;
-    vector<ll> ylens;
-    vector<ll> counts;
+    ll x, y1, y2, val;
+    bool operator < (const Line& p) { return x < p.x; }
 };
 
+int n;
+Line arr[2 * MAXN + 10];
+vector<ll> comp;
+ll ans;
 
-struct Rectangle
+int getcomp(ll x)
 {
-    Rectangle():x1(0), y1(0), x2(0), y2(0){}
-
-    Rectangle(ll x1, ll y1, ll x2, ll y2)
-        : x1(x1), y1(y1), x2(x2), y2(y2)
-    {}
-
-    ll x1, y1;
-    ll x2, y2;
-};
-
-struct Event
-{
-    Event(ll x, int delta, int index)
-        : x(x), delta(delta), index(index)
-    {}
-
-    bool operator<(const Event& ev) const
-    {
-        if (x == ev.x)
-        {
-            if (delta == ev.delta)
-            {
-                return index < ev.index;
-            }
-
-            return delta < ev.delta;
-        }
-        return x < ev.x;
-    }
-
-    ll x;
-    int delta;
-    int index;
-};
-
-ll UnionArea(const vector<Rectangle>& rects)
-{
-    // counts[i] = yvec[i] ~ yvec[i + 1] 구간에 겹쳐진 사각형 개수
-    if (rects.empty()) return 0;
-
-    vector<Event> events;
-    map<ll, int> ymap;
-
-    for (int i = 0; i < rects.size(); ++i)
-    {
-        const Rectangle& rect = rects[i];
-        events.push_back(Event(rect.x1, 1, i));
-        events.push_back(Event(rect.x2, -1, i));
-
-        ymap.insert(make_pair(rect.y1, i));
-        ymap.insert(make_pair(rect.y2, i));
-    }
-
-    LazySegmentTree tree(ymap.size() - 1);
-
-    ll prevy = numeric_limits<ll>::min();
-    for (auto e : ymap)
-    {
-        ll y = e.first;
-        int index = e.second;
-
-        if (prevy != numeric_limits<ll>::min())
-        {
-            tree.InsertElement(index, y - prevy);
-        }
-        prevy = y;
-    }
-    tree.ConstructElements();
-
-
-    ll ret = 0;
-
-    sort(begin(events), end(events));
-
-    for (int i = 0; i < events.size(); ++i)
-    {
-        const Event& ev = events[i];
-        const Rectangle& rect = rects[ev.index];
-
-        int from = ymap[rect.y1];
-        int to = ymap[rect.y2] - 1;
-
-        // ev.delta
-        if (ev.delta == 1)
-            tree.Add(from, to);
-        else
-            tree.Del(from, to);
-
-        int cut_length = tree.Query();
-
-        if (i + 1 < events.size())
-            ret += cut_length * (events[i + 1].x - ev.x);
-        
-
-        //if (i + 1 < events.size())
-        //{
-        //    ret += cut_length * (events[i + 1].x - ev.x);
-        //}
-    }
-
-    return ret;
+    return lower_bound(comp.begin(), comp.end(), x) - comp.begin();
 }
+
+struct SegmentTree
+{
+    SegmentTree(int n) : n(n), sum(4 * n + 10), cnt(4 * n + 10) {}
+
+    void Update(int node, int tl, int tr, int l, int r, ll val)
+    {
+        if (tr < l || r < tl)
+            return;
+
+        if (l <= tl && tr <= r)
+        {
+            cnt[node] += val;
+            if (cnt[node] != 0) sum[node] = comp[tr] - comp[tl - 1];
+            else
+            {
+                if (tl != tr) sum[node] = sum[node * 2] + sum[node * 2 + 1];
+                else sum[node] = 0;
+            }
+            return;
+        }
+
+        int mid = tl + tr >> 1;
+        Update(node * 2, tl, mid, l, r, val);
+        Update(node * 2 + 1, mid + 1, tr, l, r, val);
+
+        if (cnt[node] != 0) sum[node] = comp[tr] - comp[tl - 1];
+        else
+        {
+            if (tl != tr) sum[node] = sum[node * 2] + sum[node * 2 + 1];
+            else sum[node] = 0;
+        }
+    }
+
+    ll query() { return sum[1]; }
+
+private:
+    int n;
+    vector<ll> sum;
+    vector<ll> cnt;
+};
 
 ll solution(vector<vector<int>> rectangles)
 {
-    vector<Rectangle> rects(rectangles.size());
-
-    for (int i = 0; i < rectangles.size(); ++i)
+    int n = rectangles.size();
+    for (int i = 0; i < n; ++i)
     {
-        int x1 = rectangles[i][0];
-        int y1 = rectangles[i][1];
-        int x2 = rectangles[i][2];
-        int y2 = rectangles[i][3];
+        ll x1 = rectangles[i][0];
+        ll y1 = rectangles[i][1];
+        ll x2 = rectangles[i][2];
+        ll y2 = rectangles[i][3];
 
-        rects[i] = Rectangle(x1, y1, x2, y2);
+        arr[i * 2] = { x1, y1, y2, 1 };
+        arr[i * 2 + 1] = { x2, y1, y2, -1 };
+        comp.push_back(y1);
+        comp.push_back(y2);
+
     }
 
-    long long answer = UnionArea(rects);
+    sort(comp.begin(), comp.end());
+    comp.erase(unique(comp.begin(), comp.end()), comp.end());
+    sort(arr, arr + n * 2);
 
-    return answer;
+    SegmentTree seg(comp.size() - 1);
+
+    ll bef = arr[0].x;
+    for (int i = 0; i < n * 2; i++)
+    {
+        ans += (arr[i].x - bef) * seg.query();
+        bef = arr[i].x;
+
+        seg.Update(1, 1, comp.size() - 1, getcomp(arr[i].y1) + 1, getcomp(arr[i].y2), arr[i].val);
+    }
+
+    return ans;
 }
-
-
-
-int main()
-{
-    LazySegmentTree tree;
-
-
-    //vector<vector<int> > rectangles = { {0, 1, 4, 4},{3, 1, 5, 3} };
-    vector<vector<int> > rectangles = { {1, 1, 6, 5} ,{2, 0, 4, 2},{2, 4, 5, 7},{4, 3, 8, 6},{7, 5, 9, 7} };
-
-    ll answer = solution(rectangles);
-
-    cout << answer;
-
-    return 0;
-}
-
-// 참고
-// https://codedoc.tistory.com/421
-// https://blog.naver.com/PostView.nhn?blogId=jqkt15&logNo=221981556060
-
 */
