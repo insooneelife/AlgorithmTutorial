@@ -387,6 +387,11 @@ public:
 
 struct Idx
 {
+    bool operator==(const Idx& other) const
+    {
+        return i == other.i && j == other.j;
+    }
+
     int i, j;
 };
 
