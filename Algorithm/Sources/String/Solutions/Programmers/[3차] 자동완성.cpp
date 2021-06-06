@@ -1,4 +1,8 @@
-﻿#include <string>
+﻿
+// [3차] 자동완성
+// https://programmers.co.kr/learn/courses/30/lessons/17685
+
+#include <string>
 #include <algorithm>
 #include <vector>
 #include <iostream>
@@ -19,9 +23,9 @@ public:
         Insert(text.c_str(), text.size());
     }
 
-    const TrieNode* Find(const string& text) const
+    const TrieNode* Find(const string& text, int& outlevel) const
     {
-        return Find(text.c_str(), text.size());
+        return Find(text.c_str(), text.size(), outlevel);
     }
 
 private:
@@ -43,7 +47,7 @@ private:
         cur->has_value = true;
     }
 
-    const TrieNode* Find(const char* text, int size) const
+    const TrieNode* Find(const char* text, int size, int& outlevel) const
     {
         const TrieNode* cur = this;
         int level = 0;
@@ -58,6 +62,11 @@ private:
 
             level++;
             cur = cur->childs[index];
+
+            if (cur->cnt == 1 && outlevel == 0)
+            {
+                outlevel = level;
+            }
         }
 
         return cur;
@@ -94,3 +103,42 @@ public:
 
 TrieNode TrieNode::trie_pool[1000002];
 int TrieNode::trie_idx = 0;
+
+
+
+int solution(vector<string> words) 
+{
+    TrieNode trie;
+
+    for (auto w : words)
+    {
+        trie.Insert(w);
+    }
+
+    int answer = 0;
+    for (auto w : words)
+    {
+        int outlevel = 0;
+        trie.Find(w, outlevel);
+
+        if (outlevel == 0)
+        {
+            outlevel = w.size();
+        }
+
+        answer += outlevel;
+    }
+
+    return answer;
+}
+
+int main()
+{
+    //vector<string> words = { "go", "gone", "guild" };
+    //vector<string> words = { "abc","def","ghi","jklm" };
+    vector<string> words = { "word","war","warrior","world" };
+
+    cout << solution(words);
+
+    return 0;
+}

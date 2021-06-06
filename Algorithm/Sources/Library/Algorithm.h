@@ -633,4 +633,9 @@ public:
         return coeff.Get(2 * n, n) / (long long)(n + 1);
     }
 
+    // 맨하탄 거리
+    static int ManhatanDis(Vec<int> a, Vec<int> b)
+    {
+        return abs(a.x - b.x) + abs(a.y - b.y);
+    }
 };

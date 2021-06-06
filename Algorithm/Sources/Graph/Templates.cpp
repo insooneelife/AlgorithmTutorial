@@ -30,6 +30,12 @@ static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
 
 // 인풋을 통해 인접행렬 그래프를 생성한다.
 // input    2D Array Size N, 간선(노드는 1부터 시작), 양방향 여부
+// ex)
+// [from][to][cost]
+// [from][to][cost]
+// ...
+// [from][to][cost]
+
 // output   인접행렬 그래프
 std::vector<std::vector<long long>> MakeAdjArrayGraphFromInput(
     const int N,
@@ -54,6 +60,30 @@ std::vector<std::vector<long long>> MakeAdjArrayGraphFromInput(
     return graph;
 }
 
+
+// 특정 조건에 맞는
+// 인접행렬 그래프를 생성한다.
+static std::vector<std::vector<int>> MakeAdjArrayGraph(const int N)
+{
+    using namespace std;
+
+    vector<vector<int>> graph(N, vector<int>(N, 0));
+
+    for (int from = 0; from < N; ++from)
+    {
+        for (int to = 0; to < N; ++to)
+        {
+            // 여기에 조건 추가
+            bool other_conditions_here = true;
+            if (from == to || other_conditions_here)
+            {
+                graph[from][to] = 1;
+                graph[to][from] = 1;
+            }
+        }
+    }
+}
+
 // 그래프(인접행렬) 깊이우선탐색
 // time complexity     O(N ^ 2)
 // input               인접행렬 그래프(N ^ 2), 방문기록 배열(N), 탐색시작 노드
@@ -61,7 +91,7 @@ std::vector<std::vector<long long>> MakeAdjArrayGraphFromInput(
 // { 1, 1, 0 },
 // { 0, 0, 1 }
 // output              방문한 노드 수, 방문기록
-static int DFS(
+static int ArrayGraphDFS(
     const std::vector<std::vector<int>>& graph,
     std::vector<bool>& visited,
     int node)
@@ -83,7 +113,10 @@ static int DFS(
     return cnt;
 }
 
-// 인접리스트 깊이우선탐색
+// 그래프(인접리스트) 깊이우선탐색
+// time complexity     O(V + E)
+// input               인접리스트 그래프, 방문기록 배열(N), 탐색시작 노드
+// output              방문기록
 static void ListGraphDFS(
     const std::vector<std::vector<int>>& graph,
     std::vector<bool>& visited,
@@ -108,28 +141,6 @@ static void ListGraphDFS(
 
 
 
-// 특정 조건에 맞는
-// 인접행렬 그래프를 생성한다.
-static std::vector<std::vector<int>> MakeAdjArrayGraph(const int N)
-{
-    using namespace std;
-
-    vector<vector<int>> graph(N, vector<int>(N, 0));
-
-    for (int from = 0; from < N; ++from)
-    {
-        for (int to = 0; to < N; ++to)
-        {
-            // 여기에 조건 추가
-            bool other_conditions_here = true;
-            if (from == to || other_conditions_here)
-            {
-                graph[from][to] = 1;
-                graph[to][from] = 1;
-            }
-        }
-    }
-}
 
 // 그래프(인접행렬) 너비우선탐색
 // time complexity     O(N ^ 2)
@@ -178,7 +189,10 @@ static int ArrayGraphBFS(const std::vector<std::vector<int>>& graph, int start, 
     return ret;
 }
 
-// 인접리스트 너비우선탐색
+// 그래프(인접리스트) 너비우선탐색
+// time complexity     O(V + E)
+// input               인접리스트 그래프, 탐색시작 노드, 탐색중단 노드
+// output              최단방문회수(길이 없는 경우 : -1)
 static int ListGraphBFS(const std::vector<std::vector<int>>& graph, int start, int finish)
 {
     using namespace std;
@@ -222,19 +236,35 @@ static int ListGraphBFS(const std::vector<std::vector<int>>& graph, int start, i
 
 
 // 플로이드 알고리즘
+// time complexity     O(V ^ 3)
 // input        인접행렬 그래프 (node는 1부터 시작)
 // output       모든 정점 쌍에 대한 최단거리
 class Floyd
 {
 public:
-    Floyd(const int N, std::vector<std::vector<int>> inputs) : N(N), adj(MakeAdjArrayGraphFromInput(N, inputs))
+    // [from][to][cost]
+    // [from][to][cost]
+    // ...
+    // [from][to][cost]
+    void MakeFromInput(int N, const std::vector<std::vector<int>>& inputs)
     {
+        this->N = N;
+        adj = MakeAdjArrayGraphFromInput(N, inputs);
         Make();
     }
 
-    int GetCost(int from, int to) const
+    // adj element must be set max value if there is no edge
+    void MakeFromAdj(int N, const std::vector<std::vector<long long>>& adj)
     {
-        return adj[from - 1][to - 1];
+        this->N = N;
+        this->adj = adj;
+        Make();
+    }
+
+    // return max if there is no edge
+    long long GetCost(int from, int to) const
+    {
+        return adj[from][to];
     }
 
 private:
@@ -250,6 +280,6 @@ private:
     }
 
 private:
-    const int N;
+    int N;
     std::vector<std::vector<long long>> adj;
 };
