@@ -182,6 +182,20 @@ struct Time
         tm.tm_year = key;
     }
 
+    static std::string ToString(long long a, long long b, long long c)
+    {
+        stringstream ss;
+        ss << setfill('0') << setw(2) << a << ":" << setw(2) << b << ":" << setw(2) << c;
+        return ss.str();
+    }
+
+    static std::string ToString(long long a, long long b)
+    {
+        stringstream ss;
+        ss << setfill('0') << setw(2) << a << ":" << setw(2) << b;
+        return ss.str();
+    }
+
     void Print() const
     {
         std::cout << "Key : " << ToKey() << "\tYear : " << Year() << "\tMonth : " << Month() << "\tMonthDay : " << MonthDay() << "\tHour : " << Hour() << "\tMinute : " << Minute() << "\tSecond : " << Second() << "\tMilisec : " << milisec << std::endl;
@@ -387,12 +401,28 @@ public:
 
 struct Idx
 {
+    int i;
+    int j;
+
     bool operator==(const Idx& other) const
     {
         return i == other.i && j == other.j;
     }
 
-    int i, j;
+    bool operator!=(const Idx& other) const
+    {
+        return !(*this == other);
+    }
+
+    Idx operator+(const Idx& other) const
+    {
+        return { i + other.i, j + other.j };
+    }
+
+    Idx operator-(const Idx& other) const
+    {
+        return { i - other.i, j - other.j };
+    }
 };
 
 struct QueueData
