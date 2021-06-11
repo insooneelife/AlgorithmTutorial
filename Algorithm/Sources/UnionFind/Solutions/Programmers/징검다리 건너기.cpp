@@ -114,6 +114,14 @@ int solution(vector<int> stones, int k)
         }
 
         int cnt = uf.GetCount(index);
+
+        /*
+        cout << stone << " " << index << "  " << cnt << endl;
+        Print::Container(uf.parent);
+        Print::Container(uf.cnts);
+        cout << endl;
+        */
+
         if (cnt >= k)
         {
             laststone = stone;

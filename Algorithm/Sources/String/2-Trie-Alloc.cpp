@@ -1,4 +1,7 @@
-﻿#include <string>
+﻿
+// Trie의 메모리 최적화
+
+#include <string>
 #include <algorithm>
 #include <vector>
 #include <iostream>
@@ -7,18 +10,12 @@ using namespace std;
 struct TrieNode
 {
 public:
+    static TrieNode trie_pool[1000002];
+    static int trie_idx;
     static const int Alphabets = 26;
 
     TrieNode() : has_value(false), cnt(0), childs()
     {}
-
-    ~TrieNode()
-    {
-        for (int i = 0; i < Alphabets; ++i)
-        {
-            delete childs[i];
-        }
-    }
 
     void Insert(const string& text)
     {
@@ -72,8 +69,15 @@ private:
 
     TrieNode* Alloc()
     {
-        return new TrieNode();
+        for (int i = 0; i < Alphabets; i++)
+        {
+            trie_pool[trie_idx].childs[i] = nullptr;
+        }
+        trie_pool[trie_idx].has_value = false;
+
+        return &trie_pool[trie_idx++];
     }
+
 
     static int ToIndex(char alphabet)
     {
@@ -90,3 +94,8 @@ public:
     bool has_value;
     int cnt;
 };
+
+TrieNode TrieNode::trie_pool[1000002];
+int TrieNode::trie_idx = 0;
+
+

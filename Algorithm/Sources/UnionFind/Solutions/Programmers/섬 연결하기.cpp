@@ -43,18 +43,18 @@ struct RankedUnionFind
     }
 };
 
-int solution(int n, vector<vector<int>> costs) 
+int Kruskal(int vertices, vector<vector<int>>& edges)
 {
-    RankedUnionFind uf(n);
+    RankedUnionFind uf(vertices);
 
-    sort(begin(costs), end(costs), [](const vector<int>& a, const vector<int>& b) { return a[2] < b[2]; });
-    int answer = 0;
+    sort(begin(edges), end(edges), [](const vector<int>& a, const vector<int>& b) { return a[2] < b[2]; });
+    int mst_weight = 0;
 
-    for (int i = 0; i < costs.size(); ++i)
+    for (int i = 0; i < edges.size(); ++i)
     {
-        int u = costs[i][0];
-        int v = costs[i][1];
-        int cost = costs[i][2];
+        int u = edges[i][0];
+        int v = edges[i][1];
+        int cost = edges[i][2];
 
         int ru = uf.Find(u);
         int rv = uf.Find(v);
@@ -62,11 +62,15 @@ int solution(int n, vector<vector<int>> costs)
         if (ru != rv)
         {
             uf.Union(ru, rv);
-            answer += cost;
+            mst_weight += cost;
         }
     }
+    return mst_weight;
+}
 
-    return answer;
+int solution(int n, vector<vector<int>> costs)
+{
+    return Kruskal(n, costs);
 }
 
 int main()
