@@ -73,3 +73,10 @@ int main()
 
     return 0;
 }
+
+
+// 직접 구현해보기
+
+// 연습 문제
+// 섬 연결하기
+// https://algorfati.tistory.com/126

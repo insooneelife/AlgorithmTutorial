@@ -9,7 +9,7 @@ struct TrieNode
 public:
     static const int Alphabets = 26;
 
-    TrieNode() : has_value(false), cnt(0), childs()
+    TrieNode() : childs(), has_value(false), cnt(0)
     {}
 
     ~TrieNode()
@@ -90,3 +90,10 @@ public:
     bool has_value;
     int cnt;
 };
+
+
+// 구현해보기
+
+
+// 연습문제
+// https://programmers.co.kr/learn/courses/30/lessons/17685

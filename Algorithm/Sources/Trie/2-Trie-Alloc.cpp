@@ -14,7 +14,7 @@ public:
     static int trie_idx;
     static const int Alphabets = 26;
 
-    TrieNode() : has_value(false), cnt(0), childs()
+    TrieNode() : childs(), has_value(false), cnt(0)
     {}
 
     void Insert(const string& text)
