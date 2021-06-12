@@ -23,8 +23,6 @@ using namespace std;
 
 struct UnionFind
 {
-    vector<int> parent;
-
     UnionFind(int n) : parent(n)
     {
         // 모든 원소들은 자기자신을 부모로 갖는다.
@@ -38,7 +36,9 @@ struct UnionFind
     // i가 속한 집합의 루트 번호
     int Find(int i) const
     {
-        if (i == parent[i]) return i;
+        if (i == parent[i]) 
+            return i;
+
         return Find(parent[i]);
     }
 
@@ -53,6 +53,10 @@ struct UnionFind
 
         parent[root1] = root2;
     }
+
+private:
+    // 모든 원소의 parent
+    vector<int> parent;
 };
 
 
