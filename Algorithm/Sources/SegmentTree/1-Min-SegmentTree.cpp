@@ -28,6 +28,7 @@ struct MinSegmentTree
         return tree[node] = min(left_min, right_min);
     }
 
+    // 인터페이스 함수
     // query range [qfrom, qto]
     int Query(int qfrom, int qto)
     {
@@ -76,7 +77,7 @@ struct MinSegmentTree
 private:
     const int N;
 
-    // tree는 구간들을 표현하고, 각 구간의 최소값을 저장한다
+    // tree는 구간들을 표현하고, 각 구간의 최소값을 저장한다 (꽉 찬 이진트리)
     vector<int> tree;
 };
 

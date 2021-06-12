@@ -52,7 +52,7 @@ private:
     const TrieNode* Find(const char* text, int size) const
     {
         const TrieNode* cur = this;
-        int level = 0;
+        //int level = 0;
 
         for (int i = 0; i < size; ++i)
         {
@@ -62,7 +62,7 @@ private:
                 return nullptr;
             }
 
-            level++;
+            //level++;
             cur = cur->childs[index];
         }
 

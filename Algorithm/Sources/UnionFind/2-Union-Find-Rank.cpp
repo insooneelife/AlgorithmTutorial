@@ -79,4 +79,4 @@ int main()
 
 // 연습 문제
 // 섬 연결하기
-// https://algorfati.tistory.com/126
+// https://programmers.co.kr/learn/courses/30/lessons/42861
