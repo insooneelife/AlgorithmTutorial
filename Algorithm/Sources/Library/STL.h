@@ -505,6 +505,36 @@ public:
             cout << e << endl;
         }
     }
+
+    // splice
+    // 연결리스트를 다른 연결리스트에 붙이는 예제와,
+    // 연결리스트의 일부분을 떼서 다른 위치에 붙이는 예제이다.
+    static void SpliceList()
+    {
+        using namespace std;
+        // example 1.
+        {
+            list<int> l = { 1, 2, 3, 4, 5, 6, 7 };
+            list<int> m = { 1, 2, 3 };
+
+            l.splice(l.end(), m, begin(m), end(m));
+
+            Print::Container(l);
+        }
+
+        // example 2.
+        {
+            list<int> l = { 1, 2, 3, 4, 5, 6, 7 };
+
+            auto it = begin(l);
+            it++;
+            it++;
+
+            l.splice(l.end(), l, begin(l), it);
+            Print::Container(l);
+        }
+    }
+
 };
 
 
