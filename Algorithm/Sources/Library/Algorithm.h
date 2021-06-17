@@ -14,7 +14,7 @@ public:
     // output              [1, n] 까지의 합
     long long Sum(long long n)
     {
-        return n * (n + 1) / (long long)2;
+        return n * (n + 1) / (long long)2; 
     }
 
     // [a, b] 까지의 합
