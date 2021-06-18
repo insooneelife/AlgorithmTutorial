@@ -8,7 +8,7 @@ struct UnionFind
     vector<int> parent;
     vector<int> rank;
 
-    RankedUnionFind(int n) : parent(n), rank(n, 1)
+    RankedUnionFind(int n) : parent(n), rank(n, 1) 
     {
         for (int i = 0; i < n; ++i)
         {
