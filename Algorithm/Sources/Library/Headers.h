@@ -18,5 +18,6 @@
 #include <iomanip>
 #include <random>
 #include <limits>
+#include <numeric>
 #include <cmath> // pow
 #include <memory.h> // memset

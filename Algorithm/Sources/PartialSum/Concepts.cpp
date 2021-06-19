@@ -1,4 +1,4 @@
-﻿// Prefix Sum
+﻿// Partial Sum
 
 
 #include <iostream>

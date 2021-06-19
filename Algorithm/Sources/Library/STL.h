@@ -535,6 +535,22 @@ public:
         }
     }
 
+
+    static void PartialSum()
+    {
+        using namespace std;
+
+        vector<int> v = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        vector<int> sum(v.size());
+        vector<int> mul(v.size());
+
+        partial_sum(begin(v), end(v), begin(sum));
+        //partial_sum(begin(v), end(v), begin(sum), plus<int>());
+        partial_sum(begin(v), end(v), begin(mul), multiplies<int>());
+
+        Print::Container(sum);
+        Print::Container(mul);
+    }
 };
 
 
