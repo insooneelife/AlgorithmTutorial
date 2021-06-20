@@ -1,4 +1,6 @@
 ﻿
+// 구간 합 구하기 4 (부분합)
+// https://www.acmicpc.net/problem/11659
 
 #pragma warning (disable : 4996)
 #include <iostream>
