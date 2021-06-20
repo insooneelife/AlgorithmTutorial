@@ -84,155 +84,15 @@ static std::vector<std::vector<int>> MakeAdjArrayGraph(const int N)
     }
 }
 
-// 그래프(인접행렬) 깊이우선탐색
-// time complexity     O(N ^ 2)
-// input               인접행렬 그래프(N ^ 2), 방문기록 배열(N), 탐색시작 노드
-// { 1, 1, 0 },
-// { 1, 1, 0 },
-// { 0, 0, 1 }
-// output              방문한 노드 수, 방문기록
-static int ArrayGraphDFS(
-    const std::vector<std::vector<int>>& graph,
-    std::vector<bool>& visited,
-    int node)
-{
-    using namespace std;
-
-    if (visited[node])
-        return 0;
-
-    const int N = graph.size();
-    int cnt = 1;
-    visited[node] = true;
-
-    for (int i = 0; i < N; ++i)
-    {
-        if (graph[node][i] == 1 && !visited[i])
-            cnt += DFS(graph, visited, i);
-    }
-    return cnt;
-}
-
-// 그래프(인접리스트) 깊이우선탐색
-// time complexity     O(V + E)
-// input               인접리스트 그래프, 방문기록 배열(N), 탐색시작 노드
-// output              방문기록
-static void ListGraphDFS(
-    const std::vector<std::vector<int>>& graph,
-    std::vector<bool>& visited,
-    int node)
-{
-    using namespace std;
-
-    if (visited[node])
-        return;
-
-    const int N = graph.size();
-    visited[node] = true;
-
-    for (int i = 0; i < graph[node].size(); ++i)
-    {
-        int next = graph[node][i];
-        if (!visited[next])
-            ListGraphDFS(graph, visited, next);
-    }
-    return;
-}
 
 
 
 
-// 그래프(인접행렬) 너비우선탐색
-// time complexity     O(N ^ 2)
-// input               인접행렬 그래프(N ^ 2), 탐색시작 노드, 탐색중단 노드
-// { 1, 1, 0 },
-// { 1, 1, 0 },
-// { 0, 0, 1 }
-// output              최단방문회수(길이 없는 경우 : -1)
-static int ArrayGraphBFS(const std::vector<std::vector<int>>& graph, int start, int finish)
-{
-    using namespace std;
-    using Node = pair<int, int>;
 
-    const int N = graph.size();
-    vector<bool> visited(N, false);
-    queue<Node> que;
-    int ret = -1;
 
-    que.push({ start, 1 });
-    visited[start] = true;
 
-    while (!que.empty())
-    {
-        Node state = que.front();
-        int node = state.first;
-        int cnt = state.second;
 
-        if (node == finish)
-        {
-            ret = cnt;
-            break;
-        }
 
-        for (int next = 0; next < N; ++next)
-        {
-            if (graph[node][next] == 1 && !visited[next])
-            {
-                que.push({ next, cnt + 1 });
-                visited[next] = true;
-            }
-        }
-
-        que.pop();
-    }
-
-    return ret;
-}
-
-// 그래프(인접리스트) 너비우선탐색
-// time complexity     O(V + E)
-// input               인접리스트 그래프, 탐색시작 노드, 탐색중단 노드
-// output              최단방문회수(길이 없는 경우 : -1)
-static int ListGraphBFS(const std::vector<std::vector<int>>& graph, int start, int finish)
-{
-    using namespace std;
-    using Node = pair<int, int>;
-
-    const int N = graph.size();
-    vector<bool> visited(N, false);
-    queue<Node> que;
-    int ret = -1;
-
-    que.push({ start, 1 });
-    visited[start] = true;
-
-    while (!que.empty())
-    {
-        Node state = que.front();
-        int node = state.first;
-        int cnt = state.second;
-
-        if (node == finish)
-        {
-            ret = cnt;
-            break;
-        }
-
-        for (int i = 0; i < graph[node].size(); ++i)
-        {
-            int next = graph[node][i];
-            if (!visited[next])
-            {
-                que.push({ next, cnt + 1 });
-                visited[next] = true;
-            }
-        }
-
-        que.pop();
-    }
-
-    return ret;
-}
 
 
 // 플로이드 알고리즘
