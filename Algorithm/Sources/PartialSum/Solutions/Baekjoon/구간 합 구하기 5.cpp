@@ -13,7 +13,7 @@ long long psum[1024][1024] = { 0 };
 
 void PartialSum(int n)
 {
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < n; ++i) 
     {
         for (int j = 1; j < n; ++j)
         {
