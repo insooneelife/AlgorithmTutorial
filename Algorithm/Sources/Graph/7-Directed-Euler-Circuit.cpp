@@ -13,7 +13,7 @@ void MakeDegree(
     vector<int>& indegree,
     vector<int>& outdegree)
 {
-    const int N = graph.size();
+    const int N = graph.size(); 
 
     indegree.clear();
     indegree.assign(N, 0);
