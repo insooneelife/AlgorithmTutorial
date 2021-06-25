@@ -3,8 +3,13 @@
 #include "Data.h"
 
 // 인풋을 통해 인접리스트 그래프를 생성한다.
-/*
-static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
+struct Edge
+{
+    int vertex;
+    int weight;
+};
+
+static std::vector<std::vector<Edge>> MakeAdjListGraphFromInput(
     int N,
     const std::vector<std::vector<int>>& input,
     bool bigraph = true)
@@ -17,24 +22,24 @@ static std::vector<std::vector<int>> MakeAdjListGraphFromInput(
         int to = adj[1] - 1;
         int cost = adj[2];
 
-        graph[from].push_back(to);
+        graph[from].push_back({to, cost});
         if (bigraph)
         {
-            graph[to].push_back(from);
+            graph[to].push_back({from, cost});
         }
     }
 
     return graph;
 }
-*/
+
 
 // 인풋을 통해 인접행렬 그래프를 생성한다.
 // input    2D Array Size N, 간선(노드는 1부터 시작), 양방향 여부
 // ex)
-// [from][to][cost]
-// [from][to][cost]
+// { from1, to1, cost1 }
+// { from2, to2, cost2 }
 // ...
-// [from][to][cost]
+// { fromE, toE, costE }
 
 // output   인접행렬 그래프
 std::vector<std::vector<long long>> MakeAdjArrayGraphFromInput(
