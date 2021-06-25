@@ -1,9 +1,11 @@
-﻿// 연결 요소들 분류하기
+﻿
+// 연결 요소의 개수 (그래프, DFS, 연결요소)
+// https://www.acmicpc.net/problem/11724
 
 #include <vector>
 #include <iostream>
 #include <queue>
-#include "Print.h"
+//#include "Print.h"
 using namespace std;
 
 
@@ -41,40 +43,27 @@ void FindComponents(vector<vector<int>> graph)
             index++;
         }
     }
-
-    Print::Container(components);
 }
 
 int main()
 {
-    vector<vector<int>> graph =
+    int N, M;
+    cin >> N >> M;
+    vector<vector<int>> graph(N);
+
+    for (int i = 0; i < M; ++i)
     {
-        {4, 8, 13, 14},	// 0 
-        {5},           	// 1
-        {9, 15}, 	    // 2
-        {9}, 	        // 3
-        {0, 8}, 	    // 4
-        {1, 16, 17},    // 5
-        {7, 11},        // 6
-        {6, 11},        // 7
-        {4, 0, 14},     // 8
-        {3, 2, 15},     // 9
-        {15},           // 10
-        {6, 7},         // 11
-        {},             // 12
-        {0, 14},        // 13
-        {0, 8, 13},     // 14
-        {2, 9, 10},     // 15
-        {5},            // 16
-        {5},            // 17
-    };
+        int from, to;
+        cin >> from >> to;
+        from--;
+        to--;
+        graph[from].push_back(to);
+        graph[to].push_back(from);
+    }
 
     FindComponents(graph);
 
+    cout << index;
+    
     return 0;
 }
-
-
-// 예제 문제 1.
-// 연결 요소의 개수
-// https://www.acmicpc.net/problem/11724
