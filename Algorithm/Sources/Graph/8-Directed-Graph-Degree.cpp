@@ -30,7 +30,6 @@ void MakeDegree(
 
 int main()
 {
-    const int N = 6;
     vector<vector<int>> multigraph =
     {
         { 0, 0, 1, 0, 0, 0 },
@@ -41,8 +40,19 @@ int main()
         { 0, 0, 0, 1, 0, 0 }
     };
 
+    vector<vector<int>> multigraph2 =
+    {
+        { 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 1, 1, 0, 0, 0 },
+        { 0, 0, 1, 0, 2, 0, 0 },
+        { 0, 1, 1, 0, 0, 1, 0 },
+        { 0, 0, 0, 1, 0, 0, 1 },
+        { 0, 0, 0, 0, 0, 0, 1 },
+        { 0, 0, 0, 1, 0, 0, 0 },
+    };
+
     vector<int> indegree, outdegree;
-    MakeDegree(multigraph, indegree, outdegree);
+    MakeDegree(multigraph2, indegree, outdegree);
 
     Print::Container(indegree);
     Print::Container(outdegree);

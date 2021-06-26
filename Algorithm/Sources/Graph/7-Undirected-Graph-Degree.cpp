@@ -26,7 +26,6 @@ void MakeDegree(
 
 int main()
 {
-    const int N = 5;
     vector<vector<int>> multigraph =
     {
         { 2, 1, 1, 0, 0 },
