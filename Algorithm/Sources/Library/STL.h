@@ -535,7 +535,8 @@ public:
         }
     }
 
-
+    // partial_sum
+    // 부분합을 만드는 예제이다.
     static void PartialSum()
     {
         using namespace std;
@@ -550,6 +551,23 @@ public:
 
         Print::Container(sum);
         Print::Container(mul);
+    }
+
+    // chrono 
+    // 시간측정을 위한 예제이다.
+    void TimeCalculation()
+    {
+        using namespace std;
+        auto from = chrono::system_clock::now();
+        auto from_ms = chrono::time_point_cast<chrono::milliseconds>(from);
+
+        cout << "job here" << endl;
+
+        auto to = chrono::system_clock::now();
+        auto to_ms = chrono::time_point_cast<chrono::milliseconds>(to);
+        long duration = (to_ms.time_since_epoch() - from_ms.time_since_epoch()).count();
+
+        cout << duration << " ms" << endl;
     }
 };
 
