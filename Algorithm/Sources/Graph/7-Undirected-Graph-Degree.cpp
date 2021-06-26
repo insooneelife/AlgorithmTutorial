@@ -1,4 +1,6 @@
 ﻿
+// 무향그래프
+
 #include <vector>
 #include <iostream>
 #include <queue>
@@ -10,10 +12,10 @@ void MakeDegree(
     vector<int>& degree)
 {
     const int N = graph.size();
-
     degree.clear();
     degree.assign(N, 0);
 
+    // count
     for (int i = 0; i < N; ++i)
     {
         for (int j = 0; j < N; ++j)
@@ -26,9 +28,11 @@ void MakeDegree(
 
 int main()
 {
+    // 다중그래프
+    // i, j 까지의 간선의 개수
     vector<vector<int>> multigraph =
     {
-        { 2, 1, 1, 0, 0 },
+        { 0, 1, 1, 0, 0 },
         { 1, 0, 1, 1, 1 },
         { 1, 1, 0, 1, 1 },
         { 0, 1, 1, 0, 1 },

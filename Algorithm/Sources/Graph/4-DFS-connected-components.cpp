@@ -31,7 +31,6 @@ void FindComponents(vector<vector<int>> graph)
     const int N = graph.size();
     std::vector<bool> visited(N, false);
     std::vector<int> components(N);
-    std::vector<int> t(N, 0);
 
     for (int i = 0; i < N; ++i)
     {

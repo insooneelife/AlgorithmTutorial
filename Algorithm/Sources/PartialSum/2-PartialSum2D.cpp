@@ -62,3 +62,8 @@ int main()
 
     return 0;
 }
+
+
+// 연습 문제 
+// 구간 합 구하기 5 (부분합)
+// https://www.acmicpc.net/problem/11660

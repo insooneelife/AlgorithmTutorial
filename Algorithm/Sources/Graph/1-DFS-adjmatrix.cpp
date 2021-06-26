@@ -29,8 +29,8 @@ static void MatrixGraphDFS(
     int node)
 {
     using namespace std;
-
     const int N = graph.size();
+
     visited[node] = true;
 
     cout << node << " ";
