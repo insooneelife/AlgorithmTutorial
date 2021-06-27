@@ -1,5 +1,5 @@
 ﻿
-// 오일러 서킷, 오일러 트레일 (방향그래프)
+// 오일러 서킷, 오일러 트레일 (유향그래프)
 
 #include <string>
 #include <vector>
@@ -166,7 +166,7 @@ void DirectGraphEulerCircuitExample(const vector<vector<int>>& graph)
         // 이 예제에서는 0번 노드에서 시작한다.
         euler = DirectGraphEulerCircuit(multigraph, 0);
     }
-    Print::Container(euler, "path");
+    Print::Container(euler, "euler");
 }
 
 
@@ -189,7 +189,7 @@ void DirectGraphEulerTrailExample(const vector<vector<int>>& graph)
         euler = DirectGraphEulerTrail(multigraph, start);
     }
 
-    Print::Container(euler, "path");
+    Print::Container(euler, "euler");
 }
 
 

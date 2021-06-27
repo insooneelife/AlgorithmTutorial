@@ -9,6 +9,25 @@
 #include "Print.h"
 using namespace std;
 
+vector<vector<int>> multigraph1 =
+{
+    { 0, 1, 1, 0, 0, 0 },
+    { 1, 0, 0, 1, 0, 0 },
+    { 1, 0, 0, 2, 1, 0 },
+    { 0, 1, 2, 0, 0, 1 },
+    { 0, 0, 1, 0, 0, 1 },
+    { 0, 0, 0, 1, 1, 0 }
+};
+
+vector<vector<int>> multigraph2 =
+{
+    { 2, 1, 1, 0, 0 },
+    { 1, 0, 1, 1, 1 },
+    { 1, 1, 0, 1, 1 },
+    { 0, 1, 1, 0, 1 },
+    { 0, 1, 1, 1, 0 }
+};
+
 void MakeDegree(
     const vector<vector<int>>& graph,
     vector<int>& degree)
@@ -43,6 +62,7 @@ bool CheckEulerCircuit(const vector<int>& degree)
 
 
 // undirected graph euler circuit
+// 양방향 그래프에서는 양쪽 간선을 제거해준다.
 void EulerCircuit(
     vector<vector<int>>& graph,
     vector<int>& euler,
@@ -73,7 +93,14 @@ vector<int> EulerCircuit(
     return euler;
 }
 
-// 무향 그래프에서 euler trail은 시작 노드와 끝 노드 외에 모든 노드들은 차수가 짝수개여야 한다.
+// 무향 그래프에서 euler trail은 euler circuit이거나 시작 노드와 끝 노드 외에 모든 노드들은 차수가 짝수개여야 한다.
+
+// 오일러 회로인 경우
+// return : true,  start_node : 0,  finish_node : 0
+
+// 오일러 경로인 경우
+// return : true,  start_node : 홀수개의 차수를 갖는 정점,  finish_node : 홀수개의 차수를 갖는 정점
+
 bool CheckEulerTrail(const vector<vector<int>>& graph, const vector<int>& degree, vector<int>& start_finish)
 {
     for (int i = 0; i < degree.size(); ++i)
@@ -82,6 +109,12 @@ bool CheckEulerTrail(const vector<vector<int>>& graph, const vector<int>& degree
         {
             start_finish.push_back(i);
         }
+    }
+
+    if (start_finish.size() == 0)
+    {
+        start_finish = { 0, 0 };
+        return true;
     }
 
     return start_finish.size() == 2;
@@ -98,62 +131,48 @@ vector<int> EulerTrail(vector<vector<int>>& graph, int start_node)
     return euler;
 }
 
-void EulerCircuitExample()
+void EulerCircuitExample(const vector<vector<int>>& graph)
 {
-    const int N = 6;
-    vector<vector<int>> multigraph =
-    {
-        { 0, 1, 1, 0, 0, 0 },
-        { 1, 0, 0, 1, 0, 0 },
-        { 1, 0, 0, 2, 1, 0 },
-        { 0, 1, 2, 0, 0, 1 },
-        { 0, 0, 1, 0, 0, 1 },
-        { 0, 0, 0, 1, 1, 0 }
-    };
-
+    vector<vector<int>> multigraph = graph;
     vector<int> degree;
     vector<int> euler;
     MakeDegree(multigraph, degree);
-    Print::Container(degree);
+    Print::Container(degree, "degree");
 
     if (CheckEulerCircuit(degree))
     {
         euler = EulerCircuit(multigraph, 0);
     }
 
-    Print::Container(euler);
+    Print::Container(euler, "euler");
 }
 
-void EulerTrailExample()
+void EulerTrailExample(const vector<vector<int>>& graph)
 {
-    const int N = 5;
-    vector<vector<int>> multigraph =
-    {
-        { 2, 1, 1, 0, 0 },
-        { 1, 0, 1, 1, 1 },
-        { 1, 1, 0, 1, 1 },
-        { 0, 1, 1, 0, 1 },
-        { 0, 1, 1, 1, 0 }
-    };
-
+    vector<vector<int>> multigraph = graph;
     vector<int> euler;
     vector<int> degree;
     vector<int> start_finish;
     MakeDegree(multigraph, degree);
-    Print::Container(degree);
+    Print::Container(degree, "degree");
 
     if (CheckEulerTrail(multigraph, degree, start_finish))
     {
         euler = EulerTrail(multigraph, start_finish[0]);
     }
 
-    Print::Container(euler);
+    Print::Container(euler, "euler");
 }
 
 int main()
 {
-    EulerCircuitExample();
-    EulerTrailExample();
+    cout << "[circuit]" << endl;
+    EulerCircuitExample(multigraph1);
+
+    cout << endl;
+
+    cout << "[trail]" << endl;
+    EulerTrailExample(multigraph1);
 
     return 0;
 }
