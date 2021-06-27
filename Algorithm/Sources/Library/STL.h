@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+//#pragma warning (disable : 4996)
 
 #include "Headers.h"
 #include "Utility.h"
