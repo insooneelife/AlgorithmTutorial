@@ -33,7 +33,7 @@ struct Dist
 // time complexity     O(E * logV)
 // input               방향 그래프, 시작 정점
 // output              모든 정점으로의 최단거리
-vector<int> Dijkstra(const vector<vector<Edge>>& graph, int start)
+vector<int> Dijkstra(const vector<vector<Edge>>& graph, vector<int>& backtrack, int start)
 {
     // 각 정점까지의 최단거리를 저장할 배열
     // 초기값은 무한대로 세팅한다.
@@ -68,12 +68,29 @@ vector<int> Dijkstra(const vector<vector<Edge>>& graph, int start)
             if (nextdist < distances[next])
             {
                 distances[next] = nextdist;
+                backtrack[next] = v;
                 pq.push({ next, nextdist });
             }
         }
     }
 
     return distances;
+}
+
+void PrintPath(const vector<int>& backtrack, int start, int finish)
+{
+    vector<int> path;
+    int node = finish;
+
+    while (backtrack[node] != node)
+    {
+        path.push_back(node);
+        node = backtrack[node];
+    }
+    path.push_back(node);
+    reverse(begin(path), end(path));
+
+    Print::Container(path, "[path]");
 }
 
 int main()
@@ -86,9 +103,13 @@ int main()
         {{4, 3}},
         {}
     };
+    
+    vector<int> backtrack(graph.size());
+    int start = 0;
+    vector<int> dist = Dijkstra(graph, backtrack, start);
 
-    vector<int> dist = Dijkstra(graph, 0);
+    Print::Container(dist, "[distances]");
 
-    Print::Container(dist);
+    PrintPath(backtrack, start, 4);
 }
 
