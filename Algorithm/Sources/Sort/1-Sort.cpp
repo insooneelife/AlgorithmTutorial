@@ -58,11 +58,11 @@ int main()
     // sort(begin(plays), end(plays), Compare);
 
     // 람다, 내림차순
-    //sort(begin(plays), end(plays), [](int a, int b) { return a > b; });
+    // sort(begin(plays), end(plays), [](int a, int b) { return a > b; });
 
     // 기본, 반쪽만 정렬
-    //sort(begin(plays) + plays.size() / 2, end(plays));
-    //sort(begin(plays), begin(plays) + plays.size() / 2);
+    // sort(begin(plays) + plays.size() / 2, end(plays));
+    // sort(begin(plays), begin(plays) + plays.size() / 2);
 
     // 람다, 값이 threshold 보다 크면 -> 내림차순, 작거나 같으면 오름차순, 큰 애들이 뒤로
     /*
