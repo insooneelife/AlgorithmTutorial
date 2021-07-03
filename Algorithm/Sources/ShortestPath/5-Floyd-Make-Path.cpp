@@ -1,4 +1,8 @@
-﻿#include <queue>
+﻿
+// 플로이드
+// 최적화 + 최단경로생성
+
+#include <queue>
 #include <iostream>
 #include <limits>
 #include "Print.h"
@@ -12,7 +16,7 @@ using namespace std;
 class Floyd
 {
 public:
-    
+
     // adj element must be set max value if there is no edge
     void MakeFromGraph(int N, const vector<vector<long long>>& graph)
     {
@@ -73,7 +77,7 @@ private:
                     }
                 }
             }
-        }       
+        }
     }
 
 private:
@@ -98,7 +102,7 @@ int main()
         {0, 0, 0, 0, 3},
         {0, 0, 0, 0, 0},
     };
-    
+
     Floyd floyd;
     floyd.MakeFromGraph(V, graph);
 
@@ -118,7 +122,5 @@ int main()
 
     return 0;
 }
-
-
 
 
