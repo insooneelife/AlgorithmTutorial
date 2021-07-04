@@ -1,4 +1,4 @@
-﻿// 미로 탐색
+﻿// 미로 탐색 (BFS)
 // https://www.acmicpc.net/problem/2178
 
 #include <iostream>

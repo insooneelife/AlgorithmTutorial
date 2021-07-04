@@ -1,4 +1,5 @@
-﻿// 카카오프렌즈 컬러링북 (DFS or BFS)
+﻿
+// 카카오프렌즈 컬러링북 (DFS)
 // https://programmers.co.kr/learn/courses/30/lessons/1829
 
 #include <iostream>
