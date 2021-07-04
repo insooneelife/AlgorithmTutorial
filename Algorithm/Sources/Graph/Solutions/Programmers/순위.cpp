@@ -1,5 +1,5 @@
 ﻿
-// 순위 (그래프, DFS, DAG)
+// 순위 (그래프, DFS)
 // https://programmers.co.kr/learn/courses/30/lessons/49191
 
 #include <string>
