@@ -184,6 +184,7 @@ struct Time
 
     static std::string ToString(long long a, long long b, long long c)
     {
+        using namespace std;
         stringstream ss;
         ss << setfill('0') << setw(2) << a << ":" << setw(2) << b << ":" << setw(2) << c;
         return ss.str();
@@ -191,6 +192,7 @@ struct Time
 
     static std::string ToString(long long a, long long b)
     {
+        using namespace std;
         stringstream ss;
         ss << setfill('0') << setw(2) << a << ":" << setw(2) << b;
         return ss.str();
