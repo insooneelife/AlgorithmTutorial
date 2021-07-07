@@ -24,7 +24,7 @@ vector<vector<int>> graph =
     {},         // L 11
     {}          // M 12
 };
-
+ 
 vector<bool> visited(graph.size(), false);
 vector<int> order;
 
