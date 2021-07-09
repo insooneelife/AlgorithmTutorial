@@ -1,5 +1,5 @@
 ﻿
-// 위상정렬
+// 그래프 간선의 분류
 
 #include <iostream>
 #include <vector>
@@ -10,58 +10,57 @@ using namespace std;
 // 인접리스트 그래프
 vector<vector<int>> graph =
 {
-    {3},        // A 0
-    {3},        // B 1
-    {0, 1},     // C 2
-    {6, 7},     // D 3
-    {0, 3, 5},  // E 4
-    {10, 9},    // F 5
-    {8},        // G 6
-    {8, 9},     // H 7
-    {11},       // I 8
-    {11, 12},   // J 9
-    {9},        // K 10
-    {},         // L 11
-    {}          // M 12
+    {1, 2, 7},  // 0
+    {3},        // 1
+    {4},        // 2
+    {5},        // 3
+    {3, 6, 7},  // 4
+    {1},        // 5
+    {},         // 6
+    {}          // 7
 };
- 
-vector<bool> visited(graph.size(), false);
-vector<int> order;
+
+vector<int> discovered(graph.size(), -1);
+vector<bool> finished(graph.size(), false);
+int counter = 0;
 
 void DFS(int node)
 {
-    visited[node] = true;
+    discovered[node] = counter++;
 
     for (int i = 0; i < graph[node].size(); ++i)
     {
         int next = graph[node][i];
-        if (!visited[next])
+
+        cout << node << " -> " << next;
+
+        // 방문한 적 없다면
+        if (discovered[next] == -1)
+        {
+            cout << " : tree edge" << endl;
             DFS(next);
+        }
+        else if (discovered[node] < discovered[next])
+        {
+            cout << " : forward edge" << endl;
+        }
+        else if (!finished[next])
+        {
+            cout << " : backward edge" << endl;
+        }
+        else
+        {
+            cout << " : cross edge" << endl;
+        }
     }
 
-    order.push_back(node);
-}
-
-void TopologicalSort()
-{
-    for (int i = 0; i < graph.size(); ++i)
-    {
-        if (!visited[i])
-            DFS(i);
-    }
-
-    reverse(begin(order), end(order));
+    finished[node] = true;
 }
 
 int main()
 {
-    
-    TopologicalSort();
 
-    for (int i = 0; i < order.size(); ++i)
-    {
-        cout << (char)(order[i] + 'A') << " ";
-    }
+    DFS(0);
 
     return 0;
 }
