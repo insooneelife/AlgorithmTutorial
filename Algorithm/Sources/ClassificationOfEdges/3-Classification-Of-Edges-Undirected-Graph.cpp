@@ -21,26 +21,26 @@ vector<vector<int>> graph =
     {0, 4}          // 7
 };
 
-vector<int> discovered(graph.size(), -1);
+vector<int> indexes(graph.size(), -1);
 vector<bool> finished(graph.size(), false);
 int counter = 0;
 
 // 양방향 간선은 부모를 역방향 간선으로 바로 참조할수도 있는데 이를 방지하기 위해 parent도 저장하여 예외처리한다.
 void DFS(int parent, int node)
 {
-    discovered[node] = counter++;
+    indexes[node] = counter++;
 
     for (int i = 0; i < graph[node].size(); ++i)
     {
         int next = graph[node][i];
 
         // 방문한 적 없다면
-        if (discovered[next] == -1)
+        if (indexes[next] == -1)
         {
             cout << node << " -> " << next << " : tree edge" << endl;
             DFS(node, next);
         }
-        else if (parent != next && discovered[node] != discovered[next])
+        else if (parent != next && indexes[node] != indexes[next])
         {
             cout << node << " -> " << next << " : backward or forward edge" << endl;
         }

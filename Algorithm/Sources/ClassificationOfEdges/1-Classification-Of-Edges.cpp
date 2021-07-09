@@ -20,13 +20,13 @@ vector<vector<int>> graph =
     {}          // 7
 };
 
-vector<int> discovered(graph.size(), -1);
+vector<int> indexes(graph.size(), -1);
 vector<bool> finished(graph.size(), false);
 int counter = 0;
 
 void DFS(int node)
 {
-    discovered[node] = counter++;
+    indexes[node] = counter++;
 
     for (int i = 0; i < graph[node].size(); ++i)
     {
@@ -35,12 +35,12 @@ void DFS(int node)
         cout << node << " -> " << next;
 
         // 방문한 적 없다면
-        if (discovered[next] == -1)
+        if (indexes[next] == -1)
         {
             cout << " : tree edge" << endl;
             DFS(next);
         }
-        else if (discovered[node] < discovered[next])
+        else if (indexes[node] < indexes[next])
         {
             cout << " : forward edge" << endl;
         }
