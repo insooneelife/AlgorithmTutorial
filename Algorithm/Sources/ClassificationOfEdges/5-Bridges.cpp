@@ -1,66 +1,75 @@
-﻿
-// 위상정렬
+﻿// 다리 (CutEdges, Bridges)
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include "Print.h"
+#include <string>
+#include <set>
+//#include "Print.h"
 using namespace std;
 
 // 인접리스트 그래프
 vector<vector<int>> graph =
 {
-    {3},        // A 0
-    {3},        // B 1
-    {0, 1},     // C 2
-    {6, 7},     // D 3
-    {0, 3, 5},  // E 4
-    {10, 9},    // F 5
-    {8},        // G 6
-    {8, 9},     // H 7
-    {11},       // I 8
-    {11, 12},   // J 9
-    {9},        // K 10
-    {},         // L 11
-    {}          // M 12
+    {1, 2},        // 0
+    {0, 2},        // 1
+    {0, 1, 3, 5},  // 2
+    {2, 4},        // 3
+    {3},           // 4
+    {2, 6, 8},     // 5
+    {5, 7},        // 6
+    {6, 8},        // 7
+    {5, 7},        // 8
 };
- 
-vector<bool> visited(graph.size(), false);
-vector<int> order;
 
-void DFS(int node)
+// 각 정점에 대해 최초 방문 순서를 저장하는 배열
+vector<int> indexes(graph.size(), -1);
+
+vector<pair<int, int>> bridges;
+
+// 방문 순서
+int counter = 0;
+
+int FindBridges(int node, int parent)
 {
-    visited[node] = true;
+    indexes[node] = ++counter;
+    int ret = indexes[node];
 
     for (int i = 0; i < graph[node].size(); ++i)
     {
         int next = graph[node][i];
-        if (!visited[next])
-            DFS(next);
+        if (next == parent)
+            continue;
+
+        // 방문된적 없는 경우 (트리 간선)
+        if (indexes[next] == -1)
+        {
+            int subtree = FindBridges(next, node);
+
+            if (subtree > indexes[node])
+            {
+                bridges.push_back({ min(node, next), max(node, next) });
+            }
+            ret = min(ret, subtree);
+        }
+        else
+        {
+            ret = min(ret, indexes[next]);
+        }
     }
 
-    order.push_back(node);
+    return ret;
 }
 
-void TopologicalSort()
-{
-    for (int i = 0; i < graph.size(); ++i)
-    {
-        if (!visited[i])
-            DFS(i);
-    }
-
-    reverse(begin(order), end(order));
-}
 
 int main()
 {
-    
-    TopologicalSort();
+    FindBridges(0, -1);
 
-    for (int i = 0; i < order.size(); ++i)
+    cout << bridges.size() << endl;
+    for (int i = 0; i < bridges.size(); ++i)
     {
-        cout << (char)(order[i] + 'A') << " ";
+        cout << bridges[i].first << " " << bridges[i].second << endl;
     }
 
     return 0;
