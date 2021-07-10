@@ -33,7 +33,7 @@ void Floyd()
         }
     }
 
-    // 모두 아주 큰 값으로 초기화
+    // dp 배열도 모두 아주 큰 값으로 초기화
     for (int k = 0; k < V; ++k)
     {
         for (int u = 0; u < V; ++u)
