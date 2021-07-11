@@ -79,6 +79,7 @@ int main()
 {
     // 현재 0을 루트로 절단점을 찾기 시작했지만,
     // 어떤 값을 루트 노드로 하더라도 같은 결과가 나타난다.
+    // 만약 그래프가 여러 컴포넌트로 분리되어 있다면, 모든 정점에 대해 수행해보아야 할 것이다. (indexes[next] == -1 조건 성립 시)
     FindCutVertex(0, true);
 
     Print::Container(cutvertex);

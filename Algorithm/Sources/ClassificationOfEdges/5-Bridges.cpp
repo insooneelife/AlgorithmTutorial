@@ -48,7 +48,7 @@ int FindBridges(int node, int parent)
 
             if (subtree > indexes[node])
             {
-                bridges.push_back({ min(node, next), max(node, next) });
+                bridges.push_back({ node, next });
             }
             ret = min(ret, subtree);
         }
