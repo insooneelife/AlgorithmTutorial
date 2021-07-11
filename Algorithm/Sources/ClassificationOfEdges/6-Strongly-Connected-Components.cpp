@@ -1,1 +1,1 @@
-﻿// 강결합요소
+﻿// 강결합요소 (Strongly Connected Components, SCC)
