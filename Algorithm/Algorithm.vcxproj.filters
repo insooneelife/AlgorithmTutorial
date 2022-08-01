@@ -30,10 +30,7 @@
     <ClCompile Include="Sources\Sort\4-SortCompareValid1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Student Playgrounds\hanbin8269\Playground.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Playground.cpp">
+    <ClCompile Include="Playground.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
