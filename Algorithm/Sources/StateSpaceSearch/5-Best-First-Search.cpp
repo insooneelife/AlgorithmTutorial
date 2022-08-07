@@ -56,7 +56,7 @@ static bool InArray2D(int rows, int columns, int i, int j)
 		0 <= j && j < columns;
 }
 
-ll LCFS(const vector<vector<int>>& board, State start, State finish, const ll BlockSymbol = 1, const ll EmptyCost = 0, const ll BlockCost = 1)
+ll BestFirstSearch(const vector<vector<int>>& board, State start, State finish, const ll BlockSymbol = 1, const ll EmptyCost = 0, const ll BlockCost = 1)
 {
 	const vector<pair<int, int>> directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
 
@@ -85,9 +85,6 @@ ll LCFS(const vector<vector<int>>& board, State start, State finish, const ll Bl
 			all = costs;
 			break;
 		}
-
-		if (costs >= BlockCost * 2)
-			break;
 
 		for (auto d : directions)
 		{
@@ -137,14 +134,14 @@ int main()
 	}
 
 	ll BlockCost = 10000000;
-	ll val = LCFS(board, { 0,0 }, { n - 1, m - 1 }, 1, 1, BlockCost);
+	ll val = BestFirstSearch(board, { 0,0 }, { n - 1, m - 1 }, 1, 1, BlockCost);
 
-	if (0 < val && val < BlockCost * 2)
+	if (val < BlockCost * 2)
 	{
 		ll emptyCost = val % BlockCost;
 		ll blockCost = val / BlockCost;
 
-		cout << emptyCost + blockCost;
+		cout << emptyCost + blockCost + 1;
 	}
 	else
 	{
@@ -153,21 +150,3 @@ int main()
 
 	return 0;
 }
-
-
-/*
-
-
-
-8 8
-01000100
-01010100
-01010100
-01010100
-01010100
-01010100
-01010100
-00010100
-
-
-*/
