@@ -133,10 +133,10 @@ int main()
 	heap.Insert(4);
 	heap.Print();
 
-	while(heap.Size() > 0)
+	while (heap.Size() > 0)
 	{
 		int value = heap.Delete();
-		cout <<"pop : " << value << endl;
+		cout << "pop : " << value << endl;
 		heap.Print();
 	}
 
