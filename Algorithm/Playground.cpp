@@ -4,55 +4,92 @@
 #include <array>
 using namespace std;
 
+const int A = 0;
+const int L = 1;
+const int P = 2;
+
 
 class Solution 
 {
 public:
-	int trap(vector<int>& height) 
+	int F(int n, int slast, int last, int cnt)
 	{
-		int sumval = 0;
-		int maxval = -1;
-		int maxi = -1;
-		for(int i = 0; i < height.size(); ++i)
-		{
-			int h = height[i];
-			sumval += h;
+		
 
-			if(maxval < h)
+		if(n == 2)
+		{
+			if(slast == A && last == A)
 			{
-				maxval = h;
-				maxi = i;
+				return 0;
+			}
+			else
+			{
+				int countA = 0;
+				if (slast == A)
+				{
+					countA++;
+				}
+
+				if (last == A)
+				{
+					countA++;
+				}
+
+				if (countA != cnt)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
 			}
 		}
 
+		cout << endl;
 		int sum = 0;
-		maxval = -1;
-		for(int i = 0; i < maxi; ++i)
+		for(int sslast = 0; sslast <= P; ++sslast)
 		{
-			int h = height[i];
-			if (maxval < h)
+			if(sslast == L && slast == L && last == L)
 			{
-				maxval = h;
+				continue;
 			}
 
-			sum += maxval;
-		}
+			for(int pcnt = 0; pcnt <= 1; ++pcnt)
+			{				
+				int cntA = 0;
+				if(last == A)
+					cntA ++;
+				cntA += pcnt;
 
-		maxval = -1;
-		for (int i = height.size() - 1; i > maxi; --i)
-		{
-			int h = height[i];
-			if (maxval < h)
-			{
-				maxval = h;
+				if(cnt == cntA)
+				{
+					int val = F(n - 1, sslast, slast, pcnt);
+					sum += val;
+					cout << n - 1 << " " << (char)(sslast + 'A') << " " << (char)(slast + 'A') << " " << (char)(last + 'A') << " cnt : " << cnt << " " << cntA << " " << pcnt << " val : " << val << " sum : " << sum << endl;
+				}
 			}
-
-			sum += maxval;
 		}
 
-		sum += height[maxi];
+		return sum;		
+	}
 
-		return sum - sumval;
+	int checkRecord(int n) 
+	{
+		int sum = 0;
+		for (int i = 0; i <= P; ++i)
+		{
+			for (int j = 0; j <= P; ++j)
+			{
+				for (int pcnt = 0; pcnt <= 1; ++pcnt)
+				{
+					int o = F(n, i, j, pcnt);
+					sum += o;
+				}
+			}
+		}
+
+		return sum;
 	}
 };
 
@@ -60,10 +97,7 @@ int main()
 {
 	Solution s; 
 
-	//vector<int> v = { 0,1,0,2,1,0,1,3,2,1,2,1 };
-	vector<int> v = { 4,2,0,3,2,5 };
-
-	cout << s.trap(v);
+	cout << s.checkRecord(3);
 
 	return 0;
 }
