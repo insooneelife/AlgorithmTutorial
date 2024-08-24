@@ -362,5 +362,6 @@ MigrationBackup/
 FodyWeavers.xsd
 
 Temps/
+Algorithm/Descriptions/
 Algorithm/Sources/Playground.cpp
 Algorithm/Sources/Hidden/
