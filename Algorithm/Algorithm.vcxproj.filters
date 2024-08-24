@@ -33,9 +33,6 @@
     <ClCompile Include="Playground.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\DP\Solutions\LeetCode\1937. Maximum Number of Points with Cost.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sources\Library\Algorithm.h">
