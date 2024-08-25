@@ -37,6 +37,11 @@ n == height.length
 
 */
 
+// Two Pointers
+// 시행착오
+// 1. 문제를 너무 어렵게 생각함. DP로 접근함.
+// 2. 정작 DP로 접근했는데 시간복잡도를 제대로 계산하지 않아 시간초과가 남
+
 #include <iostream>
 #include <vector>
 #include <tuple>
